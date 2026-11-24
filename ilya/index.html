@@ -166,6 +166,15 @@ tr.drag:active{cursor:grabbing}
 .emptybox{display:flex;flex-direction:column;gap:6px;margin-top:28px;padding:24px;border:2px dashed var(--line);border-radius:12px;color:var(--muted);max-width:62ch}
 .emptybox b{color:var(--ink);font-family:var(--f-display);font-size:20px}
 .navempty{font-size:14px;color:var(--muted);padding:6px 10px}
+.story p{margin:0 0 14px;line-height:2.3;max-width:70ch}
+.story .tm{color:var(--es);font-weight:600}
+.tg{white-space:nowrap}
+.tg sup{font-family:var(--f-mono);font-size:10px;color:var(--muted);margin-right:2px}
+.tgi{width:7.5em;line-height:1.4;padding:1px 6px;font-size:15px}
+.tgi.ok{background:var(--la-soft);color:var(--ok);font-weight:600}
+.tgi.bad{background:var(--es-soft);color:var(--bad);text-decoration:line-through;text-decoration-thickness:1px}
+.tg .inf{font-size:13px;font-style:italic;color:var(--muted);margin-left:4px}
+.tg .sol{font-size:13px;font-weight:600;color:var(--ok);margin-left:4px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 @media (max-width:860px){
@@ -187,6 +196,8 @@ tr.drag:active{cursor:grabbing}
     <a class="brand" href="#inicio"><b>Clases de Español</b><span>Lecciones de Ilya</span></a>
     <div class="navlabel">Lecciones</div>
     <ul class="nav" id="nav-lessons"></ul>
+    <div class="navlabel">Deberes</div>
+    <ul class="nav" id="nav-deberes"></ul>
     <div class="navlabel">Herramientas</div>
     <ul class="nav">
       <li><a href="#glosario" data-route="glosario"><span class="n">Aa</span><span>Glosario de todas las lecciones</span></a></li>
@@ -224,6 +235,8 @@ function renderNav(active){
     `<li><a href="#${l.id}" ${active===l.id?'aria-current="page"':''}><span class="n">${String(l.num).padStart(2,"0")}</span><span>${l.title}</span></a></li>`).join("");
   document.querySelectorAll('[data-route]').forEach(a => a.toggleAttribute("aria-current", a.dataset.route===active));
   if(active==="glosario") $('[data-route="glosario"]').setAttribute("aria-current","page");
+  $("#nav-deberes").innerHTML = DEBERES.length ? [...DEBERES].reverse().map(d =>
+    `<li><a href="#${d.id}" ${active===d.id?'aria-current="page"':''}><span class="n">${d.tag}</span><span>${d.title}</span></a></li>`).join("") : `<li class="navempty">Aún no hay deberes</li>`;
 }
 
 function renderHome(){
@@ -240,6 +253,8 @@ function renderHome(){
         <div class="chips">${l.themes.map(t=>`<span class="chip">${t}</span>`).join("")}</div>
       </a>`).join("")}
     </div>
+    ${DEBERES.length ? `<h2 style="font-size:24px;margin-top:40px">Deberes</h2><div class="cards" style="margin-top:14px">${[...DEBERES].reverse().map(d=>`
+      <a class="card" href="#${d.id}"><span class="eyebrow">${d.topic} · ${fmtDate(d.date)}</span><h3>${d.title}</h3><p>${d.instr.split(". ")[0]}.</p></a>`).join("")}</div>` : ""}
     <div class="legend"><span>Marcas de variante:</span>
       <span>${badge("es")} se usa sobre todo en España</span>
       <span>${badge("la")} se usa sobre todo en Latinoamérica</span>
@@ -431,6 +446,94 @@ function bindLesson(l){
   }));
 }
 
+
+/* =====================================================================
+   DEBERES
+   Texto con huecos: [n|infinitivo|respuesta] es un hueco (varias
+   respuestas válidas separadas por "/"); **texto** marca expresiones
+   de tiempo. Cada párrafo es una cadena.
+   ===================================================================== */
+const DEBERES = [
+{
+  id: "deber-urashima",
+  tag: "Ind.",
+  date: "2026-11-24",
+  title: "La leyenda de Urashima Tarō",
+  topic: "Pretérito indefinido",
+  instr: "Completa el texto con los verbos en pretérito indefinido. Cada respuesta se comprueba al salir del hueco o con el botón «Comprobar».",
+  paragraphs: [
+    "**Hace muchísimos años**, en un pequeño pueblo de la costa de Japón, vivía un joven pescador llamado Urashima Tarō. Era pobre, pero tenía buen corazón y vivía con su anciana madre.",
+    "**Un día**, mientras paseaba por la playa, **de repente** Tarō [1|ver|vio] a unos niños que maltrataban a una pequeña tortuga. Tarō se acercó y les [2|dar|dio] a elegir: la tortuga o unas monedas. Los niños, sin dudarlo ni un segundo, [3|preferir|prefirieron] las monedas y se marcharon corriendo. Tarō [4|poner|puso] la tortuga en el agua con cuidado, y el animal desapareció entre las olas.",
+    "**Al día siguiente**, Tarō salió a pescar en su barca. **De pronto**, una tortuga enorme [5|venir|vino] hasta su barca y le habló con voz humana:",
+    "—No tengas miedo. **Ayer** [6|tener, yo|tuve] mucha suerte: tú me salvaste la vida. **Anoche** [7|ir, yo|fui] al palacio del mar, se lo [8|decir, yo|dije] todo a la princesa y ella me [9|pedir|pidió] que te llevara a su palacio. ¡Sube!",
+    "Tarō se subió al caparazón de la tortuga y **en un instante** ella lo [10|conducir|condujo] hasta el fondo del mar. Allí lo esperaba la hermosa princesa Otohime. **Al verla**, Tarō [11|hacer|hizo] una profunda reverencia. Para darle las gracias, la princesa organizó un gran banquete. La comida era tan abundante que **en pocos minutos** [12|satisfacer|satisfizo] el hambre de todos los invitados. **Después del banquete**, todos [13|dormir|durmieron] hasta el mediodía.",
+    "Tarō [14|estar|estuvo] tres días en el palacio. **Al tercer día**, **de repente**, [15|sentir|sintió] una gran nostalgia de su madre y decidió volver a casa. La princesa le rogó tres veces que se quedara, pero las tres veces Tarō no [16|querer|quiso].",
+    "**Justo cuando** Tarō iba a marcharse, la princesa le [17|traer|trajo] una pequeña caja de laca negra y le [18|decir|dijo]: «Llévatela de recuerdo, pero no la abras nunca». La caja era más grande que su bolsa de pescador, pero Tarō la giró una y otra vez y, **por fin**, [19|caber|cupo] dentro.",
+    "La tortuga lo llevó de vuelta a la playa y Tarō [20|ir|fue] corriendo hasta su casa. Pero su casa ya no estaba allí. **De repente**, Tarō [21|tener|tuvo] mucho miedo. [22|andar|Anduvo] por el pueblo **hasta el anochecer**, pero no reconoció ninguna cara. **Por fin** encontró a un anciano y le preguntó por la familia Urashima.",
+    "—¿Urashima Tarō? —respondió el anciano—. Es una vieja leyenda. Un joven pescador con ese nombre desapareció en el mar **hace trescientos años**. Su madre [23|morir|murió] de tristeza **poco después**.",
+    "**Justo entonces**, Tarō [24|saber|supo] la terrible verdad: tres días en el palacio del mar eran trescientos años en la tierra. Tarō recordó la promesa, pero **al final** no [25|poder|pudo] resistir la tentación y abrió la caja. **De pronto** [26|haber|hubo] un destello, y de la caja salió una nube de humo blanco. **En un segundo**, su pelo se volvió blanco y su cara se llenó de arrugas: ¡Tarō era un anciano de trescientos años!",
+    "**Y así** [27|ser|fue] **como** Urashima Tarō perdió toda su vida en solo tres días."
+  ]
+}
+];
+
+function renderDeber(d){
+  const gaps = [];
+  const paras = d.paragraphs.map(p => p
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="tm">$1</strong>')
+    .replace(/\[(\d+)\|([^|\]]+)\|([^\]]+)\]/g, (m, n, inf, ans) => {
+      gaps.push({n, a: ans.split("/")});
+      const k = `${d.id}:${n}`;
+      return `<span class="tg"><sup>${n}</sup><input class="gap tgi" id="t-${d.id}-${n}" data-key="${k}" data-n="${n}" value="${esc(store.get(k)||"")}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Hueco ${n}: ${inf}"><span class="inf">(${inf})</span><span class="sol" hidden></span></span>`;
+    }));
+  return { gaps, html: `<article class="wrap">
+    <header class="lhead">
+      <div class="eyebrow">Deberes · ${d.topic} · ${fmtDate(d.date)}</div>
+      <h1>${d.title}</h1>
+      <p class="lead">${d.instr}</p>
+    </header>
+    <div class="ex-block story">${paras.map(p=>`<p>${p}</p>`).join("")}
+      <div class="bar"><button class="btn" id="d-check">Comprobar</button><button class="btn ghost" id="d-reveal">Ver respuestas</button><button class="btn ghost" id="d-reset">Borrar todo</button><span class="score" id="d-score" aria-live="polite"></span></div>
+    </div>
+  </article>` };
+}
+function bindDeber(d, gaps){
+  const byN = Object.fromEntries(gaps.map(g=>[g.n, g]));
+  const score = $("#d-score");
+  const check = inp => {
+    const g = byN[inp.dataset.n], v = inp.value;
+    inp.classList.remove("ok","bad");
+    inp.removeAttribute("aria-invalid");
+    if(!v.trim()) return null;
+    const ok = g.a.some(a=>norm(a)===norm(v));
+    inp.classList.add(ok ? "ok" : "bad");
+    if(!ok) inp.setAttribute("aria-invalid","true");
+    inp.title = ok ? "Correcto" : (g.a.some(a=>plain(a)===plain(v)) ? "Incorrecto: revisa la tilde" : "Incorrecto");
+    return ok;
+  };
+  const all = () => [...document.querySelectorAll(".tgi")];
+  const tally = () => { const r = all().map(check); const ok = r.filter(x=>x===true).length, bad = r.filter(x=>x===false).length;
+    score.textContent = `${ok} de ${gaps.length} correctas` + (bad ? ` · ${bad} con error` : ""); };
+  all().forEach(inp=>{
+    if(inp.value) check(inp);
+    inp.addEventListener("input", ()=>{ store.set(inp.dataset.key, inp.value); inp.classList.remove("ok","bad"); });
+    inp.addEventListener("blur", ()=>check(inp));
+    inp.addEventListener("keydown", e=>{ if(e.key==="Enter"){ check(inp); const n = all()[all().indexOf(inp)+1]; if(n) n.focus(); } });
+  });
+  $("#d-check").addEventListener("click", tally);
+  $("#d-reveal").addEventListener("click", e=>{
+    const sols = document.querySelectorAll(".story .sol"); const show = sols[0].hidden;
+    all().forEach(inp=>{ const s = inp.parentElement.querySelector(".sol"); s.textContent = byN[inp.dataset.n].a[0]; s.hidden = !show || inp.classList.contains("ok"); });
+    e.target.textContent = show ? "Ocultar respuestas" : "Ver respuestas";
+  });
+  let armed = false;
+  $("#d-reset").addEventListener("click", e=>{
+    if(!armed){ armed = true; e.target.textContent = "¿Seguro? Pulsa otra vez"; setTimeout(()=>{ armed=false; e.target.textContent="Borrar todo"; }, 3000); return; }
+    all().forEach(inp=>{ inp.value=""; store.set(inp.dataset.key,""); inp.classList.remove("ok","bad"); });
+    document.querySelectorAll(".story .sol").forEach(s=>s.hidden=true); score.textContent=""; armed=false; e.target.textContent="Borrar todo";
+  });
+}
+
 let gFilter = "todo", gQuery = "";
 function renderGlossary(){
   return `<div class="wrap">
@@ -469,6 +572,10 @@ function route(){
   const v = $("#view");
   const l = LESSONS.find(x=>x.id===h);
   if(l){ v.innerHTML = renderLesson(l); bindLesson(l); renderNav(l.id); }
+  else if(DEBERES.find(x=>x.id===h)){
+    const d = DEBERES.find(x=>x.id===h), r = renderDeber(d);
+    v.innerHTML = r.html; bindDeber(d, r.gaps); renderNav(d.id);
+  }
   else if(h==="glosario"){
     v.innerHTML = renderGlossary(); renderNav("glosario"); fillGlossary();
     $("#gq").addEventListener("input", e=>{ gQuery = e.target.value; fillGlossary(); });
