@@ -342,6 +342,49 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .nfoto{margin:6px 0 12px}
 .nfoto img{display:block;width:100%;height:auto}
 .nsrc{text-align:right!important;font-size:12px!important}
+/* crónica deportiva (La Vanguardia) */
+.cronica{max-width:560px;background:#fff;color:#222;font-family:"Fira Sans Condensed","Fira Sans",var(--f-body);color-scheme:light;padding:14px 16px 30px;box-shadow:0 2px 10px rgba(0,0,0,.16);margin-bottom:18px;clip-path:polygon(0 0,100% 0,100% 100%,94% calc(100% - 9px),84% calc(100% - 2px),70% calc(100% - 10px),57% calc(100% - 3px),44% calc(100% - 11px),30% calc(100% - 2px),17% calc(100% - 9px),6% calc(100% - 3px),0 calc(100% - 8px))}
+.cronica figure{margin:0 0 12px}
+.cronica img{display:block;width:100%;height:auto}
+.cronica p{text-align:justify;hyphens:auto;font-size:15.5px;line-height:1.42;margin:0 0 11px}
+.cronica p b{font-weight:700;color:#111}
+.cronica .cdrop::first-letter{float:left;font-family:"Fira Sans",var(--f-body);font-weight:300;font-size:64px;line-height:.8;padding:4px 6px 0 0}
+.cronica .csrc{text-align:right;font-size:12px}
+/* Más ejercicios */
+.ex-block.mas{--m-br:#7B3A2D;--m-red:#8a3324;--m-box:#E8DDD5;--m-dark:#D2BBAF;background:#fff;color:#2b2b2b;border:0;border-radius:2px;font-family:"Nunito",var(--f-body);padding:16px clamp(14px,3vw,24px) 22px;overflow:hidden;color-scheme:light}
+.mas .mband{background:var(--m-br);color:#fff;font-family:"Nunito",var(--f-body);font-weight:300;font-size:clamp(28px,5vw,40px);padding:14px clamp(14px,3vw,24px);margin:-16px calc(-1 * clamp(14px,3vw,24px)) 22px}
+.mas h3{font-family:"Nunito",var(--f-body);font-weight:600;font-size:18px;line-height:1.35;color:#222;margin:0 0 12px}
+.mas .bn{color:var(--m-red);font-weight:800}
+.mas .instr:empty{display:none}
+.mas .mimg{margin:0;max-width:400px}
+.mas .mimg img{display:block;width:100%;height:auto}
+.mas .mbox{background:var(--m-box);padding:16px 18px 14px}
+.mas .mimg+.mbox{margin-top:-4px}
+.mas .items>li::before{font-family:"Nunito",var(--f-body);font-weight:800;color:var(--m-red);font-size:15px}
+.mas .items{gap:12px}
+.mas .items>li:only-child{grid-template-columns:minmax(0,1fr)}.mas .items>li:only-child::before{display:none}
+.mas .items b{font-weight:800;color:#111}
+.mas ul.sq{list-style:none;margin:6px 0 0;padding:0}
+.mas ul.sq li{position:relative;padding-left:16px;margin:2px 0}
+.mas ul.sq li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;background:var(--m-br)}
+.mas textarea,.mas select{background:#fff;color:#2b2b2b;border:1px solid #cdbfb6;border-radius:0}
+.mas .model{background:#fff;border-left:3px solid var(--m-red);border-radius:0;color:#2b2b2b}
+.mas .btn{background:var(--m-red);border-color:var(--m-red);color:#fff;border-radius:3px;font-family:"Nunito",var(--f-body)}
+.mas .btn.ghost{background:transparent;color:var(--m-red)}
+.mas .score{color:#6b6460}
+.mtab{display:grid;grid-template-columns:auto minmax(0,1fr);font-size:16px}
+.mtab .mleft{background:var(--m-dark);padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.mtab .mleft b{color:var(--m-red);font-weight:800}
+.mtab .mright{background:var(--m-box);margin:0;padding:10px 14px;list-style:none;display:flex;flex-direction:column;gap:8px}
+.mtab .mright li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;align-items:start}
+.mtab select{width:30px;height:30px;text-align-last:center;font-family:inherit;font-size:15px;border-radius:50%!important;border:1.5px solid #555!important;text-align:center;font-weight:800;color:var(--m-red);padding:0;appearance:none;-webkit-appearance:none;cursor:pointer}
+.mtab select.ok{border-color:#2e7d32!important;background:#e5f3e5}.mtab select.bad{border-color:#c62828!important;background:#fde3e1}
+.ntab{max-width:400px;border-collapse:separate;border-spacing:0 3px;width:100%;font-size:16px;margin:0 0 6px}
+.ntab th{font-family:inherit;color:#2b2b2b;letter-spacing:.03em;background:var(--m-dark);text-transform:uppercase;font-weight:800;font-size:14px;padding:8px 12px;text-align:center}
+.ntab td{background:var(--m-box);padding:6px 12px}
+.ntab td+td,.ntab th+th{border-left:3px solid #fff}
+@media (max-width:520px){.mtab{grid-template-columns:1fr}.mtab .mleft{flex-direction:row;flex-wrap:wrap;gap:6px 16px}}
+
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 @media (max-width:860px){
@@ -749,10 +792,18 @@ function renderExercise(l,e,ei){
   } else if(e.type==="matchimg"){
     body = `<div class="panels">${e.panels.map((p,i)=>`<figure class="panel"><img src="${p.img}" alt="${esc(p.alt)}" loading="lazy"><select id="m-${l.id}-${ei}-${i}" data-key="${key(i)}" data-i="${i}" aria-label="Frase para el dibujo ${i+1}"><option value="">–</option>${e.sentences.map((_,si)=>`<option ${store.get(key(i))==String(si+1)?"selected":""}>${si+1}</option>`).join("")}</select></figure>`).join("")}</div>
       <ol class="sent">${e.sentences.map(s=>`<li>${s}</li>`).join("")}</ol><div class="bar"><button class="btn" data-act="check">Comprobar</button><span class="score" aria-live="polite"></span></div>`;
+  } else if(e.type==="match"){
+    body = `<div class="mtab"><div class="mleft">${e.left.map((w,i)=>`<span><b>${"abcdefgh"[i]}.</b> ${w}</span>`).join("")}</div>
+      <ol class="mright">${e.right.map((d,i)=>`<li><select id="mt-${l.id}-${ei}-${i}" data-key="${key(i)}" data-i="${i}" aria-label="Letra para: ${esc(d.t)}"><option value=""></option>${e.left.map((_,li)=>`<option ${store.get(key(i))==="abcdefgh"[li]?"selected":""}>${"abcdefgh"[li]}</option>`).join("")}</select><span>${d.t}</span></li>`).join("")}</ol></div>
+      <div class="bar"><button class="btn" data-act="check">Comprobar</button><button class="btn ghost" data-act="reveal">Ver respuestas</button><span class="score" aria-live="polite"></span></div>`;
   } else if(e.type==="table3"){
     body = `<div class="tscroll t3"><table><thead><tr>${e.head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${e.rows.map((r,ri)=>`<tr>${r.cells.map((c,ci)=>c===null
       ? `<td class="in"><textarea id="t3-${l.id}-${ei}-${ri}" data-key="${key(ri)}" aria-label="${e.head[ci]}, fila ${ri+1}">${esc(store.get(key(ri))||"")}</textarea><div class="model" hidden>${r.model}</div></td>`
       : `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div><div class="bar"><button class="btn ghost" data-act="model">Ver modelos</button></div>`;
+  }
+  if(th==="mas"){
+    const head = `${e.band?`<div class="mband">${e.band}</div>`:""}${e.title?`<h3>${e.title}</h3>`:""}${e.image?`<figure class="mimg"><img src="${e.image}" alt="${esc(e.alt||"")}" loading="lazy"></figure>`:""}`;
+    return `<div class="ex-block mas" data-lesson="${l.id}" data-ex="${ei}">${head}${e.box?`<div class="mbox">${e.context||""}${body}</div>`:`${e.context||""}${body}`}</div>`;
   }
   const head = th==="aula"
     ? `${e.band?`<div class="band">${e.band}</div>`:""}${e.num?`<h3 class="ah"><span class="pill">${e.num}</span>${e.title}</h3>`:""}<p class="instr">${e.letter?`<b class="let">${e.letter}.</b> `:""}${e.instr}</p>`
@@ -865,6 +916,13 @@ function bindLesson(l){
         score.textContent = `${ok} / ${ex.panels.length} correctas`;
       });
     }
+    if(ex.type==="match"){
+      const chk = () => { let ok = 0; block.querySelectorAll("select").forEach(sl=>{ sl.classList.remove("ok","bad"); if(!sl.value) return;
+        const r = sl.value === ex.right[+sl.dataset.i].a; sl.classList.add(r?"ok":"bad"); ok += r; }); score.textContent = `${ok} / ${ex.right.length} correctas`; };
+      block.addEventListener("change", e=>{ if(e.target.dataset.key){ store.set(e.target.dataset.key, e.target.value); e.target.classList.remove("ok","bad"); } });
+      block.querySelector('[data-act="check"]').addEventListener("click", chk);
+      block.querySelector('[data-act="reveal"]').addEventListener("click", ()=>{ block.querySelectorAll("select").forEach(sl=>{ sl.value = ex.right[+sl.dataset.i].a; store.set(sl.dataset.key, sl.value); }); chk(); });
+    }
     if(ex.type==="table3"){
       block.addEventListener("input", e=>{ if(e.target.dataset.key) store.set(e.target.dataset.key, e.target.value); });
       block.querySelector('[data-act="model"]').addEventListener("click", ev=>{
@@ -913,6 +971,77 @@ function bindLesson(l){
    de tiempo. Cada párrafo es una cadena.
    ===================================================================== */
 const DEBERES = [
+{
+  id: "deber-cronicas",
+  kind: "pack",
+  tag: "Crón.",
+  date: "2026-11-27",
+  title: "27 de noviembre",
+  topic: "Dos crónicas: el Mineirazo y el terremoto de Japón",
+  instr: "Lee las dos crónicas y haz los ejercicios 3, 4, 14 y 15.",
+  subtitle: "Lee la crónica del partido Brasil–Alemania y la noticia del terremoto de Japón. Después, haz los ejercicios.",
+  readings: [
+    { title:"El desplome de la Canarinha", html:`
+      <article class="cronica">
+        <figure><img src="img/canarinha.jpg" alt="El desplome de la Canarinha. David Luiz se lamenta por la derrota ante la mirada de Özil" loading="lazy"></figure>
+        <p class="cdrop">Comenzó el partido Brasil con la intensidad que acostumbraba en cada partido, sin embargo, poco tardó Alemania en lanzar un par de contragolpes que serenaron el encuentro. Se cumplía el minuto 10 cuando un córner lo aprovechó Müller para escaparse de David Luiz y marcar a placer con la derecha en el segundo palo.</p>
+        <p><b>Los nervios revolucionaron a Brasil,</b> que carecía por completo de sentido de juego. Las únicas opciones eran la fuerza en el contragolpe y los balones largos de los centrales buscando una segunda jugada. No tenía fútbol la Canarinha y la presión de verse por debajo en el marcador los desnortó definitivamente tras el segundo gol. Fue Klose, en el minuto 26, el que tras una fantástica jugada de Khedira y Kross marcó el gol que lo convierte en el máximo goleador de la historia de los mundiales, con 16 tantos. El alemán destrona a Ronaldo precisamente en la noche más negra de Brasil.</p>
+        <p><b>El desplome de la Canarinha se agigantó de golpe.</b> Y en uno de los partidos más importantes de la historia de los mundiales Alemania bailó sobre el cadáver de un Brasil descompuesto. Kross fulminó las esperanzas de su rival con dos goles en dos minutos y el estadio Mineirão se convirtió en un cementerio. Khedira asestó el golpe definitivo antes de noquear a su rival con el quinto gol en el minuto 29.</p>
+        <p><b>El fútbol brasileño ya tenía un nuevo trauma.</b> Se acababa de construir ‘el Mineirazo’, la derrota más escandalosa de los mundiales encajada por el equipo más laureado. Muchos aficionados abandonaban el estadio, otros simplemente lloraban desconsoladamente. Todos, excepto los alemanes, sufrían un <i>shock</i> ante lo que estaba sucediendo.</p>
+        <p><b>Con el 0-5 Alemania bajó el listón y frenó su exhibición.</b> Tras el descanso Brasil intentó salvar su honor y peleó por hacer gol. Su intención duró cinco minutos. Alemania sería capaz de marcar dos goles más por medio de Schürle y terminaría dominando ante un equipo rendido y humillado. Óscar, en el noventa, hizo un gol que los aficionados locales silbaron.</p>
+        <p><b>‘El Mineirazo’ es ya historia del fútbol.</b> Por segunda vez Brasil pierde un mundial como anfitrión con una derrota traumática. En 1950 la victoria de Uruguay creó un fantasma imborrable en la mente de los brasileños en lo que fue llamado ‘el Maracanazo’. Alemania, 64 años después, ha fabricado un monstruo que atormentará durante mucho tiempo a un país que vive para el fútbol y cuya pasión por este deporte es, seguramente, lo que les hará regresar al éxito más tarde o más temprano.</p>
+        <p class="csrc">(<i>Fuente:</i> La Vanguardia)</p>
+      </article>` },
+    { title:"Terrible terremoto en Japón", html:`
+      <article class="noticia">
+        <div class="nbar"><span class="nmenu" aria-hidden="true"></span><b>Las noticias</b></div>
+        <div class="nbody">
+          <div class="nsec">Internacional</div>
+          <h3 class="ntit">Terrible terremoto en Japón</h3>
+          <p class="ndrop">De repente, tras la calma tensa posterior a la conmoción, las noticias apocalípticas empezaron a llegar, una tras otra, a cada cual más grave. Un tren de pasajeros totalmente desaparecido después de ser arrollado por una ola gigantesca junto a la costa; conductores desesperados huyendo de una lengua de agua de 10 metros de altura, algunos de ellos sin éxito; entre 200 y 300 cuerpos sin vida desperdigados por la playa de Sendai, la ciudad más afectada por el tsunami; una planta petroquímica ardiendo; un reactor nuclear cuyo fallo en el sistema de refrigeración obligaba a declarar el estado de emergencia nuclear y a evacuar a 3000 personas en un radio de dos kilómetros. Y así, hasta el infinito.</p>
+          <figure class="nfoto"><img src="img/fukushima.jpg" alt="Incendio en la central nuclear de Fukushima" loading="lazy"></figure>
+          <p>Japón ha sufrido este viernes su mayor terremoto en 140 años, el quinto más fuerte del mundo. Unos 500 desaparecidos y 350 muertos confirmados por la Policía a última hora de este viernes. Más de 1000 fallecidos, según la agencia de noticias Kyodo. 14:46 h. Comienza la catástrofe. La gente regresa al trabajo tras la hora del almuerzo. En Tokio las mesas se empiezan a deslizar, los edificios se tambalean como flanes, la gente se marea y pierde el equilibrio. Pronto el pánico se apodera de la capital de Japón, una megaurbe de 36 millones de personas. Pero Tokio es la ciudad mejor preparada del mundo contra los terremotos y apenas se desploman un puñado de edificios.</p>
+          <p>A 400 kilómetros al noreste de la capital, en las prefecturas de Miyagi y Fukushima, la situación es mucho más dramática. El terremoto, de 8,9 grados de magnitud, ha tenido el epicentro a 130 kilómetros de sus costas, en el océano Pacífico, a una profundidad de 26 kilómetros. El terrible temblor pronto origina un tsunami que se retroalimenta cuanto más se acerca a la costa y es este último, más que el terremoto, la causa de la destrucción masiva.</p>
+          <p class="nsrc">(<i>Fuente:</i> Público)</p>
+        </div>
+      </article>` }
+  ],
+  exercises: [
+    { type:"open", theme:"mas", band:"Más ejercicios", box:true, title:'<span class="bn">3.</span> Vuelve a las crónicas de arriba y contesta las siguientes preguntas. Puedes trabajar con diccionarios o con buscadores de internet.',
+      image:"img/mas-texto1.jpg", alt:"Texto 1: David Luiz en el suelo tras la derrota",
+      items:[
+        { q:"¿Qué palabra se usa en el primer párrafo para hacer referencia al partido? ¿Qué otras se podrían usar?", model:"<i>El encuentro</i> («contragolpes que serenaron el encuentro»). También: <i>el choque, el duelo, el enfrentamiento, el juego, el compromiso</i>." },
+        { q:"Lee de nuevo el segundo párrafo. ¿Entiendes qué es un <b>tanto</b>? ¿De qué palabra, también usada en el segundo párrafo, es sinónima?", model:"Un <i>tanto</i> es un punto en el marcador: en el fútbol, un gol. Es sinónimo de <i>gol</i> («Klose… marcó el gol… con 16 tantos»)." },
+        { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>poco tardó Alemania en <b>lanzar un par de contragolpes</b></li><li><b>marcar a placer</b></li><li>Alemania <b>bajó el listón</b></li><li><b>la presión de verse por debajo</b> en el marcador</li><li>los <b>desnortó</b> definitivamente</li><li><b>carecía por completo de sentido de juego</b></li><li>Alemania <b>bailó sobre el cadáver</b> de un Brasil descompuesto</li><li>Kross <b>fulminó</b> las esperanzas de su rival</li><li>antes de <b>noquear a su rival</b></li><li>lo que les hará regresar al éxito <b>más tarde o más temprano</b></li></ul>", model:"<i>lanzar un par de contragolpes</i>: hacer dos contraataques rápidos · <i>marcar a placer</i>: marcar con total facilidad, sin oposición · <i>bajó el listón</i>: se exigió menos, bajó el ritmo · <i>la presión de verse por debajo</i>: la tensión de ir perdiendo · <i>los desnortó</i>: los desorientó, les hizo perder el rumbo · <i>carecía por completo de sentido de juego</i>: no tenía ninguna idea ni organización de juego · <i>bailó sobre el cadáver</i>: humilló a un rival ya vencido · <i>fulminó las esperanzas</i>: acabó de golpe con las esperanzas · <i>noquear a su rival</i>: dejarlo KO, derrotarlo por completo · <i>más tarde o más temprano</i>: tarde o temprano, algún día." },
+        { q:"En el segundo párrafo aparece el verbo <b>destronar</b>. ¿Entiendes qué significa? ¿Con qué sustantivos podría combinarse el verbo <b>destronar</b> en este u otros contextos?", model:"<i>Destronar</i>: quitarle a alguien el trono, es decir, el primer puesto (Klose le quita a Ronaldo el récord de goles). Se combina con: <i>al rey, al campeón, al líder de la liga, al favorito, al número uno, a la marca líder del mercado</i>." }
+      ]},
+    { type:"open", theme:"mas", box:true, title:"", image:"img/mas-texto2.jpg", alt:"Texto 2: incendio en una planta de Japón",
+      items:[
+        { q:"¿Qué palabras se usan para referirse a las personas muertas?", model:"<i>muertos, fallecidos, cuerpos sin vida</i> (y, en general, <i>víctimas</i>)." },
+        { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>las noticias empezaron a llegar, <b>a cada cual más grave</b></li><li>conductores desesperados huyendo de una <b>lengua de agua</b> de 10 metros de altura</li><li>y así, <b>hasta el infinito</b></li><li>los edificios <b>se tambalean como flanes</b></li><li>pronto <b>el pánico se apodera de</b> la capital de Japón</li><li>apenas se desploman <b>un puñado de</b> edificios</li></ul>", model:"<i>a cada cual más grave</i>: cada una más grave que la anterior · <i>una lengua de agua</i>: una ola, una masa de agua que avanza tierra adentro · <i>hasta el infinito</i>: y así sin fin, una lista interminable · <i>se tambalean como flanes</i>: se mueven de un lado a otro, tiemblan sin parar · <i>el pánico se apodera de</i>: el pánico invade, se extiende por toda · <i>un puñado de</i>: unos pocos, muy pocos." },
+        { q:"Fíjate en la expresión <b>origina un tsunami</b>. ¿Qué otros verbos se podrían utilizar para decir lo mismo?", model:"<i>provoca, causa, genera, produce, desencadena</i> un tsunami." }
+      ]},
+    { type:"match", theme:"mas", title:'<span class="bn">4.</span> Relaciona cada verbo con su significado.',
+      left:["serenar","frenar","atormentar","arrollar","evacuar","deslizar"],
+      right:[
+        { t:"Causar aflicción o disgusto, molestar.", a:"c" },
+        { t:"Detener, parar.", a:"b" },
+        { t:"Trasladar a personas heridas o en peligro para que estén a salvo.", a:"e" },
+        { t:"Mover(se) algo con suavidad.", a:"f" },
+        { t:"Pasar con fuerza o violencia por encima de algo o alguien.", a:"d" },
+        { t:"Tranquilizar.", a:"a" }
+      ]},
+    { type:"open", theme:"mas", title:'<span class="bn">14.</span> Los siguientes sustantivos y adjetivos aparecen en la unidad. ¿Cuáles combinarías entre sí? Trata de formular enunciados donde aparezcan y anótalos aquí.',
+      context:`<table class="ntab"><thead><tr><th>Sustantivo</th><th>Adjetivo</th></tr></thead><tbody><tr><td>noches</td><td>interminable/s</td></tr><tr><td>mercado</td><td>exótico/a/os/as</td></tr><tr><td>frutas</td><td>mítico/a/os/as</td></tr><tr><td>calma</td><td>tenso/a/os/as</td></tr><tr><td>jugada</td><td>fantástico/a/os/as</td></tr><tr><td>partido</td><td>importante/s</td></tr><tr><td>derrota</td><td>traumático/a/os/as</td></tr><tr><td>ola</td><td>gigantesco/a/os/as</td></tr><tr><td>conductor</td><td>desesperado/a/os/as</td></tr><tr><td>reactor</td><td>nuclear/es</td></tr><tr><td>hombres</td><td>desnudo/a/os/as</td></tr><tr><td>jugadores</td><td>descompuesto/a/os/as</td></tr><tr><td>tierra</td><td>prometido/a/os/as</td></tr><tr><td>trajes</td><td>luminoso/a/os/as</td></tr><tr><td>montañas</td><td>bello/a/os/as</td></tr><tr><td>labores</td><td>doméstico/a/os/as</td></tr><tr><td>elefante</td><td>rosa/s</td></tr></tbody></table>`,
+      items:[
+        { q:"Tus enunciados:", model:"Combinaciones de los textos: <i>noches interminables, el mítico mercado de frutas exóticas, la calma tensa, una fantástica jugada, uno de los partidos más importantes, una derrota traumática, una ola gigantesca, conductores desesperados, un reactor nuclear, hombres desnudos, un Brasil descompuesto, la tierra prometida, elegantes trajes luminosos, bellas montañas, las labores domésticas</i>. Y la expresión <i>ver elefantes rosas</i> (alucinar). Ejemplo: <i>Tras la derrota traumática, los jugadores estaban completamente descompuestos.</i>" }
+      ]},
+    { type:"open", theme:"mas", title:'<span class="bn">15.</span> En los enunciados que has escrito en la actividad 14, ¿los adjetivos aparecen antes o después del sustantivo? ¿En qué casos crees que podrías invertir el orden?',
+      items:[
+        { q:"", model:"La mayoría van <b>después</b>: describen o clasifican (<i>reactor nuclear, labores domésticas, frutas exóticas, calma tensa</i>). Los que expresan valoración o subrayan una cualidad se pueden poner <b>delante</b>, con un tono más expresivo o literario: <i>una fantástica jugada, bellas montañas, el mítico mercado, interminables noches, una gigantesca ola</i>. Los clasificadores y las expresiones fijas no se invierten: <i>*nuclear reactor, *domésticas labores, *prometida tierra, *rosa elefante</i>." }
+      ]}
+  ]
+},
 {
   id: "deber-harlem",
   kind: "pack",
