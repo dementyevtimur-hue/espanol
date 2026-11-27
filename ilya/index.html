@@ -337,12 +337,6 @@ const LESSONS = [
   topic: "Intenciones y acciones interrumpidas",
   subtitle: "Iba a, pensaba, quería + infinitivo; justo cuando, acababa de, estar a punto de; los marcadores temporales del relato y el pretérito indefinido irregular.",
   themes: ["leyendas", "historia de un barrio", "planes que no salen"],
-  goals: [
-    "Contar planes que no se cumplieron: <i>iba a / pensaba / quería</i> + infinitivo.",
-    "Explicar la causa como circunstancia (imperfecto) o como acontecimiento (indefinido).",
-    "Situar con precisión una acción interrumpida: <i>justo cuando</i>, <i>acababa de</i>, <i>estaba a punto de</i>.",
-    "Repasar el pretérito indefinido irregular y los marcadores temporales del relato."
-  ],
   grammar: {
     intro: "Para contar una intención que no se cumplió usamos el imperfecto. Después explicamos qué pasó y cuál fue la consecuencia: <b>intención + causa / circunstancia + consecuencia</b>.",
     rules: [
@@ -549,8 +543,8 @@ function renderHome(){
   return `<div class="wrap home">
     <div class="eyebrow">Lecciones de Ilya</div>
     <h1>Clases de Español</h1>
-    <p class="lead">Aquí están todas las lecciones de Ilya: lectura, vocabulario, gramática, ejercicios con corrección automática y las palabras nuevas de cada clase.</p>
-    ${LESSONS.length ? "" : `<div class="emptybox"><b>Todavía no hay lecciones.</b><span>Aquí aparecerá cada lección nueva: lectura, vocabulario, gramática, ejercicios y las palabras nuevas que apuntemos en clase.</span></div>`}
+    <p class="lead">Aquí están todas las lecciones de Ilya: lectura, vocabulario, gramática, y ejercicios con corrección automática.</p>
+    ${LESSONS.length ? "" : `<div class="emptybox"><b>Todavía no hay lecciones.</b><span>Aquí aparecerá cada lección nueva: lectura, vocabulario, gramática y ejercicios.</span></div>`}
     <div class="cards">${sorted().map(l => `
       <a class="card" href="#${l.id}">
         <span class="eyebrow">${l.topic||""}</span>
@@ -589,7 +583,7 @@ function renderLesson(l){
   if(l.vocab && l.vocab.length) S.push(["vocabulario","Vocabulario",`<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>
       ${l.vocab.map(v=>`<tr draggable="true" class="drag" data-term="${esc(v.term.replace(/<[^>]+>/g,""))}" data-ru="${esc(v.ru)}" title="Arrastra a «Palabras nuevas»"><td class="term">${v.term} ${badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")}
       </tbody></table></div>`]);
-  S.push(["nuevas","Palabras nuevas",`<p style="color:var(--muted);margin:0 0 12px">Las palabras que salen en clase. Escribe la palabra, la traducción y, si quieres, un ejemplo.</p>
+  if(l.wordsSection) S.push(["nuevas","Palabras nuevas",`<p style="color:var(--muted);margin:0 0 12px">Las palabras que salen en clase. Escribe la palabra, la traducción y, si quieres, un ejemplo.</p>
       <div class="dropzone" id="mw-drop">Arrastra aquí una palabra: seleccionada en el texto, de la tabla de vocabulario o de otra página.</div>
       <div class="tscroll"><table class="mw"><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th><th><span class="sr">Borrar</span></th></tr></thead>
       <tbody id="mw-fixed">${(l.myWords||[]).map(w=>`<tr><td class="term">${w.term}</td><td>${w.ru}</td><td class="ex">${w.ex||""}</td><td></td></tr>`).join("")}</tbody>
@@ -662,6 +656,7 @@ function checkGap(block, ex, i){
 
 const loadMW = id => { try{ return JSON.parse(store.get(id+":words")||"[]"); }catch(e){ return []; } };
 function bindMyWords(l){
+  if(!document.getElementById("mw-body")) return;
   const key = l.id+":words", body = $("#mw-body"), msg = $("#mw-msg");
   let rows = loadMW(l.id);
   if(!rows.length) rows = [{term:"",ru:"",ex:""}];
