@@ -735,7 +735,7 @@ function renderLesson(l){
       ${l.grammar.regionNote?`<div class="note"><b>Variantes:</b><span>${l.grammar.regionNote}</span></div>`:""}`, "gram"]);
   (l.sections||[]).forEach(x=>S.push([x.id, x.title, x.html]));
   if(l.cheat) S.push(["chuleta", l.cheat.title, l.cheat.html]);
-  if(l.story){ const d = DEBERES.find(x=>x.id===l.story), r = renderDeber(d); l._gaps = r.gaps;
+  if(l.story){ const d = DEBERES.find(x=>x.id===l.story), r = renderDeber(d, l.noAnswers); l._gaps = r.gaps;
     S.push(["leyenda", "Leyenda", r.html.replace(/^[\s\S]*?(?=<div class="ex-block story sheet">)/,"").replace(/\s*<\/article>\s*$/,"")]); }
   const readings = l.readings || (l.reading ? [l.reading] : []);
   if(readings.length) S.push(["lectura", readings.length>1?"Lecturas":"Lectura", readings.map(r=>`
@@ -797,7 +797,7 @@ function renderExercise(l,e,ei){
   } else if(e.type==="match"){
     body = `<div class="mtab"><div class="mleft">${e.left.map((w,i)=>`<span><b>${"abcdefgh"[i]}.</b> ${w}</span>`).join("")}</div>
       <ol class="mright">${e.right.map((d,i)=>`<li><select id="mt-${l.id}-${ei}-${i}" data-key="${key(i)}" data-i="${i}" aria-label="Letra para: ${esc(d.t)}"><option value=""></option>${e.left.map((_,li)=>`<option ${store.get(key(i))==="abcdefgh"[li]?"selected":""}>${"abcdefgh"[li]}</option>`).join("")}</select><span>${d.t}</span></li>`).join("")}</ol></div>
-      <div class="bar"><button class="btn" data-act="check">Comprobar</button><button class="btn ghost" data-act="reveal">Ver respuestas</button><span class="score" aria-live="polite"></span></div>`;
+      <div class="bar"><button class="btn" data-act="check">Comprobar</button>${l.noAnswers?"":`<button class="btn ghost" data-act="reveal">Ver respuestas</button>`}<span class="score" aria-live="polite"></span></div>`;
   } else if(e.type==="table3"){
     body = `<div class="tscroll t3"><table><thead><tr>${e.head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${e.rows.map((r,ri)=>`<tr>${r.cells.map((c,ci)=>c===null
       ? `<td class="in"><textarea id="t3-${l.id}-${ei}-${ri}" data-key="${key(ri)}" aria-label="${e.head[ci]}, fila ${ri+1}">${esc(store.get(key(ri))||"")}</textarea><div class="model" hidden>${r.model}</div></td>`
@@ -924,7 +924,7 @@ function bindLesson(l){
         const r = sl.value === ex.right[+sl.dataset.i].a; sl.classList.add(r?"ok":"bad"); ok += r; }); score.textContent = `${ok} / ${ex.right.length} correctas`; };
       block.addEventListener("change", e=>{ if(e.target.dataset.key){ store.set(e.target.dataset.key, e.target.value); e.target.classList.remove("ok","bad"); } });
       block.querySelector('[data-act="check"]').addEventListener("click", chk);
-      block.querySelector('[data-act="reveal"]').addEventListener("click", ()=>{ block.querySelectorAll("select").forEach(sl=>{ sl.value = ex.right[+sl.dataset.i].a; store.set(sl.dataset.key, sl.value); }); chk(); });
+      const rv = block.querySelector('[data-act="reveal"]'); if(rv) rv.addEventListener("click", ()=>{ block.querySelectorAll("select").forEach(sl=>{ sl.value = ex.right[+sl.dataset.i].a; store.set(sl.dataset.key, sl.value); }); chk(); });
     }
     if(ex.type==="table3"){
       block.addEventListener("input", e=>{ if(e.target.dataset.key) store.set(e.target.dataset.key, e.target.value); });
@@ -982,6 +982,7 @@ const DEBERES = [
   date: "2026-11-27",
   title: "27 de noviembre",
   story: "deber-urashima",
+  noAnswers: true,
   topic: "La leyenda de Urashima Tarō y dos crónicas",
   instr: "Completa la leyenda con el pretérito indefinido, lee las dos crónicas y haz los ejercicios.",
   subtitle: "Completa la leyenda de Urashima Tarō con el pretérito indefinido. Después, lee la crónica del partido Brasil–Alemania y la noticia del terremoto de Japón y haz los ejercicios.",
@@ -1015,16 +1016,16 @@ const DEBERES = [
     { type:"open", theme:"mas", band:"Más ejercicios", box:true, title:'<span class="bn">3.</span> Contesta las siguientes preguntas sobre las crónicas. Puedes trabajar con diccionarios o con buscadores de internet.',
       image:"img/mas-texto1.jpg", alt:"Texto 1: David Luiz en el suelo tras la derrota",
       items:[
-        { q:"¿Qué palabra se usa en el primer párrafo para hacer referencia al partido? ¿Qué otras se podrían usar?", model:"<i>El encuentro</i> («contragolpes que serenaron el encuentro»). También: <i>el choque, el duelo, el enfrentamiento, el juego, el compromiso</i>." },
-        { q:"Lee de nuevo el segundo párrafo. ¿Entiendes qué es un <b>tanto</b>? ¿De qué palabra, también usada en el segundo párrafo, es sinónima?", model:"Un <i>tanto</i> es un punto en el marcador: en el fútbol, un gol. Es sinónimo de <i>gol</i> («Klose… marcó el gol… con 16 tantos»)." },
-        { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>poco tardó Alemania en <b>lanzar un par de contragolpes</b></li><li><b>marcar a placer</b></li><li>Alemania <b>bajó el listón</b></li><li><b>la presión de verse por debajo</b> en el marcador</li><li>los <b>desnortó</b> definitivamente</li><li><b>carecía por completo de sentido de juego</b></li><li>Alemania <b>bailó sobre el cadáver</b> de un Brasil descompuesto</li><li>Kross <b>fulminó</b> las esperanzas de su rival</li><li>antes de <b>noquear a su rival</b></li><li>lo que les hará regresar al éxito <b>más tarde o más temprano</b></li></ul>", model:"<i>lanzar un par de contragolpes</i>: hacer dos contraataques rápidos · <i>marcar a placer</i>: marcar con total facilidad, sin oposición · <i>bajó el listón</i>: se exigió menos, bajó el ritmo · <i>la presión de verse por debajo</i>: la tensión de ir perdiendo · <i>los desnortó</i>: los desorientó, les hizo perder el rumbo · <i>carecía por completo de sentido de juego</i>: no tenía ninguna idea ni organización de juego · <i>bailó sobre el cadáver</i>: humilló a un rival ya vencido · <i>fulminó las esperanzas</i>: acabó de golpe con las esperanzas · <i>noquear a su rival</i>: dejarlo KO, derrotarlo por completo · <i>más tarde o más temprano</i>: tarde o temprano, algún día." },
-        { q:"En el segundo párrafo aparece el verbo <b>destronar</b>. ¿Entiendes qué significa? ¿Con qué sustantivos podría combinarse el verbo <b>destronar</b> en este u otros contextos?", model:"<i>Destronar</i>: quitarle a alguien el trono, es decir, el primer puesto (Klose le quita a Ronaldo el récord de goles). Se combina con: <i>al rey, al campeón, al líder de la liga, al favorito, al número uno, a la marca líder del mercado</i>." }
+        { q:"¿Qué palabra se usa en el primer párrafo para hacer referencia al partido? ¿Qué otras se podrían usar?" },
+        { q:"Lee de nuevo el segundo párrafo. ¿Entiendes qué es un <b>tanto</b>? ¿De qué palabra, también usada en el segundo párrafo, es sinónima?" },
+        { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>poco tardó Alemania en <b>lanzar un par de contragolpes</b></li><li><b>marcar a placer</b></li><li>Alemania <b>bajó el listón</b></li><li><b>la presión de verse por debajo</b> en el marcador</li><li>los <b>desnortó</b> definitivamente</li><li><b>carecía por completo de sentido de juego</b></li><li>Alemania <b>bailó sobre el cadáver</b> de un Brasil descompuesto</li><li>Kross <b>fulminó</b> las esperanzas de su rival</li><li>antes de <b>noquear a su rival</b></li><li>lo que les hará regresar al éxito <b>más tarde o más temprano</b></li></ul>" },
+        { q:"En el segundo párrafo aparece el verbo <b>destronar</b>. ¿Entiendes qué significa? ¿Con qué sustantivos podría combinarse el verbo <b>destronar</b> en este u otros contextos?" }
       ]},
     { type:"open", theme:"mas", box:true, title:"", image:"img/mas-texto2.jpg", alt:"Texto 2: incendio en una planta de Japón",
       items:[
-        { q:"¿Qué palabras se usan para referirse a las personas muertas?", model:"<i>muertos, fallecidos, cuerpos sin vida</i> (y, en general, <i>víctimas</i>)." },
-        { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>las noticias empezaron a llegar, <b>a cada cual más grave</b></li><li>conductores desesperados huyendo de una <b>lengua de agua</b> de 10 metros de altura</li><li>y así, <b>hasta el infinito</b></li><li>los edificios <b>se tambalean como flanes</b></li><li>pronto <b>el pánico se apodera de</b> la capital de Japón</li><li>apenas se desploman <b>un puñado de</b> edificios</li></ul>", model:"<i>a cada cual más grave</i>: cada una más grave que la anterior · <i>una lengua de agua</i>: una ola, una masa de agua que avanza tierra adentro · <i>hasta el infinito</i>: y así sin fin, una lista interminable · <i>se tambalean como flanes</i>: se mueven de un lado a otro, tiemblan sin parar · <i>el pánico se apodera de</i>: el pánico invade, se extiende por toda · <i>un puñado de</i>: unos pocos, muy pocos." },
-        { q:"Fíjate en la expresión <b>origina un tsunami</b>. ¿Qué otros verbos se podrían utilizar para decir lo mismo?", model:"<i>provoca, causa, genera, produce, desencadena</i> un tsunami." }
+        { q:"¿Qué palabras se usan para referirse a las personas muertas?" },
+        { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>las noticias empezaron a llegar, <b>a cada cual más grave</b></li><li>conductores desesperados huyendo de una <b>lengua de agua</b> de 10 metros de altura</li><li>y así, <b>hasta el infinito</b></li><li>los edificios <b>se tambalean como flanes</b></li><li>pronto <b>el pánico se apodera de</b> la capital de Japón</li><li>apenas se desploman <b>un puñado de</b> edificios</li></ul>" },
+        { q:"Fíjate en la expresión <b>origina un tsunami</b>. ¿Qué otros verbos se podrían utilizar para decir lo mismo?" }
       ]},
     { type:"match", theme:"mas", title:'<span class="bn">4.</span> Relaciona cada verbo con su significado.',
       left:["serenar","frenar","atormentar","arrollar","evacuar","deslizar"],
@@ -1039,11 +1040,11 @@ const DEBERES = [
     { type:"open", theme:"mas", title:'<span class="bn">14.</span> Los siguientes sustantivos y adjetivos aparecen en la unidad. ¿Cuáles combinarías entre sí? Trata de formular enunciados donde aparezcan y anótalos aquí.',
       context:`<table class="ntab"><thead><tr><th>Sustantivo</th><th>Adjetivo</th></tr></thead><tbody><tr><td>noches</td><td>interminable/s</td></tr><tr><td>mercado</td><td>exótico/a/os/as</td></tr><tr><td>frutas</td><td>mítico/a/os/as</td></tr><tr><td>calma</td><td>tenso/a/os/as</td></tr><tr><td>jugada</td><td>fantástico/a/os/as</td></tr><tr><td>partido</td><td>importante/s</td></tr><tr><td>derrota</td><td>traumático/a/os/as</td></tr><tr><td>ola</td><td>gigantesco/a/os/as</td></tr><tr><td>conductor</td><td>desesperado/a/os/as</td></tr><tr><td>reactor</td><td>nuclear/es</td></tr><tr><td>hombres</td><td>desnudo/a/os/as</td></tr><tr><td>jugadores</td><td>descompuesto/a/os/as</td></tr><tr><td>tierra</td><td>prometido/a/os/as</td></tr><tr><td>trajes</td><td>luminoso/a/os/as</td></tr><tr><td>montañas</td><td>bello/a/os/as</td></tr><tr><td>labores</td><td>doméstico/a/os/as</td></tr><tr><td>elefante</td><td>rosa/s</td></tr></tbody></table>`,
       items:[
-        { q:"Tus enunciados:", model:"Combinaciones de los textos: <i>noches interminables, el mítico mercado de frutas exóticas, la calma tensa, una fantástica jugada, uno de los partidos más importantes, una derrota traumática, una ola gigantesca, conductores desesperados, un reactor nuclear, hombres desnudos, un Brasil descompuesto, la tierra prometida, elegantes trajes luminosos, bellas montañas, las labores domésticas</i>. Y la expresión <i>ver elefantes rosas</i> (alucinar). Ejemplo: <i>Tras la derrota traumática, los jugadores estaban completamente descompuestos.</i>" }
+        { q:"Tus enunciados:" }
       ]},
     { type:"open", theme:"mas", title:'<span class="bn">15.</span> En los enunciados que has escrito en la actividad 14, ¿los adjetivos aparecen antes o después del sustantivo? ¿En qué casos crees que podrías invertir el orden?',
       items:[
-        { q:"", model:"La mayoría van <b>después</b>: describen o clasifican (<i>reactor nuclear, labores domésticas, frutas exóticas, calma tensa</i>). Los que expresan valoración o subrayan una cualidad se pueden poner <b>delante</b>, con un tono más expresivo o literario: <i>una fantástica jugada, bellas montañas, el mítico mercado, interminables noches, una gigantesca ola</i>. Los clasificadores y las expresiones fijas no se invierten: <i>*nuclear reactor, *domésticas labores, *prometida tierra, *rosa elefante</i>." }
+        { q:"" }
       ]}
   ]
 },
@@ -1119,7 +1120,7 @@ const DEBERES = [
 }
 ];
 
-function renderDeber(d){
+function renderDeber(d, noAns){
   const gaps = [];
   const paras = d.paragraphs.map(p => p
     .replace(/\*\*(.+?)\*\*/g, '<strong class="tm">$1</strong>')
@@ -1134,7 +1135,7 @@ function renderDeber(d){
       <h1 class="sh"><span class="dot"></span>${d.title}</h1>
       <p class="shs">${d.sheetInstr || "Completa el texto con los verbos en pretérito indefinido."}</p>
       ${paras.map(p=>`<p>${p}</p>`).join("")}
-      <div class="bar"><button class="btn" id="d-check">Comprobar</button><button class="btn ghost" id="d-reveal">Ver respuestas</button><button class="btn ghost" id="d-reset">Borrar todo</button><span class="score" id="d-score" aria-live="polite"></span></div>
+      <div class="bar"><button class="btn" id="d-check">Comprobar</button>${noAns?"":`<button class="btn ghost" id="d-reveal">Ver respuestas</button>`}<button class="btn ghost" id="d-reset">Borrar todo</button><span class="score" id="d-score" aria-live="polite"></span></div>
     </div>
   </article>` };
 }
@@ -1162,7 +1163,7 @@ function bindDeber(d, gaps){
     inp.addEventListener("keydown", e=>{ if(e.key==="Enter"){ check(inp); const n = all()[all().indexOf(inp)+1]; if(n) n.focus(); } });
   });
   $("#d-check").addEventListener("click", tally);
-  $("#d-reveal").addEventListener("click", e=>{
+  if(document.getElementById("d-reveal")) $("#d-reveal").addEventListener("click", e=>{
     const sols = document.querySelectorAll(".story .sol"); const show = sols[0].hidden;
     all().forEach(inp=>{ const s = inp.parentElement.querySelector(".sol"); s.textContent = byN[inp.dataset.n].a[0]; s.hidden = !show || inp.classList.contains("ok"); });
     e.target.textContent = show ? "Ocultar respuestas" : "Ver respuestas";
