@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <title>Clases de Español de Ilya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Fira+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <style>
 html{-webkit-text-size-adjust:100%}
 body{margin:0}
@@ -182,6 +182,113 @@ td.grp{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(-
 .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 16px}
 .quotes blockquote{margin:0;padding:12px 14px;border-radius:10px;background:var(--bg);font-weight:600;font-size:15px}
 .items small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
+/* ====== Estilos de los materiales originales ====== */
+.topic{font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--accent);margin:0 0 6px}
+.nav .nt{display:block;font-size:12px;opacity:.75;margin-top:1px}
+figure.orig{margin:0 0 12px}
+figure.orig img{display:block;width:100%;height:auto;border-radius:6px;box-shadow:0 2px 14px rgba(0,0,0,.12)}
+details.txt{margin:0 0 14px}
+details.txt summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;padding:6px 0}
+details.txt .reading{margin-top:8px}
+
+/* Aula: Intenciones y acciones interrumpidas */
+.ex-block.aula{--au-red:#D52B26;--au-bg:#EAE5E1;--au-ink:#2B2B2B;--au-line:#C9BFB8;background:var(--au-bg);color:var(--au-ink);border:0;border-radius:4px;font-family:"Fira Sans",var(--f-body);padding:0 clamp(16px,3vw,28px) 22px;overflow:hidden;color-scheme:light}
+.ex-block.aula:not(:has(.band)){padding-top:18px}
+.aula .band{position:relative;background:var(--au-red);color:#fff;font-weight:300;font-size:clamp(20px,3.4vw,30px);padding:14px 120px 14px clamp(16px,3vw,28px);margin:0 calc(-1 * clamp(16px,3vw,28px)) 22px;clip-path:polygon(0 0,100% 0,calc(100% - 50px) 100%,0 100%);letter-spacing:.005em}
+.aula .ah{font-family:"Fira Sans",var(--f-body);font-size:18px;font-weight:600;display:flex;align-items:center;gap:10px;padding-bottom:6px;border-bottom:1px solid #7a7a7a;margin-bottom:14px;color:var(--au-ink)}
+.aula .pill{display:inline-grid;place-items:center;min-width:34px;height:22px;border-radius:11px;background:var(--au-red);color:#fff;font-size:13px;font-weight:700}
+.aula .instr{color:var(--au-ink);font-size:15px}
+.aula .let{color:var(--au-red)}
+.aula .items>li::before{color:var(--au-ink);font-family:"Fira Sans",var(--f-body);font-weight:700}
+.aula textarea,.aula select{background:#fff;color:var(--au-ink);border:1px solid #d8d2cd;border-radius:0}
+.aula .model{background:#fff;border-left:3px solid var(--au-red);border-radius:0;color:var(--au-ink)}
+.aula .btn{background:var(--au-red);border-color:var(--au-red);color:#fff;border-radius:3px;font-family:"Fira Sans",var(--f-body)}
+.aula .btn.ghost{background:transparent;color:var(--au-red)}
+.aula .score{color:#6b6460}
+.aula .fb.ok{color:#2e7d32}.aula .fb.bad{color:var(--au-red)}.aula .fb.warn{color:#9a6b00}
+.aula .opts{flex-direction:column;gap:6px;margin-top:10px}
+.aula .opt{background:transparent;border:0;padding:2px 0;display:flex;gap:10px;align-items:flex-start;color:var(--au-ink);font-size:15px}
+.aula .opt::before{content:"";flex:none;width:16px;height:16px;margin-top:2px;border:1.5px solid #555;border-radius:50%;background:#fff}
+.aula .opts.multi .opt::before{border-radius:3px;border-color:#999}
+.aula .opt[aria-pressed="true"]::before{background:radial-gradient(circle,var(--au-red) 0 40%,#fff 45%);border-color:var(--au-red)}
+.aula .opts.multi .opt[aria-pressed="true"]::before{background:#fde3e1;content:"✔";color:var(--au-red);font-size:12px;line-height:14px;text-align:center}
+.aula .opt.ok{color:#2e7d32;background:transparent}.aula .opt.bad{color:var(--au-red);background:transparent;text-decoration:line-through}
+.aula .items{gap:0}
+.aula .items>li{padding:12px 0;border-top:1px solid var(--au-line)}
+.aula .items>li:last-child{border-bottom:1px solid var(--au-line)}
+.aula:has(textarea) .items>li{border:0;padding:6px 0}
+.pics2{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 14px}
+.pics2 img{min-width:0;flex:1 1 220px;max-width:280px;border:4px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.panels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:6px solid #7a7a7a;background:#7a7a7a;gap:4px;margin-bottom:14px}
+.panel{margin:0;position:relative;background:#fff}
+.panel img{display:block;width:100%;height:auto}
+.panel select{position:absolute;left:8px;bottom:8px;width:52px;height:40px;font-size:20px;text-align:center;border:0;color:var(--au-red)}
+.panel select.ok{outline:3px solid #2e7d32}.panel select.bad{outline:3px solid var(--au-red)}
+.sent{margin:0;padding-left:22px}.sent li{margin:4px 0}.sent li::marker{font-weight:700}
+.t3 table{background:transparent;font-size:15px}
+.t3 th{background:#DCC5BB;color:var(--au-ink);font-family:"Fira Sans",var(--f-body);font-weight:700;font-size:13px;letter-spacing:.02em}
+.t3 td{background:#E5D8D1;border:3px solid var(--au-bg);min-width:170px;width:33%}
+.t3 td.in textarea{margin:0;min-height:90px}
+.t3.tscroll{border:0;background:transparent;border-radius:0}
+
+/* Libro: Manco Cápac / Harlem */
+.ex-block.libro{font-family:"Nunito",var(--f-body);background:#FBFAF7;color:#3a3a3a;border-color:#e6e1da;color-scheme:light}
+.libro h3{font-family:"Nunito",var(--f-body);font-weight:700;font-size:18px;color:#222;line-height:1.35}
+.libro .bn{color:#8a3324;font-weight:800}
+.libro .instr:empty{display:none}
+.lchips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 16px}
+.lchips span{background:#DFC3B8;color:#3a2a25;padding:3px 9px;font-size:15px}
+.libro .items>li::before{font-family:"Nunito",var(--f-body);font-weight:800;color:#222}
+.libro textarea{background:transparent;border:0;border-bottom:1px dotted #999;border-radius:0;color:#333}
+.libro .model{background:#F1E6E1;border-radius:0;color:#333}
+.libro .btn{background:#8a3324;border-color:#8a3324;color:#fff}.libro .btn.ghost{background:transparent;color:#8a3324}
+.libro .items b{font-weight:800}
+
+/* Ficha: pretérito indefinido */
+.ficha{--fg-green:#1F6B45;--fg-soft:#E3EFE7;--fg-ink:#1E3B2C;font-family:"Nunito",var(--f-body);color:var(--fg-ink);background:#F3F8F4;border-radius:14px;padding:clamp(12px,2.5vw,22px);display:flex;flex-direction:column;gap:14px;color-scheme:light}
+.fhead{background:linear-gradient(135deg,#1C6440,#2E8B57);color:#fff;border-radius:12px;padding:16px 22px}
+.fhead b{display:block;font-size:clamp(24px,4.5vw,34px);font-weight:800;letter-spacing:.01em}
+.fhead span{font-size:14px;opacity:.9}
+.fcard{background:#fff;border:1px solid #D6E6DC;border-radius:12px;padding:14px 16px;min-width:0}
+.fcard h4{margin:0 0 10px;font-size:16px;font-weight:800;padding-left:10px;border-left:4px solid var(--fg-green)}
+.fcard p{margin:0 0 8px;font-size:14px}
+.fchips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.fchips span{background:var(--fg-soft);border-radius:999px;padding:4px 14px;font-size:14px;font-weight:600}
+.fmark{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px 14px}
+.fmark div{display:flex;justify-content:space-between;gap:10px;padding:3px 10px;font-size:14px}
+.fmark div:nth-child(4n+1),.fmark div:nth-child(4n+2){background:var(--fg-soft)}
+.fmark span{color:#5b6b62;font-size:13px;text-align:right}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
+.fverbs th{background:var(--fg-soft);color:var(--fg-ink);font-family:"Nunito",var(--f-body);font-size:13px;letter-spacing:0;text-transform:none;font-weight:700;padding:5px 8px}
+.fverbs td{padding:3px 8px;border:0;color:var(--fg-ink)}
+.fverbs tr:nth-child(even) td{background:#F5FAF6}
+.fverbs u{text-decoration:none;background:#FBE3C4;border-radius:3px}
+.fverbs i{font-style:normal;background:#CFE8D6;border-radius:3px}
+.fverbs em{font-style:normal;font-weight:800;text-decoration:underline;text-decoration-color:var(--fg-green);text-decoration-thickness:3px;text-underline-offset:3px}
+.fojo{display:flex;gap:12px;align-items:center;background:var(--fg-soft);border-radius:10px;padding:10px 12px;margin-top:10px;font-size:13px}
+.fojo b{background:var(--fg-green);color:#fff;border-radius:8px;padding:8px 10px}
+.fvow{display:flex;align-items:center;gap:12px;background:var(--fg-soft);border-radius:10px;padding:8px 12px;margin:12px 0 6px}
+.fvow b{font-size:20px;color:var(--fg-green)}
+.fvow span{font-size:12px;color:#5b6b62}
+.ffoot{text-align:center;font-size:12px;letter-spacing:.08em;color:#5b6b62}
+
+/* Hoja: Urashima Tarō */
+.sheet{background:#fff;color:#262626;font-family:"Crimson Pro",Georgia,serif;font-size:18px;border:1px solid #e5e5e5;border-radius:2px;box-shadow:0 2px 18px rgba(0,0,0,.08);padding:clamp(18px,5vw,54px);color-scheme:light;margin-top:12px}
+.sheet .sh{font-family:"Crimson Pro",Georgia,serif;font-weight:700;font-size:clamp(26px,4.4vw,36px);display:flex;align-items:center;gap:14px;color:#262626}
+.sheet .dot{flex:none;width:.8em;height:.8em;border-radius:50%;background:#A61E22}
+.sheet .shs{font-style:italic;margin:6px 0 18px;padding-bottom:10px;border-bottom:1.5px solid #A61E22}
+.sheet p{line-height:2.1}
+.story.sheet .tm{color:#A61E22;font-weight:700}
+.sheet .tg sup{color:#A61E22;font-family:"Crimson Pro",Georgia,serif;font-size:11px}
+.sheet .tgi{font-family:"Crimson Pro",Georgia,serif;font-size:17px;background:#EBF2F3;color:#262626;border:0;border-bottom:1.5px solid #888;border-radius:0;width:7em}
+.sheet .tgi.ok{background:#E3F1E5;color:#1f6b33;border-bottom-color:#2e7d32}
+.sheet .tgi.bad{background:#F8E1E0;color:#A61E22;border-bottom-color:#A61E22}
+.sheet .tg .inf{font-family:"Crimson Pro",Georgia,serif;font-size:15px;color:#8a8a8a}
+.sheet .btn{background:#A61E22;border-color:#A61E22;color:#fff;font-family:var(--f-body)}
+.sheet .btn.ghost{background:transparent;color:#A61E22}
+.sheet .score{color:#6b6b6b}
+@media (max-width:600px){.panels{grid-template-columns:minmax(0,1fr)}.aula .band{padding-right:70px}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 @media (max-width:860px){
@@ -226,7 +333,8 @@ const LESSONS = [
   id: "leccion-1",
   num: 1,
   date: "2026-11-23",
-  title: "Intenciones y acciones interrumpidas",
+  title: "23 de noviembre",
+  topic: "Intenciones y acciones interrumpidas",
   subtitle: "Iba a, pensaba, quería + infinitivo; justo cuando, acababa de, estar a punto de; los marcadores temporales del relato y el pretérito indefinido irregular.",
   themes: ["leyendas", "historia de un barrio", "planes que no salen"],
   goals: [
@@ -249,22 +357,30 @@ const LESSONS = [
     ]
   },
   cheat: {
-    title: "Pretérito indefinido: ficha de repaso",
-    html: `
-      <h3 class="ch">Marcadores temporales básicos</h3>
-      <div class="chips">${["ayer","anteayer","anoche","la semana pasada","el mes pasado","el año pasado","el lunes / martes…","en 1998","en mayo","el 8 de diciembre","hace dos días","hace tres semanas","hace un año","un día","el otro día"].map(x=>`<span class="chip">${x}</span>`).join("")}</div>
-      <h3 class="ch">Marcadores del relato</h3>
-      <div class="tscroll"><table><tbody>${[["entonces","тогда; затем"],["de repente","вдруг, внезапно"],["de pronto","вдруг, неожиданно"],["luego","потом, затем"],["después","после этого"],["más tarde","позже"],["al final","в конце концов"],["en aquel momento","в тот момент"],["justo entonces","как раз тогда"],["justo cuando","как раз когда…"],["en esa ocasión / esa vez","в тот раз"],["al día siguiente","на следующий день"],["a la semana siguiente","на следующей неделе"],["tres días más tarde","три дня спустя"],["a partir de aquel instante","с того момента"],["hasta ese día","до того дня"],["a esas alturas","к тому времени"]].map(([a,b])=>`<tr><td class="term">${a}</td><td>${b}</td></tr>`).join("")}</tbody></table></div>
-      <h3 class="ch">Verbos irregulares</h3>
-      <div class="tscroll"><table><thead><tr><th>Verbo</th><th>yo</th><th>él / ella</th></tr></thead><tbody>${[["dar","di","dio"],["ver","vi","vio"],["ir / ser","fui","fue"],["estar","estuve","estuvo"],["andar","anduve","anduvo"],["tener","tuve","tuvo"],["poder","pude","pudo"],["poner","puse","puso"],["saber","supe","supo"],["querer","quise","quiso"],["venir","vine","vino"],["caber","cupe","cupo"],["haber","hube","hubo"],["hacer","hice","hizo"],["satisfacer (como hacer)","satisfice","satisfizo"],["decir","dije","dijo"],["traer","traje","trajo"],["conducir","conduje","condujo"]].map(([a,b,c])=>`<tr><td class="term">${a}</td><td>${b}</td><td>${c}</td></tr>`).join("")}</tbody></table></div>
-      <div class="note"><b>¡Ojo!</b><span>A diferencia de las formas regulares, estas formas irregulares no llevan tilde en la última sílaba: <i>dio, vio, fue, hizo</i>.</span></div>
-      <h3 class="ch">Cambio vocálico en los verbos en -ir</h3>
-      <p>Solo cambia la vocal de la raíz en 3.ª persona (él / ella, ellos / ellas).</p>
-      <div class="tscroll"><table><thead><tr><th>Infinitivo</th><th>yo</th><th>él / ella</th><th>ellos / ellas</th></tr></thead><tbody>${[["e → i","","",""],["pedir","pedí","p<b>i</b>dió","p<b>i</b>dieron"],["sentir","sentí","s<b>i</b>ntió","s<b>i</b>ntieron"],["preferir","preferí","pref<b>i</b>rió","pref<b>i</b>rieron"],["o → u","","",""],["dormir","dormí","d<b>u</b>rmió","d<b>u</b>rmieron"],["morir","morí","m<b>u</b>rió","m<b>u</b>rieron"]].map(r=>r[1]?`<tr><td class="term">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`:`<tr><td colspan="4" class="grp">${r[0]}</td></tr>`).join("")}</tbody></table></div>`
+    title: "Ficha: pretérito indefinido",
+    html: `<div class="ficha">
+      <div class="fhead"><b>PRETÉRITO INDEFINIDO</b><span>Verbos irregulares y marcadores temporales</span></div>
+      <div class="fcard"><h4>MARCADORES TEMPORALES BÁSICOS</h4>
+        <div class="fchips">${["ayer","anteayer","anoche","la semana pasada","el mes pasado","el año pasado","el lunes / martes / miércoles…","en 1998","en mayo","el 8 de diciembre","hace dos días","hace tres semanas","hace un año","un día","el otro día"].map(x=>`<span>${x}</span>`).join("")}</div></div>
+      <div class="fcard"><h4>MARCADORES MÁS EXPRESIVOS / DE NARRACIÓN</h4>
+        <div class="fmark">${[["entonces","тогда; затем"],["de repente","вдруг, внезапно"],["de pronto","вдруг, неожиданно"],["luego","потом, затем"],["después","после этого"],["más tarde","позже"],["al final","в конце концов"],["en aquel momento","в тот момент"],["justo entonces","как раз тогда"],["en esa ocasión","в тот раз"],["esa vez","в тот раз"],["al día siguiente","на следующий день"],["a la semana siguiente","на следующей неделе"],["tres días más tarde","три дня спустя"],["a partir de aquel instante","с того момента"],["hasta ese día","до того дня"],["a esas alturas","к тому времени"],["justo cuando","как раз когда…"]].map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join("")}</div></div>
+      <div class="fgrid">
+        <div class="fcard"><h4>VERBOS IRREGULARES</h4>
+          <table class="fverbs"><thead><tr><th>Verbo</th><th>yo</th><th>él / ella</th></tr></thead><tbody>${[["dar","di","dio"],["ver","vi","vio"],["ir / ser","fui","fue"],["<u>est</u>ar","<i>estuv</i>e","<i>estuv</i>o"],["<u>and</u>ar","<i>anduv</i>e","<i>anduv</i>o"],["<u>ten</u>er","<i>tuv</i>e","<i>tuv</i>o"],["<u>pod</u>er","<i>pud</i>e","<i>pud</i>o"],["<u>pon</u>er","<i>pus</i>e","<i>pus</i>o"],["<u>sab</u>er","<i>sup</i>e","<i>sup</i>o"],["<u>quer</u>er","<i>quis</i>e","<i>quis</i>o"],["<u>ven</u>ir","<i>vin</i>e","<i>vin</i>o"],["<u>cab</u>er","<i>cup</i>e","<i>cup</i>o"],["<u>hab</u>er","<i>hub</i>e","<i>hub</i>o"],["<u>hac</u>er","<i>hic</i>e","<i>hiz</i>o"],["<u>satisfac</u>er <small>(como hacer)</small>","<i>satisfic</i>e","<i>satisfiz</i>o"],["<u>dec</u>ir","<i>dij</i>e","<i>dij</i>o"],["<u>tra</u>er","<i>traj</i>e","<i>traj</i>o"],["<u>conduc</u>ir","<i>conduj</i>e","<i>conduj</i>o"]].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")}</tbody></table>
+          <div class="fojo"><b>¡OJO!</b><span>A diferencia de las formas regulares, estas formas irregulares no llevan tilde en la última sílaba.</span></div></div>
+        <div class="fcard"><h4>CAMBIO VOCÁLICO · -IR</h4><p>Solo cambia la vocal de la raíz en 3.ª persona.</p>
+          ${[["e","i",[["p<em>e</em>dir","p<em>e</em>dí","p<em>i</em>dió","p<em>i</em>dieron"],["s<em>e</em>ntir","s<em>e</em>ntí","s<em>i</em>ntió","s<em>i</em>ntieron"],["pref<em>e</em>rir","pref<em>e</em>rí","pref<em>i</em>rió","pref<em>i</em>rieron"]]],["o","u",[["d<em>o</em>rmir","d<em>o</em>rmí","d<em>u</em>rmió","d<em>u</em>rmieron"],["m<em>o</em>rir","m<em>o</em>rí","m<em>u</em>rió","m<em>u</em>rieron"]]]].map(([x,y,rows])=>`
+          <div class="fvow"><b>${x} → ${y}</b><span>Vocal original → vocal cambiada</span></div>
+          <table class="fverbs"><thead><tr><th>Infinitivo</th><th>yo</th><th>él / ella</th><th>ellos / ellas</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table>`).join("")}
+        </div>
+      </div>
+      <div class="ffoot">PRETÉRITO INDEFINIDO · FICHA DE REPASO</div></div>`
   },
+
   readings: [
     {
       title: "La leyenda de Manco Cápac y Mama Ocllo",
+      image: "img/manco-capac.jpg",
       paragraphs: [
         "Cuenta la leyenda que antiguamente los hombres que habitaban la zona del lago Titicaca vivían como animales, desnudos, sin religión ni leyes, y sin cultivar la tierra.",
         "El dios Inti (el Sol) <b>pidió</b> a sus hijos Manco Cápac y Mama Ocllo <b>que fueran</b> a civilizarlos y <b>que fundaran</b> un imperio que lo adorara.",
@@ -273,10 +389,12 @@ const LESSONS = [
         "<mark>Entonces</mark>, <b>pidieron</b> a los hombres <b>que acudieran</b> a esa ciudad. Estos, cuando los vieron vestidos con elegantes trajes luminosos, enseguida pensaron que eran dioses y los obedecieron. Allí Manco Cápac enseñó a los hombres a cultivar la tierra, a pescar, a construir viviendas… Su hermana y esposa, Mama Ocllo, enseñó a las mujeres a coser y a hacerse cargo de las labores domésticas. <mark>Desde ese momento</mark>, los hombres tuvieron una religión y conocieron las ciencias y las normas de convivencia en sociedad.",
         "Y así fue como Manco Cápac y Mama Ocllo fundaron un imperio. <mark>A partir de entonces</mark>, sus descendientes fueron reyes: los emperadores del Imperio inca."
       ],
-      note: "Fíjate en los marcadores temporales (en amarillo) y en <i>pedir / ordenar / recomendar que</i> + imperfecto de subjuntivo (en negrita)."
+      note: "Fíjate en los marcadores temporales (en amarillo) y en <i>pedir / ordenar / recomendar que</i> + imperfecto de subjuntivo (en negrita).",
+      ex: [9]
     },
     {
       title: "El barrio de… Harlem",
+      image: "img/harlem.jpg",
       paragraphs: [
         "Su nombre procede del holandés <i>Nieuw Haarlem</i>, tal y como lo bautizaron sus primeros colonos en 1658. Seis años después, cayó en manos británicas, que intentaron cambiarle el nombre por el de Lancaster. La idea no cuajó: lo único que se consiguió fue quitar una a al nombre para que sonara más anglosajón.",
         "Todavía tierra de granjas a principios del siglo XIX, Harlem fue la primera zona residencial a las afueras de Nueva York cuando Alexander Hamilton, secretario del Tesoro, construyó una casa de campo llamada Hamilton Grange, que aún existe hoy, aunque no en su lugar original. En 1873 la ciudad de Nueva York se anexionó Harlem y poco después se extendieron las líneas de tren, hasta que en 1904 se inauguró el metro de Lenox Avenue. Así, el barrio se hizo mucho más accesible y, a principios del siglo XX, acogió a muchos afroamericanos.",
@@ -284,7 +402,8 @@ const LESSONS = [
         "Al este, tiendas, restaurantes y bodegas llevan nombres en español, como El Paso, La Isla, Don Paco o La Paloma. Es el Harlem hispano, donde viven los puertorriqueños, dominicanos y mexicanos que compran en La Marqueta, el mítico mercado de frutas exóticas importadas del Caribe. También hay haitianos en el East Harlem (…).",
         "El Museo del Barrio, dedicado al arte latinoamericano, y el Museo de la Ciudad de Nueva York también quedan en esta zona cercana al East River."
       ],
-      source: "Fuente: El Periódico."
+      source: "Fuente: El Periódico.",
+      ex: [10]
     }
   ],
   vocab: [
@@ -314,49 +433,58 @@ const LESSONS = [
     { term:"de bajón", ru:"в упадке духа, расстроенный (разг.)", ex:"Estaba de bajón y no se lo dije.", r:"es" }
   ],
   exercises: [
-    { type:"open", title:"1. Intenciones", instr:"Lee los inicios de estas dos historias y responde. Después compara con el modelo.",
-      context:`<div class="quotes"><blockquote>Pensaba tomar un taxi, pero como la Gran Vía estaba cortada, decidí ir en metro…</blockquote><blockquote>Iba a ir al monte el fin de semana, pero el viernes se me estropeó el coche. Total, que al final me quedé en casa…</blockquote></div>`,
+    { type:"open", theme:"aula", band:"Intenciones y acciones interrumpidas", num:1, title:"INTENCIONES", letter:"A", instr:"Lee estos inicios de dos historias. En parejas, elegid uno y pensad cómo podría continuar. Luego, contádselo al resto de la clase.",
+      context:`<div class="pics2"><img src="img/int-taxi.jpg" alt="Pensaba tomar un taxi, pero como la Gran Vía estaba cortada, decidí ir en metro…" loading="lazy"><img src="img/int-coche.jpg" alt="Iba a ir al monte el fin de semana, pero el viernes se me estropeó el coche. Total, que al final me quedé en casa…" loading="lazy"></div>`,
+      items:[ { q:"¿Cómo continúa la historia?" } ]},
+    { type:"open", theme:"aula", letter:"B", instr:"Lee de nuevo los inicios de A y responde a estas preguntas.",
       items:[
-        { q:"¿Cómo continúa una de las historias? Escribe dos o tres frases.", model:"Respuesta libre. Por ejemplo: …y en el metro me encontré con un antiguo compañero de la universidad al que no veía desde hacía años." },
-        { q:"¿Dónde se expresa la intención que no llega a cumplirse? ¿Qué tiempo verbal se usa?", model:"<i>Pensaba tomar un taxi</i> e <i>Iba a ir al monte</i>: imperfecto (<i>pensaba / iba a</i>) + infinitivo." },
-        { q:"¿Dónde se expresa la causa? ¿En qué frase es una circunstancia y en cuál un acontecimiento?", model:"<i>Como la Gran Vía estaba cortada</i> es una circunstancia (imperfecto). <i>El viernes se me estropeó el coche</i> es un acontecimiento (indefinido)." }
+        { q:"¿Dónde se expresa, en cada una de las frases, una intención que no llega a cumplirse? ¿Cuál es el tiempo verbal que se usa para expresarla?", model:"<i>Pensaba tomar un taxi</i> e <i>Iba a ir al monte</i>: imperfecto (<i>pensaba / iba a</i>) + infinitivo." },
+        { q:"¿Dónde se expresa en cada frase la causa por la que no llega a cumplirse esa intención? ¿En qué caso esta causa se presenta como la descripción de una circunstancia y en cuál como un acontecimiento?", model:"<i>Como la Gran Vía estaba cortada</i> es una circunstancia (imperfecto). <i>El viernes se me estropeó el coche</i> es un acontecimiento (indefinido)." }
       ]},
-    { type:"open", title:"1C. Completa las intenciones", instr:"Completa las frases de manera lógica.",
+    { type:"open", theme:"aula", letter:"C", instr:"En las siguientes frases, algunas intenciones no llegaron a cumplirse. Complétalas de manera lógica. Luego, compara tus propuestas con las de otras personas de la clase. ¿Habéis usado los mismos tiempos?",
       items:[
         { q:"…, pero dos semanas antes de la boda Juan tuvo un accidente y tuvieron que posponerla.", model:"María y Juan pensaban casarse el 13 de octubre, pero…" },
-        { q:"Pensaba decirle que lo habían despedido, pero…; total, que decidió decírselo otro día.", model:"…pero ese día celebraba su cumpleaños y no quería arruinarle la fiesta; total, que…" },
+        { q:"Pensaba decirle que lo habían despedido, pero… …; total, que decidió decírselo otro día.", model:"…pero ese día celebraba su cumpleaños y no quería arruinarle la fiesta; total, que…" },
         { q:"Ayer iba a llamar a mi madre, pero…", model:"…pero no había cobertura hasta muy tarde. Total, que la llamé al día siguiente." },
-        { q:"…, pero ella enfermó y decidió ir solo.", model:"Juan y María pensaban ir juntos a la fiesta, pero ella enfermó y él decidió ir solo." }
+        { q:"…, pero ella enfermó y decidió ir solo.", model:"Juan y María pensaban ir juntos a la fiesta, pero…" }
       ]},
-    { type:"choice", title:"2A. ¿En qué momento?", instr:"¿Qué dibujo corresponde a cada frase? Elige dónde está la persona cuando se da cuenta.",
-      items:[
-        { q:"«Iba a salir de casa, cuando se dio cuenta de que no había cogido las llaves.»", options:["Todavía está dentro, con la mano en la puerta","En la puerta, saliendo","Ya está fuera, en el coche"], correct:0 },
-        { q:"«Justo cuando salía de casa, se dio cuenta de que no había cogido las llaves.»", options:["Todavía está dentro, con la mano en la puerta","En la puerta, saliendo","Ya está fuera, en el coche"], correct:1 },
-        { q:"«Acababa de salir de casa, cuando se dio cuenta de que no había cogido las llaves.»", options:["Todavía está dentro, con la mano en la puerta","En la puerta, saliendo","Ya está fuera, en el coche"], correct:2 }
+    { type:"matchimg", theme:"aula", band:"Intenciones y acciones interrumpidas", num:2, title:"¿JUSTO A TIEMPO?", letter:"A", instr:"Mira estos tres dibujos y relaciona cada uno de ellos con una de las frases de abajo. Elige el número de la frase en el recuadro de cada dibujo.",
+      panels:[
+        { img:"img/int-llaves-1.jpg", alt:"Un hombre dentro de casa, con la mano en el picaporte", answer:3 },
+        { img:"img/int-llaves-2.jpg", alt:"El hombre en la puerta, saliendo, se lleva la mano a la frente", answer:1 },
+        { img:"img/int-llaves-3.jpg", alt:"El hombre ya dentro del coche, se lleva la mano a la frente", answer:2 }
+      ],
+      sentences:[
+        "Justo cuando salía de casa, se dio cuenta de que no había cogido las llaves.",
+        "Acababa de salir de casa, cuando se dio cuenta de que no había cogido las llaves.",
+        "Iba a salir de casa, cuando se dio cuenta de que no había cogido las llaves."
       ]},
-    { type:"choice", title:"2B. ¿Justo a tiempo?", instr:"Marca la opción correcta.",
+    { type:"choice", theme:"aula", letter:"B", instr:"Lee estas situaciones descritas en distintos relatos y marca la opción correcta en cada caso.",
       items:[
-        { q:"Justo cuando llegaba en taxi al aeropuerto, Úrsula se dio cuenta de que se había dejado el pasaporte en casa.", options:["Se dio cuenta cuando aún estaba dentro del taxi.","Se dio cuenta cuando ya había salido del taxi."], correct:0 },
+        { q:"Justo cuando llegaba en taxi al aeropuerto Úrsula se dio cuenta de que se había dejado el pasaporte en casa.", options:["Se dio cuenta cuando aún estaba dentro del taxi.","Se dio cuenta cuando ya había salido del taxi."], correct:0 },
         { q:"Vio a la niña con la cámara justo cuando iba a borrar todas las fotos del verano.", options:["Aún podía impedirlo.","Ya no podía impedirlo."], correct:0 },
         { q:"Acababan de firmar el contrato del piso y se dieron cuenta de que había un error en las fechas.", options:["Firmaron un contrato que tenía un error.","No firmaron un contrato que tenía un error."], correct:0 }
       ]},
-    { type:"open", title:"3. Intención, causa y consecuencia", instr:"Completa lo que falta siguiendo el esquema intención + causa / circunstancia + consecuencia.",
-      items:[
-        { q:"<b>[Intención]</b> …, pero, como me rompí una pierna, al final no pude ir.", model:"Pensaba ir a esquiar con unos amigos, pero…" },
-        { q:"Quería comprarme un coche y, como en esa época mi cuñado vendía el suyo, <b>[consecuencia]</b> …", model:"…se lo compré a él." },
-        { q:"Pensaba dejar este trabajo <b>[causa]</b> … y por eso decidí quedarme.", model:"…pero me ofrecieron un aumento de sueldo…" },
-        { q:"Iba a preguntarle si quería quedar para salir algún día <b>[causa]</b> … Total, que me dio vergüenza y no lo hice.", model:"…pero todos mis compañeros estaban escuchando." },
-        { q:"Pensaba quedarme unos días más descansando en el campo, pero mi madre se puso enferma <b>[consecuencia]</b> …", model:"…y volví a casa para cuidarla." },
-        { q:"<b>[Intención]</b> …, pero un amigo nos dijo que era una buena inversión y por eso decidimos comprarlo.", model:"No pensábamos comprar ese piso, pero…" }
+    { type:"open", theme:"aula", letter:"C", instr:"Describe algunas situaciones como las de B contando alguna experiencia tuya. Luego, compártelo con el resto de la clase.",
+      items:[ { q:"" } ]},
+    { type:"table3", theme:"aula", band:"Intenciones y acciones interrumpidas", num:3, title:"INTENCIÓN, CAUSA Y CONSECUENCIA", instr:"Las siguientes frases están construidas siguiendo el mismo esquema: intención + causa / circunstancia + consecuencia. Inventa informaciones adecuadas para completar lo que falta en cada caso.",
+      head:["Intención","Causa / circunstancia","Consecuencia"],
+      rows:[
+        { cells:[null,"pero, como me rompí una pierna,","al final no pude ir."], model:"Pensaba ir a esquiar con unos amigos" },
+        { cells:["Quería comprarme un coche","y, como en esa época mi cuñado vendía el suyo,",null], model:"se lo compré a él." },
+        { cells:["Pensaba dejar este trabajo",null,"y por eso decidí quedarme."], model:"pero me ofrecieron un aumento de sueldo" },
+        { cells:["Iba a preguntarle si quería quedar para salir algún día",null,"Total, que me dio vergüenza y no lo hice."], model:"pero todos mis compañeros estaban escuchando." },
+        { cells:["Pensaba quedarme unos días más descansando en el campo,","pero mi madre se puso enferma",null], model:"y volví a casa para cuidarla." },
+        { cells:[null,"pero un amigo nos dijo que era una buena inversión","y por eso decidimos comprarlo."], model:"No pensábamos comprar ese piso," }
       ]},
-    { type:"choice", title:"4. ¿Qué pasó exactamente?", instr:"Lee las situaciones y elige la respuesta más adecuada.",
+    { type:"check", theme:"aula", band:"Intenciones y acciones interrumpidas", num:4, title:"¿QUÉ PASÓ EXACTAMENTE?", instr:"Lee las situaciones propuestas y marca las respuestas que consideres más adecuadas.",
       items:[
-        { q:"Ayer hubo una avería en los ordenadores de la secretaría de la universidad. ¿Quiénes van a tener que volver otro día?<br><small>Nuria: «El sistema se averió justo cuando estaban a punto de atenderme.» · Alberto: «…justo cuando me estaban atendiendo.» · Ana: «…justo cuando ya me habían atendido.»</small>", options:["Solo Nuria","Nuria y Alberto","Solo Ana"], correct:1, why:"Correcto: a Nuria no la atendieron y a Alberto lo interrumpieron. Ana ya había terminado." },
-        { q:"Alfonso no soporta que lo interrumpan mientras come. ¿Qué llamada lo molestó más?", options:["Ana me llamó cuando iba a comer.","Felipe me llamó cuando estaba comiendo.","Andrea me llamó cuando ya había comido."], correct:1 },
-        { q:"No se puede entrar cuando la obra ya ha comenzado. ¿Quién pudo ver la obra?", options:["Andrés: Yo llegué cuando estaba empezando la obra.","Carla: Yo llegué justo cuando estaba a punto de empezar la obra.","Mónica: Yo llegué justo cuando ya había empezado la obra."], correct:1 },
-        { q:"Loreto toma siempre el mismo autobús. ¿En qué caso no tuvo que esperar al siguiente?", options:["Cuando llegó a la estación, el autobús se acababa de ir.","Llegó a la estación justo cuando la gente estaba subiendo al autobús.","Llegó al andén justo cuando se estaba marchando."], correct:1 }
+        { q:"Ayer hubo una avería en los ordenadores de la secretaría de la universidad. Estas tres personas habían ido a realizar algunos trámites. ¿Quiénes van a tener que volver otro día?", options:["<b>a.</b> Nuria: El sistema se averió justo cuando estaban a punto de atenderme.","<b>b.</b> Alberto: El sistema se averió justo cuando me estaban atendiendo.","<b>c.</b> Ana: El sistema se averió justo cuando ya me habían atendido."], correct:[0,1], why:"Correcto: a Nuria no la atendieron y a Alberto lo interrumpieron." },
+        { q:"Alfonso no soporta que lo interrumpan mientras come. ¿Cuál de estas llamadas telefónicas crees que lo molestó más?", options:["<b>a.</b> Ana me llamó cuando iba a comer.","<b>b.</b> Felipe me llamó cuando estaba comiendo.","<b>c.</b> Andrea me llamó cuando ya había comido."], correct:[1] },
+        { q:"Estas tres personas fueron ayer al teatro. Teniendo en cuenta que no puedes entrar cuando la representación ya ha comenzado, ¿cuál de ellas dirías que pudo ver la obra?", options:["<b>a.</b> Andrés: Yo llegué cuando estaba empezando la obra.","<b>b.</b> Carla: Yo llegué justo cuando estaba a punto de empezar la obra.","<b>c.</b> Mónica: Yo llegué justo cuando ya había empezado la obra."], correct:[1] },
+        { q:"Loreto toma siempre el mismo autobús para ir al trabajo. ¿En cuál de estos casos no tuvo que esperar al siguiente?", options:["<b>a.</b> Cuando llegó a la estación, el autobús se acababa de ir.","<b>b.</b> Llegó a la estación justo cuando la gente estaba subiendo al autobús.","<b>c.</b> Llegó al andén justo cuando se estaba marchando."], correct:[1] }
       ]},
-    { type:"open", title:"5. Traducción", instr:"Traduce al español. Usa las construcciones de los ejercicios 1–4. El modelo es la versión corregida de la clase.",
+    { type:"open", theme:"aula", band:"Intenciones y acciones interrumpidas", num:5, title:"TRADUCCIÓN", instr:"Traduce al español estas frases. Usa las construcciones de los ejercicios 1–4.",
       items:[
         { q:"Вчера я собирался тебе позвонить, но у меня разрядился телефон.", model:"Ayer iba a llamarte, pero se me descargó el móvil." },
         { q:"Мы думали поехать в горы на выходные, но, так как шёл дождь, остались дома.", model:"Pensábamos ir al monte / a la montaña el fin de semana, pero como llovía, nos quedamos en casa." },
@@ -369,33 +497,29 @@ const LESSONS = [
         { q:"Фильм вот-вот должен был начаться, когда отключили свет.", model:"La película estaba a punto de empezar cuando cortaron la luz." },
         { q:"Я собирался сказать ей правду, но, так как она была очень расстроена, решил сделать это в другой день.", model:"Pensaba decirle la verdad, pero como estaba muy disgustada / de bajón, decidí hacerlo otro día." }
       ]},
-    { type:"open", title:"Manco Cápac: conecta las frases", instr:"Une cada par de frases con un marcador: <i>en aquellos años, en aquella época, entonces, en aquella ocasión, a partir de ese momento, a esas alturas, aquella jornada</i>. A veces hay varias opciones.",
+    { type:"open", theme:"libro", title:"<span class=\"bn\">1.</span> Conecta los pares de frases con alguno de los siguientes marcadores temporales. En algunos casos puede haber varias opciones.", instr:"",
+      context:`<div class="lchips">${["en aquellos años","en aquella época","entonces","en aquella ocasión","a partir de ese momento","a esas alturas","aquella jornada"].map(x=>`<span>${x}</span>`).join("")}</div>`,
       items:[
-        { q:"El barco se empezó a hundir tras el choque. / La gente se puso histérica y empezó a correr.", model:"El barco se empezó a hundir tras el choque. <b>Entonces / A partir de ese momento</b>, la gente se puso histérica y empezó a correr." },
-        { q:"Después de la Guerra Civil, la situación en España no era nada fácil. / Mucha gente se vio obligada a emigrar.", model:"…no era nada fácil. <b>En aquellos años / En aquella época</b>, mucha gente se vio obligada a emigrar." },
-        { q:"Juan y Marta eran superamigos hasta que empezaron a trabajar juntos. / Su relación se fue deteriorando.", model:"…empezaron a trabajar juntos. <b>A partir de ese momento</b>, su relación se fue deteriorando." },
-        { q:"Brasil y Alemania, que hoy se enfrentan en la semifinal, se enfrentaron antes en la final del Mundial de 2002. / Brasil ganó 2-0.", model:"…en la final del Mundial de 2002. <b>En aquella ocasión</b>, Brasil ganó 2-0." },
-        { q:"Fernando llevaba trabajando en la misma empresa más de 20 años. / Sabía que su situación no iba a mejorar y dejó el trabajo.", model:"…más de 20 años. <b>A esas alturas</b>, sabía que su situación no iba a mejorar y dejó el trabajo." }
+        { q:"El barco se empezó a hundir tras el choque.<br>La gente se puso histérica y empezó a correr.", model:"El barco se empezó a hundir tras el choque. <b>Entonces / A partir de ese momento</b>, la gente se puso histérica y empezó a correr." },
+        { q:"Después de la Guerra Civil, la situación en España no era nada fácil.<br>Mucha gente se vio obligada a emigrar.", model:"…no era nada fácil. <b>En aquellos años / En aquella época</b>, mucha gente se vio obligada a emigrar." },
+        { q:"Juan y Marta eran superamigos hasta que empezaron a trabajar juntos.<br>Su relación se fue deteriorando.", model:"…empezaron a trabajar juntos. <b>A partir de ese momento</b>, su relación se fue deteriorando." },
+        { q:"Brasil y Alemania, que hoy se enfrentan en la semifinal del Mundial, se enfrentaron antes en la final del Mundial de 2002. Brasil ganó 2-0.", model:"…en la final del Mundial de 2002. <b>En aquella ocasión</b>, Brasil ganó 2-0." },
+        { q:"Fernando llevaba trabajando en la misma empresa más de 20 años. Sabía que su situación no iba a mejorar y dejó el trabajo.", model:"…más de 20 años. <b>A esas alturas</b>, sabía que su situación no iba a mejorar y dejó el trabajo." }
       ]},
-    { type:"open", title:"Harlem: explícalo con tus palabras", instr:"¿Qué significan las palabras en negrita? Explícalo en español.",
+    { type:"open", theme:"libro", title:"<span class=\"bn\">2.</span> ¿Qué significan estas palabras y expresiones del texto sobre Harlem? Explícalo con tus propias palabras.", instr:"",
       items:[
-        { q:"…tal y como lo <b>bautizaron</b> sus primeros <b>colonos</b> en 1658.", model:"<i>Bautizar</i>: ponerle un nombre. <i>Colonos</i>: las personas que llegaron a vivir a un territorio nuevo." },
+        { q:"Su nombre procede del holandés <i>Nieuw Haarlem</i>, tal y como lo <b>bautizaron</b> sus primeros <b>colonos</b> en 1658.", model:"<i>Bautizar</i>: ponerle un nombre. <i>Colonos</i>: las personas que llegaron a vivir a un territorio nuevo." },
         { q:"Seis años después <b>cayó en manos británicas</b>.", model:"Pasó a estar bajo el control de los británicos." },
         { q:"La idea <b>no cuajó</b>.", model:"La idea no tuvo éxito, no se llegó a aceptar." },
-        { q:"…para que <b>sonara más anglosajón</b>.", model:"Para que, al oírlo, pareciera un nombre inglés." },
-        { q:"Todavía <b>tierra de granjas</b>…, fue la primera <b>zona residencial</b> a las afueras de Nueva York.", model:"Un lugar de campo con granjas; una zona donde la gente vive (casas, no industria ni comercio)." },
+        { q:"Lo único que se consiguió fue quitar una a al nombre para que <b>sonara más anglosajón</b>.", model:"Para que, al oírlo, pareciera un nombre inglés." },
+        { q:"Todavía <b>tierra de granjas</b> a principios del siglo XIX, Harlem fue la primera <b>zona residencial</b> a las afueras de Nueva York.", model:"Un lugar de campo con granjas; una zona donde la gente vive (casas, no industria ni comercio)." },
         { q:"En 1904 <b>se inauguró</b> el metro de Lenox Avenue.", model:"Se abrió por primera vez al público." },
-        { q:"Harlem <b>comenzó a florecer</b> con maestros como Duke Ellington.", model:"Empezó a vivir un periodo de éxito y riqueza cultural." },
+        { q:"Fue entonces cuando Harlem <b>comenzó a florecer</b> con maestros como Duke Ellington o Louis Armstrong.", model:"Empezó a vivir un periodo de éxito y riqueza cultural." },
         { q:"La ciudad de Nueva York <b>se anexionó</b> Harlem.", model:"Incorporó Harlem a su territorio." },
-        { q:"El barrio <b>acogió a</b> muchos afroamericanos.", model:"Recibió a muchos afroamericanos, que se instalaron allí." }
+        { q:"A principios del siglo XX, el barrio <b>acogió a</b> muchos afroamericanos.", model:"Recibió a muchos afroamericanos, que se instalaron allí." }
       ]}
-  ],
-  speaking: [
-    "Cuenta un plan que no saliera como pensabas: ¿qué ibas a hacer, qué pasó y qué hiciste al final? (Usa <i>pensaba / iba a…, pero como…, total, que…</i>)",
-    "Describe dos o tres situaciones como las del ejercicio 2B a partir de tu experiencia: <i>justo cuando…, acababa de…, estaba a punto de…</i>",
-    "¿Conoces otra leyenda sobre el origen de una ciudad o de un pueblo? Cuéntala con los marcadores del relato.",
-    "¿Qué barrio de tu ciudad tiene una historia interesante? ¿Cómo ha cambiado?"
   ]
+
 }
 ];
 
@@ -414,7 +538,7 @@ const sorted = () => [...LESSONS].sort((a,b)=>b.num-a.num);
 function renderNav(active){
   $("#nav-lessons").innerHTML = LESSONS.length ? "" : `<li class="navempty">Aún no hay lecciones</li>`;
   if(LESSONS.length) $("#nav-lessons").innerHTML = sorted().map(l =>
-    `<li><a href="#${l.id}" ${active===l.id?'aria-current="page"':''}><span class="n">${String(l.num).padStart(2,"0")}</span><span>${l.title}</span></a></li>`).join("");
+    `<li><a href="#${l.id}" ${active===l.id?'aria-current="page"':''}><span class="n">${l.date.slice(8,10)}</span><span>${l.title}${l.topic?`<small class="nt">${l.topic}</small>`:""}</span></a></li>`).join("");
   document.querySelectorAll('[data-route]').forEach(a => a.toggleAttribute("aria-current", a.dataset.route===active));
   if(active==="glosario") $('[data-route="glosario"]').setAttribute("aria-current","page");
   $("#nav-deberes").innerHTML = DEBERES.length ? [...DEBERES].reverse().map(d =>
@@ -429,10 +553,10 @@ function renderHome(){
     ${LESSONS.length ? "" : `<div class="emptybox"><b>Todavía no hay lecciones.</b><span>Aquí aparecerá cada lección nueva: lectura, vocabulario, gramática, ejercicios y las palabras nuevas que apuntemos en clase.</span></div>`}
     <div class="cards">${sorted().map(l => `
       <a class="card" href="#${l.id}">
-        <span class="eyebrow">Lección ${l.num} · ${fmtDate(l.date)}</span>
+        <span class="eyebrow">${l.topic||""}</span>
         <h3>${l.title}</h3>
         <p>${l.subtitle}</p>
-        <div class="chips">${l.themes.map(t=>`<span class="chip">${t}</span>`).join("")}</div>
+        <div class="chips">${(l.themes||[]).map(t=>`<span class="chip">${t}</span>`).join("")}</div>
       </a>`).join("")}
     </div>
     ${DEBERES.length ? `<h2 style="font-size:24px;margin-top:40px">Deberes</h2><div class="cards" style="margin-top:14px">${[...DEBERES].reverse().map(d=>`
@@ -447,7 +571,9 @@ function renderHome(){
 
 function renderLesson(l){
   const S = [];  // [id, title, html]
-  const ex = (l.exercises||[]).map((e,ei) => renderExercise(l,e,ei)).join("");
+  const readings0 = l.readings || (l.reading ? [l.reading] : []);
+  const inRead = new Set(readings0.flatMap(r=>r.ex||[]));
+  const ex = (l.exercises||[]).map((e,ei) => inRead.has(ei) ? "" : renderExercise(l,e,ei)).join("");
   if(l.goals && l.goals.length) S.push(["objetivos","Objetivos",`<ul class="goals">${l.goals.map(g=>`<li>${g}</li>`).join("")}</ul>`]);
   if(l.grammar) S.push(["gramatica","Gramática",`${l.grammar.intro?`<p>${l.grammar.intro}</p>`:""}
       ${(l.grammar.rules||[]).map(r=>`<div class="rule"><b>${r.h}</b><span>${r.t}</span>${r.ex?`<span class="ex">${r.ex}</span>`:""}</div>`).join("")}
@@ -455,8 +581,11 @@ function renderLesson(l){
   if(l.cheat) S.push(["chuleta", l.cheat.title, l.cheat.html]);
   const readings = l.readings || (l.reading ? [l.reading] : []);
   if(readings.length) S.push(["lectura", readings.length>1?"Lecturas":"Lectura", readings.map(r=>`
-      <div class="reading"><h3>${r.title}</h3>${r.paragraphs.map(p=>`<p>${p}</p>`).join("")}${r.source?`<p class="src">${r.source}</p>`:""}</div>
-      ${r.note?`<div class="note"><b>Nota:</b><span>${r.note}</span></div>`:""}`).join('<div style="height:16px"></div>')]);
+      ${r.image ? `<figure class="orig"><img src="${r.image}" alt="${esc(r.title)}" loading="lazy"></figure>
+        <details class="txt"><summary>Texto para copiar o arrastrar palabras</summary><div class="reading">${r.paragraphs.map(p=>`<p>${p}</p>`).join("")}${r.source?`<p class="src">${r.source}</p>`:""}</div></details>`
+      : `<div class="reading"><h3>${r.title}</h3>${r.paragraphs.map(p=>`<p>${p}</p>`).join("")}${r.source?`<p class="src">${r.source}</p>`:""}</div>`}
+      ${r.note?`<div class="note"><b>Nota:</b><span>${r.note}</span></div>`:""}
+      ${(r.ex||[]).map(ei=>renderExercise(l,l.exercises[ei],ei)).join("")}`).join('<div style="height:16px"></div>')]);
   if(l.vocab && l.vocab.length) S.push(["vocabulario","Vocabulario",`<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>
       ${l.vocab.map(v=>`<tr draggable="true" class="drag" data-term="${esc(v.term.replace(/<[^>]+>/g,""))}" data-ru="${esc(v.ru)}" title="Arrastra a «Palabras nuevas»"><td class="term">${v.term} ${badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")}
       </tbody></table></div>`]);
@@ -475,8 +604,9 @@ function renderLesson(l){
       <textarea id="hw-${l.id}" data-key="${l.id}:hw" placeholder="Puedes escribir aquí tu borrador. Se guarda en este navegador."></textarea></div>`]);
   return `<article class="wrap">
     <header class="lhead">
-      <div class="eyebrow">Lección ${l.num} · ${fmtDate(l.date)}</div>
+      <div class="eyebrow">Clase · ${l.date.slice(0,4)}</div>
       <h1>${l.title}</h1>
+      ${l.topic?`<p class="topic">${l.topic}</p>`:""}
       <p class="lead">${l.subtitle}</p>
       ${l.themes && l.themes.length ? `<div class="meta"><span><b>Temas:</b> ${l.themes.join(", ")}</span></div>` : ""}
     </header>
@@ -487,6 +617,7 @@ function renderLesson(l){
 
 function renderExercise(l,e,ei){
   const key = (i) => `${l.id}:${ei}:${i}`;
+  const th = e.theme || "";
   let body = "";
   if(e.type==="gap"){
     body = e.items.map((it,i)=>{
@@ -496,12 +627,24 @@ function renderExercise(l,e,ei){
         <span class="fb" id="fb-${l.id}-${ei}-${i}"></span></div></li>`;
     }).join("");
     body = `<ol class="items">${body}</ol><div class="bar"><button class="btn" data-act="check">Comprobar</button><button class="btn ghost" data-act="reveal">Ver respuestas</button><span class="score" aria-live="polite"></span></div>`;
-  } else if(e.type==="choice"){
-    body = `<ol class="items">${e.items.map((it,i)=>`<li><div>${it.q}<div class="opts">${it.options.map((o,oi)=>`<button class="opt" data-i="${i}" data-o="${oi}">${o}</button>`).join("")}</div><span class="fb"></span></div></li>`).join("")}</ol><div class="bar"><span class="score" aria-live="polite"></span></div>`;
+  } else if(e.type==="choice" || e.type==="check"){
+    const multi = e.type==="check";
+    body = `<ol class="items">${e.items.map((it,i)=>`<li><div>${it.q}<div class="opts ${multi?"multi":""}">${it.options.map((o,oi)=>`<button class="opt" data-i="${i}" data-o="${oi}" aria-pressed="false">${o}</button>`).join("")}</div><span class="fb"></span></div></li>`).join("")}</ol><div class="bar"><span class="score" aria-live="polite"></span></div>`;
   } else if(e.type==="open"){
-    body = `<ol class="items">${e.items.map((it,i)=>`<li><div>${it.q}<textarea id="o-${l.id}-${ei}-${i}" data-key="${key(i)}" aria-label="Tu respuesta ${i+1}">${esc(store.get(key(i))||"")}</textarea><div class="model" hidden><b>Modelo:</b> ${it.model}</div></div></li>`).join("")}</ol><div class="bar"><button class="btn ghost" data-act="model">Ver modelos</button></div>`;
+    const hasModel = e.items.some(it=>it.model);
+    body = `<ol class="items">${e.items.map((it,i)=>`<li${it.letter?` class="lt" data-l="${it.letter}"`:""}><div>${it.q}<textarea id="o-${l.id}-${ei}-${i}" data-key="${key(i)}" aria-label="Tu respuesta ${i+1}">${esc(store.get(key(i))||"")}</textarea>${it.model?`<div class="model" hidden><b>Modelo:</b> ${it.model}</div>`:""}</div></li>`).join("")}</ol>${hasModel?`<div class="bar"><button class="btn ghost" data-act="model">Ver modelos</button></div>`:""}`;
+  } else if(e.type==="matchimg"){
+    body = `<div class="panels">${e.panels.map((p,i)=>`<figure class="panel"><img src="${p.img}" alt="${esc(p.alt)}" loading="lazy"><select id="m-${l.id}-${ei}-${i}" data-key="${key(i)}" data-i="${i}" aria-label="Frase para el dibujo ${i+1}"><option value="">–</option>${e.sentences.map((_,si)=>`<option ${store.get(key(i))==String(si+1)?"selected":""}>${si+1}</option>`).join("")}</select></figure>`).join("")}</div>
+      <ol class="sent">${e.sentences.map(s=>`<li>${s}</li>`).join("")}</ol><div class="bar"><button class="btn" data-act="check">Comprobar</button><span class="score" aria-live="polite"></span></div>`;
+  } else if(e.type==="table3"){
+    body = `<div class="tscroll t3"><table><thead><tr>${e.head.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${e.rows.map((r,ri)=>`<tr>${r.cells.map((c,ci)=>c===null
+      ? `<td class="in"><textarea id="t3-${l.id}-${ei}-${ri}" data-key="${key(ri)}" aria-label="${e.head[ci]}, fila ${ri+1}">${esc(store.get(key(ri))||"")}</textarea><div class="model" hidden>${r.model}</div></td>`
+      : `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div><div class="bar"><button class="btn ghost" data-act="model">Ver modelos</button></div>`;
   }
-  return `<div class="ex-block" data-lesson="${l.id}" data-ex="${ei}"><h3>${e.title}</h3><p class="instr">${e.instr}</p>${e.context||""}${body}</div>`;
+  const head = th==="aula"
+    ? `${e.band?`<div class="band">${e.band}</div>`:""}${e.num?`<h3 class="ah"><span class="pill">${e.num}</span>${e.title}</h3>`:""}<p class="instr">${e.letter?`<b class="let">${e.letter}.</b> `:""}${e.instr}</p>`
+    : `<h3>${e.title}</h3><p class="instr">${e.instr}</p>`;
+  return `<div class="ex-block ${th}" data-lesson="${l.id}" data-ex="${ei}">${head}${e.context||""}${body}</div>`;
 }
 
 const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
@@ -559,7 +702,7 @@ function bindMyWords(l){
   $("#mw-add").addEventListener("click", ()=>{ rows.push({term:"",ru:"",ex:""}); draw(); body.querySelector(`#mw-${l.id}-${rows.length-1}-term`).focus(); });
   $("#mw-copy").addEventListener("click", async ()=>{
     const all = [...(l.myWords||[]), ...rows].filter(r=>r.term.trim());
-    const text = `Lección ${l.num}: palabras nuevas\n` + all.map(r=>`${r.term.trim()} — ${r.ru.trim()}${r.ex&&r.ex.trim()?` (${r.ex.trim()})`:""}`).join("\n");
+    const text = `${l.title}: palabras nuevas\n` + all.map(r=>`${r.term.trim()} — ${r.ru.trim()}${r.ex&&r.ex.trim()?` (${r.ex.trim()})`:""}`).join("\n");
     try{ await navigator.clipboard.writeText(text); msg.textContent = "Copiado."; }
     catch(err){ msg.textContent = "No se pudo copiar automáticamente."; }
   });
@@ -582,12 +725,46 @@ function bindLesson(l){
           if(!inp.classList.contains("ok")){ fb.className = "fb warn"; fb.textContent = "Respuesta: " + it.a.join(" / "); } });
       });
     }
+    if(ex.type==="check"){
+      block.addEventListener("click", e=>{
+        const b = e.target.closest(".opt"); if(!b) return;
+        const i = +b.dataset.i, it = ex.items[i], li = b.closest("li"), fb = li.querySelector(".fb");
+        b.setAttribute("aria-pressed", b.getAttribute("aria-pressed")==="true" ? "false" : "true");
+        const sel = [...li.querySelectorAll('.opt[aria-pressed="true"]')].map(x=>+x.dataset.o);
+        li.querySelectorAll(".opt").forEach(x=>x.classList.remove("ok","bad"));
+        const wrong = sel.filter(o=>!it.correct.includes(o));
+        wrong.forEach(o=>li.querySelector(`.opt[data-o="${o}"]`).classList.add("bad"));
+        const done = !wrong.length && sel.length===it.correct.length;
+        if(done) sel.forEach(o=>li.querySelector(`.opt[data-o="${o}"]`).classList.add("ok"));
+        fb.className = "fb " + (done ? "ok" : wrong.length ? "bad" : "warn");
+        fb.textContent = !sel.length ? "" : done ? (it.why||"Correcto.") : wrong.length ? "Revisa la opción marcada en rojo." : "Bien, pero falta otra opción.";
+        li.dataset.done = done ? "1" : "";
+        score.textContent = `${block.querySelectorAll('li[data-done="1"]').length} / ${ex.items.length}`;
+      });
+    }
+    if(ex.type==="matchimg"){
+      block.addEventListener("change", e=>{ if(e.target.dataset.key){ store.set(e.target.dataset.key, e.target.value); e.target.classList.remove("ok","bad"); } });
+      block.querySelector('[data-act="check"]').addEventListener("click", ()=>{
+        let ok = 0;
+        block.querySelectorAll("select").forEach(s=>{ s.classList.remove("ok","bad"); if(!s.value) return;
+          const r = +s.value === ex.panels[+s.dataset.i].answer; s.classList.add(r?"ok":"bad"); ok += r; });
+        score.textContent = `${ok} / ${ex.panels.length} correctas`;
+      });
+    }
+    if(ex.type==="table3"){
+      block.addEventListener("input", e=>{ if(e.target.dataset.key) store.set(e.target.dataset.key, e.target.value); });
+      block.querySelector('[data-act="model"]').addEventListener("click", ev=>{
+        const ms = block.querySelectorAll(".model"); const show = ms[0].hidden;
+        ms.forEach(m=>m.hidden = !show); ev.target.textContent = show ? "Ocultar modelos" : "Ver modelos";
+      });
+    }
     if(ex.type==="choice"){
       block.addEventListener("click", e=>{
         const b = e.target.closest(".opt"); if(!b) return;
         const i = +b.dataset.i, o = +b.dataset.o, it = ex.items[i];
         const li = b.closest("li"), fb = li.querySelector(".fb");
-        li.querySelectorAll(".opt").forEach(x=>x.classList.remove("ok","bad"));
+        li.querySelectorAll(".opt").forEach(x=>{ x.classList.remove("ok","bad"); x.setAttribute("aria-pressed","false"); });
+        b.setAttribute("aria-pressed","true");
         const right = o===it.correct;
         b.classList.add(right?"ok":"bad");
         fb.className = "fb " + (right?"ok":"bad");
@@ -599,7 +776,8 @@ function bindLesson(l){
     }
     if(ex.type==="open"){
       block.addEventListener("input", e=>{ if(e.target.dataset.key) store.set(e.target.dataset.key, e.target.value); });
-      block.querySelector('[data-act="model"]').addEventListener("click", ev=>{
+      const mb = block.querySelector('[data-act="model"]');
+      if(mb) mb.addEventListener("click", ev=>{
         const ms = block.querySelectorAll(".model"); const show = ms[0].hidden;
         ms.forEach(m=>m.hidden = !show); ev.target.textContent = show ? "Ocultar modelos" : "Ver modelos";
       });
@@ -654,12 +832,11 @@ function renderDeber(d){
       return `<span class="tg"><sup>${n}</sup><input class="gap tgi" id="t-${d.id}-${n}" data-key="${k}" data-n="${n}" value="${esc(store.get(k)||"")}" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Hueco ${n}: ${inf}"><span class="inf">(${inf})</span><span class="sol" hidden></span></span>`;
     }));
   return { gaps, html: `<article class="wrap">
-    <header class="lhead">
-      <div class="eyebrow">Deberes · ${d.topic} · ${fmtDate(d.date)}</div>
-      <h1>${d.title}</h1>
-      <p class="lead">${d.instr}</p>
-    </header>
-    <div class="ex-block story">${paras.map(p=>`<p>${p}</p>`).join("")}
+    <div class="eyebrow">Deberes · ${d.topic} · ${fmtDate(d.date)}</div>
+    <div class="ex-block story sheet">
+      <h1 class="sh"><span class="dot"></span>${d.title}</h1>
+      <p class="shs">${d.sheetInstr || "Completa el texto con los verbos en pretérito indefinido."}</p>
+      ${paras.map(p=>`<p>${p}</p>`).join("")}
       <div class="bar"><button class="btn" id="d-check">Comprobar</button><button class="btn ghost" id="d-reveal">Ver respuestas</button><button class="btn ghost" id="d-reset">Borrar todo</button><span class="score" id="d-score" aria-live="polite"></span></div>
     </div>
   </article>` };
@@ -728,8 +905,8 @@ function fillGlossary(){
     if(q && !plain(v.term+" "+v.ru+" "+(v.alt||"").replace(/<[^>]+>/g,"")).includes(q)) return false;
     return true;
   }).sort((a,b)=>plain(a.term.replace(/^(el|la|los|las) /,"")).localeCompare(plain(b.term.replace(/^(el|la|los|las) /,"")),"es"));
-  $("#glist").innerHTML = list.length ? `<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Lección</th></tr></thead><tbody>${
-    list.map(v=>`<tr><td class="term">${v.term} ${v.mine?'<span class="rg mine">nueva</span>':badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td><a href="#${v.lesson.id}">${v.lesson.num}</a></td></tr>`).join("")
+  $("#glist").innerHTML = list.length ? `<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Clase</th></tr></thead><tbody>${
+    list.map(v=>`<tr><td class="term">${v.term} ${v.mine?'<span class="rg mine">nueva</span>':badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td><a href="#${v.lesson.id}">${v.lesson.title}</a></td></tr>`).join("")
   }</tbody></table></div>` : `<p class="empty">${rows.length ? "No hay palabras que coincidan." : "Todavía no hay palabras. Aparecerán aquí con cada lección."}</p>`;
   document.querySelectorAll(".fbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===gFilter));
 }
