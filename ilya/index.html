@@ -352,7 +352,12 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 #nb header b{font-family:var(--f-display);font-size:20px;margin-right:auto}
 #nb header button{font:inherit;font-size:13px;border:1px solid #d9c770;background:#fff8d6;color:#5a4a00;border-radius:6px;padding:5px 9px;cursor:pointer}
 #nb header .x{font-size:20px;line-height:1;padding:2px 9px}
-#nb textarea{flex:1;margin:0;border:0;border-radius:0;resize:none;background:repeating-linear-gradient(#FFFBEA 0 29px,#eadfb0 29px 30px);background-attachment:local;line-height:30px;padding:2px 18px 20px;font-size:16px;color:#2b2b2b;min-height:0}
+.nbw{position:relative;flex:1;min-height:0}
+#nb textarea,.nbhl{position:absolute;inset:0;margin:0;border:0;border-radius:0;font-family:var(--f-body);font-size:16px;line-height:30px;padding:2px 18px 20px;white-space:pre-wrap;overflow-wrap:break-word;word-break:normal;letter-spacing:normal;scrollbar-gutter:stable;box-sizing:border-box}
+#nb textarea{resize:none;width:100%;height:100%;overflow-y:auto;background:repeating-linear-gradient(#FFFBEA 0 29px,#eadfb0 29px 30px);background-attachment:local;color:transparent;caret-color:#2b2b2b;min-height:0}
+#nb textarea::placeholder{color:#9a8f6a}
+.nbhl{overflow:hidden;pointer-events:none;color:#2b2b2b}
+.nbhl .nbd{color:var(--accent);font-weight:700}
 #nb textarea:focus{outline:none}
 /* crónica deportiva (La Vanguardia) */
 .cronica{max-width:560px;background:#fff;color:#222;font-family:"Fira Sans Condensed","Fira Sans",var(--f-body);color-scheme:light;padding:14px 16px 30px;box-shadow:0 2px 10px rgba(0,0,0,.16);margin-bottom:18px;clip-path:polygon(0 0,100% 0,100% 100%,94% calc(100% - 9px),84% calc(100% - 2px),70% calc(100% - 10px),57% calc(100% - 3px),44% calc(100% - 11px),30% calc(100% - 2px),17% calc(100% - 9px),6% calc(100% - 3px),0 calc(100% - 8px))}
@@ -1285,11 +1290,16 @@ function route(){
   const nb = document.createElement("aside");
   nb.id = "nb"; nb.setAttribute("aria-label","Notas");
   nb.innerHTML = `<header><b>Notas</b><button type="button" class="x" id="nb-close" aria-label="Cerrar">×</button></header>
-    <textarea id="nb-txt" aria-label="Notas" placeholder="Apunta aquí lo que surja en clase…"></textarea>`;
+    <div class="nbw"><textarea id="nb-txt" aria-label="Notas" placeholder="Apunta aquí lo que surja en clase…"></textarea><div class="nbhl" aria-hidden="true"></div></div>`;
   document.body.append(tab, nb);
   const txt = nb.querySelector("#nb-txt");
-  txt.value = store.get("notas") || "";
-  txt.addEventListener("input", ()=>store.set("notas", txt.value));
+  const hl = nb.querySelector(".nbhl");
+  const isDay = l => /^\d{1,2} de [a-záéíóú]+$/.test(l.trim());
+  const paint = () => { hl.innerHTML = txt.value.split("\n").map(l=>isDay(l)?`<span class="nbd">${esc(l)}</span>`:esc(l)).join("\n") + "\n"; hl.scrollTop = txt.scrollTop; };
+  txt.value = (store.get("notas") || "").replace(/^— (\d{1,2} de [a-záéíóú]+) —$/gm, "$1");
+  paint();
+  txt.addEventListener("input", ()=>{ store.set("notas", txt.value); paint(); });
+  txt.addEventListener("scroll", ()=>{ hl.scrollTop = txt.scrollTop; });
   const setOpen = o => { nb.classList.toggle("open", o); tab.setAttribute("aria-expanded", String(o)); if(o) setTimeout(()=>txt.focus(), 200); else tab.focus(); };
   tab.addEventListener("click", ()=>setOpen(!nb.classList.contains("open")));
   nb.querySelector("#nb-close").addEventListener("click", ()=>setOpen(false));
@@ -1300,7 +1310,7 @@ function route(){
     if(store.get("notas:dia")===d) return;
     store.set("notas:dia", d);
     const v = txt.value.replace(/\s+$/,"");
-    txt.value = (v ? v+"\n\n" : "") + `— ${d} —\n`;
+    txt.value = (v ? v+"\n\n" : "") + `${d}\n`;
     txt.selectionStart = txt.selectionEnd = txt.value.length;
   });
 })();
