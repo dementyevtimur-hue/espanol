@@ -289,10 +289,16 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .sheet .btn.ghost{background:transparent;color:#A61E22}
 .sheet .score{color:#6b6b6b}
 @media (max-width:600px){.panels{grid-template-columns:minmax(0,1fr)}.aula .band{padding-right:70px}}
-.gday{margin-top:28px}
-.gday h2{font-size:24px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:10px}
-.gday h2 a{color:var(--ink);text-decoration:none}
-.gday h2 span{font-family:var(--f-body);font-size:14px;font-weight:500;color:var(--muted)}
+.gday{margin-top:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.gday summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:16px 18px}
+.gday summary::-webkit-details-marker{display:none}
+.gday summary::before{content:"▸";color:var(--accent);transition:transform .15s}
+.gday[open] summary::before{transform:rotate(90deg)}
+.gday summary b{font-family:var(--f-display);font-size:22px}
+.gday summary span{font-size:14px;color:var(--muted)}
+.gday summary em{margin-left:auto;font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.gday .tscroll{border:0;border-top:1px solid var(--line);border-radius:0 0 12px 12px}
+.glink{margin:0;padding:10px 14px;font-size:14px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 @media (max-width:860px){
@@ -915,10 +921,10 @@ function fillGlossary(){
   const groups = sorted().map(l=>({ l, words: [...(l.vocab||[]), ...(l.myWords||[])].filter(keep) })).filter(g=>g.words.length);
   const total = LESSONS.reduce((n,l)=>n+(l.vocab||[]).length,0);
   $("#glist").innerHTML = groups.length ? groups.map(({l,words})=>`
-    <section class="gday"><h2><a href="#${l.id}">${l.title}</a>${l.topic?`<span>${l.topic}</span>`:""}</h2>
+    <details class="gday" ${q?"open":""}><summary><b>${l.title}</b>${l.topic?`<span>${l.topic}</span>`:""}<em>${words.length} palabras</em></summary>
     <div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>${
       words.map(v=>`<tr><td class="term">${v.term} ${v.r && v.r!=="all" ? badge(v.r, v.label) : ""}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")
-    }</tbody></table></div></section>`).join("")
+    }</tbody></table><p class="glink"><a href="#${l.id}">Ir a la clase del ${l.title}</a></p></div></details>`).join("")
     : `<p class="empty">${total ? "No hay palabras que coincidan." : "Todavía no hay palabras. Aparecerán aquí con cada clase."}</p>`;
   document.querySelectorAll(".fbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===gFilter));
 }
