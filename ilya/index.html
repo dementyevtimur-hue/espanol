@@ -289,6 +289,10 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .sheet .btn.ghost{background:transparent;color:#A61E22}
 .sheet .score{color:#6b6b6b}
 @media (max-width:600px){.panels{grid-template-columns:minmax(0,1fr)}.aula .band{padding-right:70px}}
+.gday{margin-top:28px}
+.gday h2{font-size:24px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin-bottom:10px}
+.gday h2 a{color:var(--ink);text-decoration:none}
+.gday h2 span{font-family:var(--f-body);font-size:14px;font-weight:500;color:var(--muted)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 @media (max-width:860px){
@@ -314,7 +318,7 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
     <ul class="nav" id="nav-deberes"></ul>
     <div class="navlabel">Herramientas</div>
     <ul class="nav">
-      <li><a href="#glosario" data-route="glosario"><span class="n">Aa</span><span>Glosario de todas las lecciones</span></a></li>
+      <li><a href="#glosario" data-route="glosario"><span class="n">Aa</span><span>Glosario por fechas</span></a></li>
     </ul>
   </aside>
   <main id="view" tabindex="-1"></main>
@@ -383,21 +387,7 @@ const LESSONS = [
         "<mark>Entonces</mark>, <b>pidieron</b> a los hombres <b>que acudieran</b> a esa ciudad. Estos, cuando los vieron vestidos con elegantes trajes luminosos, enseguida pensaron que eran dioses y los obedecieron. Allí Manco Cápac enseñó a los hombres a cultivar la tierra, a pescar, a construir viviendas… Su hermana y esposa, Mama Ocllo, enseñó a las mujeres a coser y a hacerse cargo de las labores domésticas. <mark>Desde ese momento</mark>, los hombres tuvieron una religión y conocieron las ciencias y las normas de convivencia en sociedad.",
         "Y así fue como Manco Cápac y Mama Ocllo fundaron un imperio. <mark>A partir de entonces</mark>, sus descendientes fueron reyes: los emperadores del Imperio inca."
       ],
-      note: "Fíjate en los marcadores temporales (en amarillo) y en <i>pedir / ordenar / recomendar que</i> + imperfecto de subjuntivo (en negrita).",
-      ex: [9]
-    },
-    {
-      title: "El barrio de… Harlem",
-      image: "img/harlem.jpg",
-      paragraphs: [
-        "Su nombre procede del holandés <i>Nieuw Haarlem</i>, tal y como lo bautizaron sus primeros colonos en 1658. Seis años después, cayó en manos británicas, que intentaron cambiarle el nombre por el de Lancaster. La idea no cuajó: lo único que se consiguió fue quitar una a al nombre para que sonara más anglosajón.",
-        "Todavía tierra de granjas a principios del siglo XIX, Harlem fue la primera zona residencial a las afueras de Nueva York cuando Alexander Hamilton, secretario del Tesoro, construyó una casa de campo llamada Hamilton Grange, que aún existe hoy, aunque no en su lugar original. En 1873 la ciudad de Nueva York se anexionó Harlem y poco después se extendieron las líneas de tren, hasta que en 1904 se inauguró el metro de Lenox Avenue. Así, el barrio se hizo mucho más accesible y, a principios del siglo XX, acogió a muchos afroamericanos.",
-        "<mark>Fue entonces cuando</mark> Harlem comenzó a florecer con maestros como Duke Ellington o Louis Armstrong, que estaban iniciando sus carreras en los años 20 y 30. Fue cuando todos los extranjeros querían conocer las interminables noches del Savoy Ballroom, abierto entre 1936 y 1958. Años más tarde, las famosas sesiones del restaurante Sherman's Barbeque, donde las Ronettes llevaron a los Beatles en el año 1964 para que los cuatro de Liverpool despistaran a los fans que rodeaban el Hotel Plaza. (…)",
-        "Al este, tiendas, restaurantes y bodegas llevan nombres en español, como El Paso, La Isla, Don Paco o La Paloma. Es el Harlem hispano, donde viven los puertorriqueños, dominicanos y mexicanos que compran en La Marqueta, el mítico mercado de frutas exóticas importadas del Caribe. También hay haitianos en el East Harlem (…).",
-        "El Museo del Barrio, dedicado al arte latinoamericano, y el Museo de la Ciudad de Nueva York también quedan en esta zona cercana al East River."
-      ],
-      source: "Fuente: El Periódico.",
-      ex: [10]
+      note: "Fíjate en los marcadores temporales (en amarillo) y en <i>pedir / ordenar / recomendar que</i> + imperfecto de subjuntivo (en negrita)."
     }
   ],
   vocab: [
@@ -409,6 +399,10 @@ const LESSONS = [
     { term:"coser", ru:"шить", ex:"Mama Ocllo enseñó a las mujeres a coser." },
     { term:"hacerse cargo de", ru:"брать на себя, заниматься", ex:"Se hacía cargo de las labores domésticas." },
     { term:"el / la descendiente", ru:"потомок", ex:"Sus descendientes fueron reyes." },
+    { term:"estropearse", ru:"сломаться (о машине, технике)", ex:"Se me estropeó el coche." },
+    { term:"descargarse (el móvil)", ru:"разрядиться", ex:"Se me descargó el móvil." },
+    { term:"cortar la luz", ru:"отключить свет", ex:"Cortaron la luz justo antes de la película." },
+    { term:"de bajón", ru:"в упадке духа, расстроенный (разг.)", ex:"Estaba de bajón y no se lo dije.", r:"es" },
     { term:"bautizar", ru:"крестить; давать имя", ex:"Así lo bautizaron sus primeros colonos." },
     { term:"el colono", ru:"колонист, поселенец", ex:"Los colonos holandeses llegaron en 1658." },
     { term:"caer en manos de", ru:"попасть в руки (к кому-то)", ex:"Cayó en manos británicas." },
@@ -420,11 +414,7 @@ const LESSONS = [
     { term:"inaugurarse", ru:"открываться (торжественно)", ex:"En 1904 se inauguró el metro." },
     { term:"acoger", ru:"принимать, давать приют", ex:"El barrio acogió a muchos afroamericanos." },
     { term:"florecer", ru:"процветать, расцветать", ex:"Harlem comenzó a florecer." },
-    { term:"despistar a alguien", ru:"сбить со следа, отвлечь", ex:"Para despistar a los fans." },
-    { term:"estropearse", ru:"сломаться (о машине, технике)", ex:"Se me estropeó el coche." },
-    { term:"descargarse (el móvil)", ru:"разрядиться", ex:"Se me descargó el móvil." },
-    { term:"cortar la luz", ru:"отключить свет", ex:"Cortaron la luz justo antes de la película." },
-    { term:"de bajón", ru:"в упадке духа, расстроенный (разг.)", ex:"Estaba de bajón y no se lo dije.", r:"es" }
+    { term:"despistar a alguien", ru:"сбить со следа, отвлечь", ex:"Para despistar a los fans." }
   ],
   exercises: [
     { type:"open", theme:"aula", band:"Intenciones y acciones interrumpidas", num:1, title:"INTENCIONES", letter:"A", instr:"Lee estos inicios de dos historias. En parejas, elegid uno y pensad cómo podría continuar. Luego, contádselo al resto de la clase.",
@@ -490,27 +480,6 @@ const LESSONS = [
         { q:"Брат позвонил мне как раз, когда я принимал душ.", model:"Mi hermano me llamó justo cuando <b>me estaba duchando</b>." },
         { q:"Фильм вот-вот должен был начаться, когда отключили свет.", model:"La película estaba a punto de empezar cuando cortaron la luz." },
         { q:"Я собирался сказать ей правду, но, так как она была очень расстроена, решил сделать это в другой день.", model:"Pensaba decirle la verdad, pero como estaba muy disgustada / de bajón, decidí hacerlo otro día." }
-      ]},
-    { type:"open", theme:"libro", title:"<span class=\"bn\">1.</span> Conecta los pares de frases con alguno de los siguientes marcadores temporales. En algunos casos puede haber varias opciones.", instr:"",
-      context:`<div class="lchips">${["en aquellos años","en aquella época","entonces","en aquella ocasión","a partir de ese momento","a esas alturas","aquella jornada"].map(x=>`<span>${x}</span>`).join("")}</div>`,
-      items:[
-        { q:"El barco se empezó a hundir tras el choque.<br>La gente se puso histérica y empezó a correr.", model:"El barco se empezó a hundir tras el choque. <b>Entonces / A partir de ese momento</b>, la gente se puso histérica y empezó a correr." },
-        { q:"Después de la Guerra Civil, la situación en España no era nada fácil.<br>Mucha gente se vio obligada a emigrar.", model:"…no era nada fácil. <b>En aquellos años / En aquella época</b>, mucha gente se vio obligada a emigrar." },
-        { q:"Juan y Marta eran superamigos hasta que empezaron a trabajar juntos.<br>Su relación se fue deteriorando.", model:"…empezaron a trabajar juntos. <b>A partir de ese momento</b>, su relación se fue deteriorando." },
-        { q:"Brasil y Alemania, que hoy se enfrentan en la semifinal del Mundial, se enfrentaron antes en la final del Mundial de 2002. Brasil ganó 2-0.", model:"…en la final del Mundial de 2002. <b>En aquella ocasión</b>, Brasil ganó 2-0." },
-        { q:"Fernando llevaba trabajando en la misma empresa más de 20 años. Sabía que su situación no iba a mejorar y dejó el trabajo.", model:"…más de 20 años. <b>A esas alturas</b>, sabía que su situación no iba a mejorar y dejó el trabajo." }
-      ]},
-    { type:"open", theme:"libro", title:"<span class=\"bn\">2.</span> ¿Qué significan estas palabras y expresiones del texto sobre Harlem? Explícalo con tus propias palabras.", instr:"",
-      items:[
-        { q:"Su nombre procede del holandés <i>Nieuw Haarlem</i>, tal y como lo <b>bautizaron</b> sus primeros <b>colonos</b> en 1658.", model:"<i>Bautizar</i>: ponerle un nombre. <i>Colonos</i>: las personas que llegaron a vivir a un territorio nuevo." },
-        { q:"Seis años después <b>cayó en manos británicas</b>.", model:"Pasó a estar bajo el control de los británicos." },
-        { q:"La idea <b>no cuajó</b>.", model:"La idea no tuvo éxito, no se llegó a aceptar." },
-        { q:"Lo único que se consiguió fue quitar una a al nombre para que <b>sonara más anglosajón</b>.", model:"Para que, al oírlo, pareciera un nombre inglés." },
-        { q:"Todavía <b>tierra de granjas</b> a principios del siglo XIX, Harlem fue la primera <b>zona residencial</b> a las afueras de Nueva York.", model:"Un lugar de campo con granjas; una zona donde la gente vive (casas, no industria ni comercio)." },
-        { q:"En 1904 <b>se inauguró</b> el metro de Lenox Avenue.", model:"Se abrió por primera vez al público." },
-        { q:"Fue entonces cuando Harlem <b>comenzó a florecer</b> con maestros como Duke Ellington o Louis Armstrong.", model:"Empezó a vivir un periodo de éxito y riqueza cultural." },
-        { q:"La ciudad de Nueva York <b>se anexionó</b> Harlem.", model:"Incorporó Harlem a su territorio." },
-        { q:"A principios del siglo XX, el barrio <b>acogió a</b> muchos afroamericanos.", model:"Recibió a muchos afroamericanos, que se instalaron allí." }
       ]}
   ]
 
@@ -580,7 +549,7 @@ function renderLesson(l){
       : `<div class="reading"><h3>${r.title}</h3>${r.paragraphs.map(p=>`<p>${p}</p>`).join("")}${r.source?`<p class="src">${r.source}</p>`:""}</div>`}
       ${r.note?`<div class="note"><b>Nota:</b><span>${r.note}</span></div>`:""}
       ${(r.ex||[]).map(ei=>renderExercise(l,l.exercises[ei],ei)).join("")}`).join('<div style="height:16px"></div>')]);
-  if(l.vocab && l.vocab.length) S.push(["vocabulario","Vocabulario",`<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>
+  if(l.showVocab && l.vocab && l.vocab.length) S.push(["vocabulario","Vocabulario",`<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>
       ${l.vocab.map(v=>`<tr draggable="true" class="drag" data-term="${esc(v.term.replace(/<[^>]+>/g,""))}" data-ru="${esc(v.ru)}" title="Arrastra a «Palabras nuevas»"><td class="term">${v.term} ${badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")}
       </tbody></table></div>`]);
   if(l.wordsSection) S.push(["nuevas","Palabras nuevas",`<p style="color:var(--muted);margin:0 0 12px">Las palabras que salen en clase. Escribe la palabra, la traducción y, si quieres, un ejemplo.</p>
@@ -598,7 +567,7 @@ function renderLesson(l){
       <textarea id="hw-${l.id}" data-key="${l.id}:hw" placeholder="Puedes escribir aquí tu borrador. Se guarda en este navegador."></textarea></div>`]);
   return `<article class="wrap">
     <header class="lhead">
-      <div class="eyebrow">Clase · ${l.date.slice(0,4)}</div>
+      <div class="eyebrow">${l.kind==="pack" ? `Deberes · ${fmtDate(l.date)}` : `Clase · ${l.date.slice(0,4)}`}</div>
       <h1>${l.title}</h1>
       ${l.topic?`<p class="topic">${l.topic}</p>`:""}
       <p class="lead">${l.subtitle}</p>
@@ -795,6 +764,54 @@ function bindLesson(l){
    ===================================================================== */
 const DEBERES = [
 {
+  id: "deber-harlem",
+  kind: "pack",
+  tag: "Marc.",
+  date: "2026-11-27",
+  title: "Marcadores temporales y el barrio de Harlem",
+  topic: "Marcadores temporales",
+  instr: "Une las frases con marcadores temporales, lee el texto sobre Harlem y explica las expresiones.",
+  subtitle: "Une las frases con marcadores temporales, lee el texto sobre Harlem y explica las expresiones en negrita.",
+  readings: [
+    {
+      title: "El barrio de… Harlem",
+      image: "img/harlem.jpg",
+      paragraphs: [
+        "Su nombre procede del holandés <i>Nieuw Haarlem</i>, tal y como lo bautizaron sus primeros colonos en 1658. Seis años después, cayó en manos británicas, que intentaron cambiarle el nombre por el de Lancaster. La idea no cuajó: lo único que se consiguió fue quitar una a al nombre para que sonara más anglosajón.",
+        "Todavía tierra de granjas a principios del siglo XIX, Harlem fue la primera zona residencial a las afueras de Nueva York cuando Alexander Hamilton, secretario del Tesoro, construyó una casa de campo llamada Hamilton Grange, que aún existe hoy, aunque no en su lugar original. En 1873 la ciudad de Nueva York se anexionó Harlem y poco después se extendieron las líneas de tren, hasta que en 1904 se inauguró el metro de Lenox Avenue. Así, el barrio se hizo mucho más accesible y, a principios del siglo XX, acogió a muchos afroamericanos.",
+        "<mark>Fue entonces cuando</mark> Harlem comenzó a florecer con maestros como Duke Ellington o Louis Armstrong, que estaban iniciando sus carreras en los años 20 y 30. Fue cuando todos los extranjeros querían conocer las interminables noches del Savoy Ballroom, abierto entre 1936 y 1958. Años más tarde, las famosas sesiones del restaurante Sherman's Barbeque, donde las Ronettes llevaron a los Beatles en el año 1964 para que los cuatro de Liverpool despistaran a los fans que rodeaban el Hotel Plaza. (…)",
+        "Al este, tiendas, restaurantes y bodegas llevan nombres en español, como El Paso, La Isla, Don Paco o La Paloma. Es el Harlem hispano, donde viven los puertorriqueños, dominicanos y mexicanos que compran en La Marqueta, el mítico mercado de frutas exóticas importadas del Caribe. También hay haitianos en el East Harlem (…).",
+        "El Museo del Barrio, dedicado al arte latinoamericano, y el Museo de la Ciudad de Nueva York también quedan en esta zona cercana al East River."
+      ],
+      source: "Fuente: El Periódico.",
+      ex: [1]
+    }
+  ],
+  exercises: [
+    { type:"open", theme:"libro", title:"<span class=\"bn\">1.</span> Conecta los pares de frases con alguno de los siguientes marcadores temporales. En algunos casos puede haber varias opciones.", instr:"",
+      context:`<div class="lchips">${["en aquellos años","en aquella época","entonces","en aquella ocasión","a partir de ese momento","a esas alturas","aquella jornada"].map(x=>`<span>${x}</span>`).join("")}</div>`,
+      items:[
+        { q:"El barco se empezó a hundir tras el choque.<br>La gente se puso histérica y empezó a correr.", model:"El barco se empezó a hundir tras el choque. <b>Entonces / A partir de ese momento</b>, la gente se puso histérica y empezó a correr." },
+        { q:"Después de la Guerra Civil, la situación en España no era nada fácil.<br>Mucha gente se vio obligada a emigrar.", model:"…no era nada fácil. <b>En aquellos años / En aquella época</b>, mucha gente se vio obligada a emigrar." },
+        { q:"Juan y Marta eran superamigos hasta que empezaron a trabajar juntos.<br>Su relación se fue deteriorando.", model:"…empezaron a trabajar juntos. <b>A partir de ese momento</b>, su relación se fue deteriorando." },
+        { q:"Brasil y Alemania, que hoy se enfrentan en la semifinal del Mundial, se enfrentaron antes en la final del Mundial de 2002. Brasil ganó 2-0.", model:"…en la final del Mundial de 2002. <b>En aquella ocasión</b>, Brasil ganó 2-0." },
+        { q:"Fernando llevaba trabajando en la misma empresa más de 20 años. Sabía que su situación no iba a mejorar y dejó el trabajo.", model:"…más de 20 años. <b>A esas alturas</b>, sabía que su situación no iba a mejorar y dejó el trabajo." }
+      ]},
+    { type:"open", theme:"libro", title:"<span class=\"bn\">2.</span> ¿Qué significan estas palabras y expresiones del texto sobre Harlem? Explícalo con tus propias palabras.", instr:"",
+      items:[
+        { q:"Su nombre procede del holandés <i>Nieuw Haarlem</i>, tal y como lo <b>bautizaron</b> sus primeros <b>colonos</b> en 1658.", model:"<i>Bautizar</i>: ponerle un nombre. <i>Colonos</i>: las personas que llegaron a vivir a un territorio nuevo." },
+        { q:"Seis años después <b>cayó en manos británicas</b>.", model:"Pasó a estar bajo el control de los británicos." },
+        { q:"La idea <b>no cuajó</b>.", model:"La idea no tuvo éxito, no se llegó a aceptar." },
+        { q:"Lo único que se consiguió fue quitar una a al nombre para que <b>sonara más anglosajón</b>.", model:"Para que, al oírlo, pareciera un nombre inglés." },
+        { q:"Todavía <b>tierra de granjas</b> a principios del siglo XIX, Harlem fue la primera <b>zona residencial</b> a las afueras de Nueva York.", model:"Un lugar de campo con granjas; una zona donde la gente vive (casas, no industria ni comercio)." },
+        { q:"En 1904 <b>se inauguró</b> el metro de Lenox Avenue.", model:"Se abrió por primera vez al público." },
+        { q:"Fue entonces cuando Harlem <b>comenzó a florecer</b> con maestros como Duke Ellington o Louis Armstrong.", model:"Empezó a vivir un periodo de éxito y riqueza cultural." },
+        { q:"La ciudad de Nueva York <b>se anexionó</b> Harlem.", model:"Incorporó Harlem a su territorio." },
+        { q:"A principios del siglo XX, el barrio <b>acogió a</b> muchos afroamericanos.", model:"Recibió a muchos afroamericanos, que se instalaron allí." }
+      ]}
+  ]
+},
+{
   id: "deber-urashima",
   tag: "Ind.",
   date: "2026-11-24",
@@ -878,7 +895,7 @@ function renderGlossary(){
   return `<div class="wrap">
     <div class="eyebrow">Herramienta</div>
     <h1 style="font-size:clamp(30px,5vw,44px);margin:10px 0">Glosario</h1>
-    <p class="lead">Todo el vocabulario de las lecciones en un solo lugar.</p>
+    <p class="lead">El vocabulario de cada clase, ordenado por fechas.</p>
     <div class="filters">
       <input id="gq" type="search" placeholder="Buscar en español o en ruso" aria-label="Buscar">
       <button class="fbtn" data-f="todo">Todo</button>
@@ -888,21 +905,21 @@ function renderGlossary(){
     <div id="glist"></div></div>`;
 }
 function fillGlossary(){
-  const rows = [];
-  LESSONS.forEach(l=>{
-    (l.vocab||[]).forEach(v=>rows.push({...v, lesson:l}));
-    [...(l.myWords||[]), ...loadMW(l.id)].filter(w=>w.term&&w.term.trim()).forEach(w=>rows.push({term:esc(w.term), ru:esc(w.ru||""), r:"all", mine:true, lesson:l}));
-  });
   const q = plain(gQuery);
-  const list = rows.filter(v=>{
-    if(gFilter==="es" && !(v.r==="es" || v.r==="all")) return false;
-    if(gFilter==="la" && !(v.r==="la" || v.r==="all" || (v.alt && /latinoam|méxico|argentina/i.test(v.alt)))) return false;
-    if(q && !plain(v.term+" "+v.ru+" "+(v.alt||"").replace(/<[^>]+>/g,"")).includes(q)) return false;
+  const keep = v => {
+    if(gFilter==="es" && !(v.r==="es" || !v.r || v.r==="all")) return false;
+    if(gFilter==="la" && !(v.r==="la" || !v.r || v.r==="all" || (v.alt && /latinoam|méxico|argentina/i.test(v.alt)))) return false;
+    if(q && !plain(v.term+" "+v.ru+" "+(v.alt||"")+" "+(v.ex||"")).replace(/<[^>]+>/g,"").includes(q)) return false;
     return true;
-  }).sort((a,b)=>plain(a.term.replace(/^(el|la|los|las) /,"")).localeCompare(plain(b.term.replace(/^(el|la|los|las) /,"")),"es"));
-  $("#glist").innerHTML = list.length ? `<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Clase</th></tr></thead><tbody>${
-    list.map(v=>`<tr><td class="term">${v.term} ${v.mine?'<span class="rg mine">nueva</span>':badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td><a href="#${v.lesson.id}">${v.lesson.title}</a></td></tr>`).join("")
-  }</tbody></table></div>` : `<p class="empty">${rows.length ? "No hay palabras que coincidan." : "Todavía no hay palabras. Aparecerán aquí con cada lección."}</p>`;
+  };
+  const groups = sorted().map(l=>({ l, words: [...(l.vocab||[]), ...(l.myWords||[])].filter(keep) })).filter(g=>g.words.length);
+  const total = LESSONS.reduce((n,l)=>n+(l.vocab||[]).length,0);
+  $("#glist").innerHTML = groups.length ? groups.map(({l,words})=>`
+    <section class="gday"><h2><a href="#${l.id}">${l.title}</a>${l.topic?`<span>${l.topic}</span>`:""}</h2>
+    <div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>${
+      words.map(v=>`<tr><td class="term">${v.term} ${v.r && v.r!=="all" ? badge(v.r, v.label) : ""}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")
+    }</tbody></table></div></section>`).join("")
+    : `<p class="empty">${total ? "No hay palabras que coincidan." : "Todavía no hay palabras. Aparecerán aquí con cada clase."}</p>`;
   document.querySelectorAll(".fbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===gFilter));
 }
 
@@ -912,8 +929,9 @@ function route(){
   const l = LESSONS.find(x=>x.id===h);
   if(l){ v.innerHTML = renderLesson(l); bindLesson(l); renderNav(l.id); }
   else if(DEBERES.find(x=>x.id===h)){
-    const d = DEBERES.find(x=>x.id===h), r = renderDeber(d);
-    v.innerHTML = r.html; bindDeber(d, r.gaps); renderNav(d.id);
+    const d = DEBERES.find(x=>x.id===h);
+    if(d.kind==="pack"){ v.innerHTML = renderLesson(d); bindLesson(d); renderNav(d.id); }
+    else { const r = renderDeber(d); v.innerHTML = r.html; bindDeber(d, r.gaps); renderNav(d.id); }
   }
   else if(h==="glosario"){
     v.innerHTML = renderGlossary(); renderNav("glosario"); fillGlossary();
