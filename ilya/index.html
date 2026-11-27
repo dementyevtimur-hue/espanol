@@ -1283,8 +1283,8 @@ function route(){
   tab.id = "nb-tab"; tab.type = "button"; tab.setAttribute("aria-expanded","false"); tab.setAttribute("aria-controls","nb");
   tab.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>Notas`;
   const nb = document.createElement("aside");
-  nb.id = "nb"; nb.setAttribute("aria-label","Bloc de notas");
-  nb.innerHTML = `<header><b>Bloc de notas</b><button type="button" id="nb-date">+ Fecha</button><button type="button" class="x" id="nb-close" aria-label="Cerrar">×</button></header>
+  nb.id = "nb"; nb.setAttribute("aria-label","Notas");
+  nb.innerHTML = `<header><b>Notas</b><button type="button" class="x" id="nb-close" aria-label="Cerrar">×</button></header>
     <textarea id="nb-txt" aria-label="Notas" placeholder="Apunta aquí lo que surja en clase…"></textarea>`;
   document.body.append(tab, nb);
   const txt = nb.querySelector("#nb-txt");
@@ -1294,10 +1294,14 @@ function route(){
   tab.addEventListener("click", ()=>setOpen(!nb.classList.contains("open")));
   nb.querySelector("#nb-close").addEventListener("click", ()=>setOpen(false));
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && nb.classList.contains("open")) setOpen(false); });
-  nb.querySelector("#nb-date").addEventListener("click", ()=>{
-    const d = new Date().toLocaleDateString("es-ES",{day:"numeric",month:"long"});
-    const pre = txt.value && !txt.value.endsWith("\n") ? "\n\n" : (txt.value ? "\n" : "");
-    txt.value += `${pre}— ${d} —\n`; store.set("notas", txt.value); txt.focus(); txt.selectionStart = txt.selectionEnd = txt.value.length;
+  const today = () => new Date().toLocaleDateString("es-ES",{day:"numeric",month:"long"});
+  txt.addEventListener("beforeinput", ()=>{
+    const d = today();
+    if(store.get("notas:dia")===d) return;
+    store.set("notas:dia", d);
+    const v = txt.value.replace(/\s+$/,"");
+    txt.value = (v ? v+"\n\n" : "") + `— ${d} —\n`;
+    txt.selectionStart = txt.selectionEnd = txt.value.length;
   });
 })();
 window.addEventListener("hashchange", route);
