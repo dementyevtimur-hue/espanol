@@ -97,7 +97,7 @@ mark{background:var(--mark);color:inherit;padding:0 2px;border-radius:3px}
 .note{display:flex;gap:10px;font-size:14px;padding:12px 14px;border-radius:10px;background:var(--accent-soft);margin-top:14px}
 .note b{white-space:nowrap}
 
-.tscroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.tscroll{position:relative;overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:15px}
 th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
 tr:last-child td{border-bottom:0}
@@ -175,6 +175,13 @@ tr.drag:active{cursor:grabbing}
 .tgi.bad{background:var(--es-soft);color:var(--bad);text-decoration:line-through;text-decoration-thickness:1px}
 .tg .inf{font-size:13px;font-style:italic;color:var(--muted);margin-left:4px}
 .tg .sol{font-size:13px;font-weight:600;color:var(--ok);margin-left:4px}
+.ch{font-size:18px;margin:22px 0 10px}
+.blk>h3.ch:first-of-type{margin-top:0}
+td.grp{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;color:var(--accent);background:var(--accent-soft)}
+.reading .src{font-size:13px;color:var(--muted);font-style:italic}
+.quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 16px}
+.quotes blockquote{margin:0;padding:12px 14px;border-radius:10px;background:var(--bg);font-weight:600;font-size:15px}
+.items small{display:block;color:var(--muted);font-size:13px;margin-top:4px;line-height:1.5}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 @media (max-width:860px){
@@ -215,6 +222,181 @@ tr.drag:active{cursor:grabbing}
    en "label" se puede precisar el país: { r:"la", label:"MX" }.
    ===================================================================== */
 const LESSONS = [
+{
+  id: "leccion-1",
+  num: 1,
+  date: "2026-11-23",
+  title: "Intenciones y acciones interrumpidas",
+  subtitle: "Iba a, pensaba, quería + infinitivo; justo cuando, acababa de, estar a punto de; los marcadores temporales del relato y el pretérito indefinido irregular.",
+  themes: ["leyendas", "historia de un barrio", "planes que no salen"],
+  goals: [
+    "Contar planes que no se cumplieron: <i>iba a / pensaba / quería</i> + infinitivo.",
+    "Explicar la causa como circunstancia (imperfecto) o como acontecimiento (indefinido).",
+    "Situar con precisión una acción interrumpida: <i>justo cuando</i>, <i>acababa de</i>, <i>estaba a punto de</i>.",
+    "Repasar el pretérito indefinido irregular y los marcadores temporales del relato."
+  ],
+  grammar: {
+    intro: "Para contar una intención que no se cumplió usamos el imperfecto. Después explicamos qué pasó y cuál fue la consecuencia: <b>intención + causa / circunstancia + consecuencia</b>.",
+    rules: [
+      { h:"iba a / pensaba / quería + infinitivo", t:"Una intención en el pasado que no llegó a cumplirse.", ex:"Pensaba tomar un taxi, pero… · Iba a ir al monte el fin de semana, pero…" },
+      { h:"Causa como circunstancia → imperfecto", t:"Describe la situación que había en ese momento.", ex:"…pero como la Gran Vía estaba cortada, decidí ir en metro." },
+      { h:"Causa como acontecimiento → indefinido", t:"Cuenta algo que pasó y cambió los planes.", ex:"…pero el viernes se me estropeó el coche." },
+      { h:"total, que · al final · así que · por eso", t:"Introducen la consecuencia.", ex:"Total, que al final me quedé en casa." },
+      { h:"iba a / estaba a punto de + infinitivo", t:"La acción todavía no había empezado.", ex:"Iba a salir de casa cuando me di cuenta de que no tenía las llaves. (Todavía estoy dentro.)" },
+      { h:"justo cuando + imperfecto · estar + gerundio", t:"La acción estaba en curso en ese momento.", ex:"Justo cuando salía de casa, me llamó el jefe. · Me llamó cuando me estaba duchando." },
+      { h:"acababa de + infinitivo", t:"La acción había terminado hacía muy poco.", ex:"Acababa de salir de casa cuando me di cuenta de que no había cogido las llaves. (Ya estoy fuera.)" },
+      { h:"ya + pluscuamperfecto", t:"La acción terminó antes del otro momento del pasado.", ex:"Cuando llegamos a la estación, el tren ya se había ido." }
+    ]
+  },
+  cheat: {
+    title: "Pretérito indefinido: ficha de repaso",
+    html: `
+      <h3 class="ch">Marcadores temporales básicos</h3>
+      <div class="chips">${["ayer","anteayer","anoche","la semana pasada","el mes pasado","el año pasado","el lunes / martes…","en 1998","en mayo","el 8 de diciembre","hace dos días","hace tres semanas","hace un año","un día","el otro día"].map(x=>`<span class="chip">${x}</span>`).join("")}</div>
+      <h3 class="ch">Marcadores del relato</h3>
+      <div class="tscroll"><table><tbody>${[["entonces","тогда; затем"],["de repente","вдруг, внезапно"],["de pronto","вдруг, неожиданно"],["luego","потом, затем"],["después","после этого"],["más tarde","позже"],["al final","в конце концов"],["en aquel momento","в тот момент"],["justo entonces","как раз тогда"],["justo cuando","как раз когда…"],["en esa ocasión / esa vez","в тот раз"],["al día siguiente","на следующий день"],["a la semana siguiente","на следующей неделе"],["tres días más tarde","три дня спустя"],["a partir de aquel instante","с того момента"],["hasta ese día","до того дня"],["a esas alturas","к тому времени"]].map(([a,b])=>`<tr><td class="term">${a}</td><td>${b}</td></tr>`).join("")}</tbody></table></div>
+      <h3 class="ch">Verbos irregulares</h3>
+      <div class="tscroll"><table><thead><tr><th>Verbo</th><th>yo</th><th>él / ella</th></tr></thead><tbody>${[["dar","di","dio"],["ver","vi","vio"],["ir / ser","fui","fue"],["estar","estuve","estuvo"],["andar","anduve","anduvo"],["tener","tuve","tuvo"],["poder","pude","pudo"],["poner","puse","puso"],["saber","supe","supo"],["querer","quise","quiso"],["venir","vine","vino"],["caber","cupe","cupo"],["haber","hube","hubo"],["hacer","hice","hizo"],["satisfacer (como hacer)","satisfice","satisfizo"],["decir","dije","dijo"],["traer","traje","trajo"],["conducir","conduje","condujo"]].map(([a,b,c])=>`<tr><td class="term">${a}</td><td>${b}</td><td>${c}</td></tr>`).join("")}</tbody></table></div>
+      <div class="note"><b>¡Ojo!</b><span>A diferencia de las formas regulares, estas formas irregulares no llevan tilde en la última sílaba: <i>dio, vio, fue, hizo</i>.</span></div>
+      <h3 class="ch">Cambio vocálico en los verbos en -ir</h3>
+      <p>Solo cambia la vocal de la raíz en 3.ª persona (él / ella, ellos / ellas).</p>
+      <div class="tscroll"><table><thead><tr><th>Infinitivo</th><th>yo</th><th>él / ella</th><th>ellos / ellas</th></tr></thead><tbody>${[["e → i","","",""],["pedir","pedí","p<b>i</b>dió","p<b>i</b>dieron"],["sentir","sentí","s<b>i</b>ntió","s<b>i</b>ntieron"],["preferir","preferí","pref<b>i</b>rió","pref<b>i</b>rieron"],["o → u","","",""],["dormir","dormí","d<b>u</b>rmió","d<b>u</b>rmieron"],["morir","morí","m<b>u</b>rió","m<b>u</b>rieron"]].map(r=>r[1]?`<tr><td class="term">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`:`<tr><td colspan="4" class="grp">${r[0]}</td></tr>`).join("")}</tbody></table></div>`
+  },
+  readings: [
+    {
+      title: "La leyenda de Manco Cápac y Mama Ocllo",
+      paragraphs: [
+        "Cuenta la leyenda que antiguamente los hombres que habitaban la zona del lago Titicaca vivían como animales, desnudos, sin religión ni leyes, y sin cultivar la tierra.",
+        "El dios Inti (el Sol) <b>pidió</b> a sus hijos Manco Cápac y Mama Ocllo <b>que fueran</b> a civilizarlos y <b>que fundaran</b> un imperio que lo adorara.",
+        "Inti le dio a su hijo una vara de oro y le <b>ordenó que la usara</b> para buscar la tierra prometida. Para encontrarla, le <b>recomendó que hundiera</b> el bastón en los lugares por los que pasara hasta que encontrara un lugar donde se hundiera fácilmente. Ese sería el lugar idóneo para fundar un imperio.",
+        "<mark>Ese mismo día</mark>, Manco Cápac y su hermana salieron en busca de la tierra prometida. Caminaron mucho buscándola, pero no la encontraban, hasta que un día, en un valle rodeado de bellas montañas, la vara se hundió perfectamente en el suelo y, <mark>entonces</mark>, comprendieron que aquel era el lugar. Y allí fue donde fundaron Cusco, una ciudad que acabaría siendo el centro del Imperio inca y cuyo nombre significa «el ombligo del mundo».",
+        "<mark>Entonces</mark>, <b>pidieron</b> a los hombres <b>que acudieran</b> a esa ciudad. Estos, cuando los vieron vestidos con elegantes trajes luminosos, enseguida pensaron que eran dioses y los obedecieron. Allí Manco Cápac enseñó a los hombres a cultivar la tierra, a pescar, a construir viviendas… Su hermana y esposa, Mama Ocllo, enseñó a las mujeres a coser y a hacerse cargo de las labores domésticas. <mark>Desde ese momento</mark>, los hombres tuvieron una religión y conocieron las ciencias y las normas de convivencia en sociedad.",
+        "Y así fue como Manco Cápac y Mama Ocllo fundaron un imperio. <mark>A partir de entonces</mark>, sus descendientes fueron reyes: los emperadores del Imperio inca."
+      ],
+      note: "Fíjate en los marcadores temporales (en amarillo) y en <i>pedir / ordenar / recomendar que</i> + imperfecto de subjuntivo (en negrita)."
+    },
+    {
+      title: "El barrio de… Harlem",
+      paragraphs: [
+        "Su nombre procede del holandés <i>Nieuw Haarlem</i>, tal y como lo bautizaron sus primeros colonos en 1658. Seis años después, cayó en manos británicas, que intentaron cambiarle el nombre por el de Lancaster. La idea no cuajó: lo único que se consiguió fue quitar una a al nombre para que sonara más anglosajón.",
+        "Todavía tierra de granjas a principios del siglo XIX, Harlem fue la primera zona residencial a las afueras de Nueva York cuando Alexander Hamilton, secretario del Tesoro, construyó una casa de campo llamada Hamilton Grange, que aún existe hoy, aunque no en su lugar original. En 1873 la ciudad de Nueva York se anexionó Harlem y poco después se extendieron las líneas de tren, hasta que en 1904 se inauguró el metro de Lenox Avenue. Así, el barrio se hizo mucho más accesible y, a principios del siglo XX, acogió a muchos afroamericanos.",
+        "<mark>Fue entonces cuando</mark> Harlem comenzó a florecer con maestros como Duke Ellington o Louis Armstrong, que estaban iniciando sus carreras en los años 20 y 30. Fue cuando todos los extranjeros querían conocer las interminables noches del Savoy Ballroom, abierto entre 1936 y 1958. Años más tarde, las famosas sesiones del restaurante Sherman's Barbeque, donde las Ronettes llevaron a los Beatles en el año 1964 para que los cuatro de Liverpool despistaran a los fans que rodeaban el Hotel Plaza. (…)",
+        "Al este, tiendas, restaurantes y bodegas llevan nombres en español, como El Paso, La Isla, Don Paco o La Paloma. Es el Harlem hispano, donde viven los puertorriqueños, dominicanos y mexicanos que compran en La Marqueta, el mítico mercado de frutas exóticas importadas del Caribe. También hay haitianos en el East Harlem (…).",
+        "El Museo del Barrio, dedicado al arte latinoamericano, y el Museo de la Ciudad de Nueva York también quedan en esta zona cercana al East River."
+      ],
+      source: "Fuente: El Periódico."
+    }
+  ],
+  vocab: [
+    { term:"la vara / el bastón", ru:"жезл, посох", ex:"Inti le dio a su hijo una vara de oro." },
+    { term:"hundir(se)", ru:"погружать(ся), вонзать(ся); тонуть", ex:"La vara se hundió en el suelo." },
+    { term:"adorar", ru:"поклоняться; обожать", ex:"Un imperio que lo adorara." },
+    { term:"acudir a", ru:"приходить, являться (куда-то)", ex:"Pidieron a los hombres que acudieran a la ciudad." },
+    { term:"obedecer", ru:"слушаться, подчиняться", ex:"Pensaron que eran dioses y los obedecieron." },
+    { term:"coser", ru:"шить", ex:"Mama Ocllo enseñó a las mujeres a coser." },
+    { term:"hacerse cargo de", ru:"брать на себя, заниматься", ex:"Se hacía cargo de las labores domésticas." },
+    { term:"el / la descendiente", ru:"потомок", ex:"Sus descendientes fueron reyes." },
+    { term:"bautizar", ru:"крестить; давать имя", ex:"Así lo bautizaron sus primeros colonos." },
+    { term:"el colono", ru:"колонист, поселенец", ex:"Los colonos holandeses llegaron en 1658." },
+    { term:"caer en manos de", ru:"попасть в руки (к кому-то)", ex:"Cayó en manos británicas." },
+    { term:"no cuajar", ru:"не прижиться, не получиться", ex:"La idea no cuajó." },
+    { term:"sonar (+ adjetivo)", ru:"звучать (как-то)", ex:"Para que sonara más anglosajón." },
+    { term:"la tierra de granjas", ru:"сельскохозяйственные угодья, фермы", ex:"Harlem era todavía tierra de granjas." },
+    { term:"las afueras", ru:"окраины, пригород", ex:"Una zona residencial a las afueras de Nueva York." },
+    { term:"anexionarse", ru:"присоединить (территорию)", ex:"Nueva York se anexionó Harlem en 1873." },
+    { term:"inaugurarse", ru:"открываться (торжественно)", ex:"En 1904 se inauguró el metro." },
+    { term:"acoger", ru:"принимать, давать приют", ex:"El barrio acogió a muchos afroamericanos." },
+    { term:"florecer", ru:"процветать, расцветать", ex:"Harlem comenzó a florecer." },
+    { term:"despistar a alguien", ru:"сбить со следа, отвлечь", ex:"Para despistar a los fans." },
+    { term:"estropearse", ru:"сломаться (о машине, технике)", ex:"Se me estropeó el coche." },
+    { term:"descargarse (el móvil)", ru:"разрядиться", ex:"Se me descargó el móvil." },
+    { term:"cortar la luz", ru:"отключить свет", ex:"Cortaron la luz justo antes de la película." },
+    { term:"de bajón", ru:"в упадке духа, расстроенный (разг.)", ex:"Estaba de bajón y no se lo dije.", r:"es" }
+  ],
+  exercises: [
+    { type:"open", title:"1. Intenciones", instr:"Lee los inicios de estas dos historias y responde. Después compara con el modelo.",
+      context:`<div class="quotes"><blockquote>Pensaba tomar un taxi, pero como la Gran Vía estaba cortada, decidí ir en metro…</blockquote><blockquote>Iba a ir al monte el fin de semana, pero el viernes se me estropeó el coche. Total, que al final me quedé en casa…</blockquote></div>`,
+      items:[
+        { q:"¿Cómo continúa una de las historias? Escribe dos o tres frases.", model:"Respuesta libre. Por ejemplo: …y en el metro me encontré con un antiguo compañero de la universidad al que no veía desde hacía años." },
+        { q:"¿Dónde se expresa la intención que no llega a cumplirse? ¿Qué tiempo verbal se usa?", model:"<i>Pensaba tomar un taxi</i> e <i>Iba a ir al monte</i>: imperfecto (<i>pensaba / iba a</i>) + infinitivo." },
+        { q:"¿Dónde se expresa la causa? ¿En qué frase es una circunstancia y en cuál un acontecimiento?", model:"<i>Como la Gran Vía estaba cortada</i> es una circunstancia (imperfecto). <i>El viernes se me estropeó el coche</i> es un acontecimiento (indefinido)." }
+      ]},
+    { type:"open", title:"1C. Completa las intenciones", instr:"Completa las frases de manera lógica.",
+      items:[
+        { q:"…, pero dos semanas antes de la boda Juan tuvo un accidente y tuvieron que posponerla.", model:"María y Juan pensaban casarse el 13 de octubre, pero…" },
+        { q:"Pensaba decirle que lo habían despedido, pero…; total, que decidió decírselo otro día.", model:"…pero ese día celebraba su cumpleaños y no quería arruinarle la fiesta; total, que…" },
+        { q:"Ayer iba a llamar a mi madre, pero…", model:"…pero no había cobertura hasta muy tarde. Total, que la llamé al día siguiente." },
+        { q:"…, pero ella enfermó y decidió ir solo.", model:"Juan y María pensaban ir juntos a la fiesta, pero ella enfermó y él decidió ir solo." }
+      ]},
+    { type:"choice", title:"2A. ¿En qué momento?", instr:"¿Qué dibujo corresponde a cada frase? Elige dónde está la persona cuando se da cuenta.",
+      items:[
+        { q:"«Iba a salir de casa, cuando se dio cuenta de que no había cogido las llaves.»", options:["Todavía está dentro, con la mano en la puerta","En la puerta, saliendo","Ya está fuera, en el coche"], correct:0 },
+        { q:"«Justo cuando salía de casa, se dio cuenta de que no había cogido las llaves.»", options:["Todavía está dentro, con la mano en la puerta","En la puerta, saliendo","Ya está fuera, en el coche"], correct:1 },
+        { q:"«Acababa de salir de casa, cuando se dio cuenta de que no había cogido las llaves.»", options:["Todavía está dentro, con la mano en la puerta","En la puerta, saliendo","Ya está fuera, en el coche"], correct:2 }
+      ]},
+    { type:"choice", title:"2B. ¿Justo a tiempo?", instr:"Marca la opción correcta.",
+      items:[
+        { q:"Justo cuando llegaba en taxi al aeropuerto, Úrsula se dio cuenta de que se había dejado el pasaporte en casa.", options:["Se dio cuenta cuando aún estaba dentro del taxi.","Se dio cuenta cuando ya había salido del taxi."], correct:0 },
+        { q:"Vio a la niña con la cámara justo cuando iba a borrar todas las fotos del verano.", options:["Aún podía impedirlo.","Ya no podía impedirlo."], correct:0 },
+        { q:"Acababan de firmar el contrato del piso y se dieron cuenta de que había un error en las fechas.", options:["Firmaron un contrato que tenía un error.","No firmaron un contrato que tenía un error."], correct:0 }
+      ]},
+    { type:"open", title:"3. Intención, causa y consecuencia", instr:"Completa lo que falta siguiendo el esquema intención + causa / circunstancia + consecuencia.",
+      items:[
+        { q:"<b>[Intención]</b> …, pero, como me rompí una pierna, al final no pude ir.", model:"Pensaba ir a esquiar con unos amigos, pero…" },
+        { q:"Quería comprarme un coche y, como en esa época mi cuñado vendía el suyo, <b>[consecuencia]</b> …", model:"…se lo compré a él." },
+        { q:"Pensaba dejar este trabajo <b>[causa]</b> … y por eso decidí quedarme.", model:"…pero me ofrecieron un aumento de sueldo…" },
+        { q:"Iba a preguntarle si quería quedar para salir algún día <b>[causa]</b> … Total, que me dio vergüenza y no lo hice.", model:"…pero todos mis compañeros estaban escuchando." },
+        { q:"Pensaba quedarme unos días más descansando en el campo, pero mi madre se puso enferma <b>[consecuencia]</b> …", model:"…y volví a casa para cuidarla." },
+        { q:"<b>[Intención]</b> …, pero un amigo nos dijo que era una buena inversión y por eso decidimos comprarlo.", model:"No pensábamos comprar ese piso, pero…" }
+      ]},
+    { type:"choice", title:"4. ¿Qué pasó exactamente?", instr:"Lee las situaciones y elige la respuesta más adecuada.",
+      items:[
+        { q:"Ayer hubo una avería en los ordenadores de la secretaría de la universidad. ¿Quiénes van a tener que volver otro día?<br><small>Nuria: «El sistema se averió justo cuando estaban a punto de atenderme.» · Alberto: «…justo cuando me estaban atendiendo.» · Ana: «…justo cuando ya me habían atendido.»</small>", options:["Solo Nuria","Nuria y Alberto","Solo Ana"], correct:1, why:"Correcto: a Nuria no la atendieron y a Alberto lo interrumpieron. Ana ya había terminado." },
+        { q:"Alfonso no soporta que lo interrumpan mientras come. ¿Qué llamada lo molestó más?", options:["Ana me llamó cuando iba a comer.","Felipe me llamó cuando estaba comiendo.","Andrea me llamó cuando ya había comido."], correct:1 },
+        { q:"No se puede entrar cuando la obra ya ha comenzado. ¿Quién pudo ver la obra?", options:["Andrés: Yo llegué cuando estaba empezando la obra.","Carla: Yo llegué justo cuando estaba a punto de empezar la obra.","Mónica: Yo llegué justo cuando ya había empezado la obra."], correct:1 },
+        { q:"Loreto toma siempre el mismo autobús. ¿En qué caso no tuvo que esperar al siguiente?", options:["Cuando llegó a la estación, el autobús se acababa de ir.","Llegó a la estación justo cuando la gente estaba subiendo al autobús.","Llegó al andén justo cuando se estaba marchando."], correct:1 }
+      ]},
+    { type:"open", title:"5. Traducción", instr:"Traduce al español. Usa las construcciones de los ejercicios 1–4. El modelo es la versión corregida de la clase.",
+      items:[
+        { q:"Вчера я собирался тебе позвонить, но у меня разрядился телефон.", model:"Ayer iba a llamarte, pero se me descargó el móvil." },
+        { q:"Мы думали поехать в горы на выходные, но, так как шёл дождь, остались дома.", model:"Pensábamos ir al monte / a la montaña el fin de semana, pero como llovía, nos quedamos en casa." },
+        { q:"Она хотела купить эту квартиру, но в пятницу её продали. В общем, в итоге она купила другую.", model:"Quería comprar ese piso, pero lo vendieron el viernes. Total, que al final compró otro." },
+        { q:"Как раз когда я выходил из дома, мне позвонил начальник.", model:"Justo cuando salía de casa, me llamó el jefe." },
+        { q:"Я только что вышел из дома, когда понял, что не взял ключи.", model:"Acababa de salir de casa cuando me di cuenta <b>de</b> que no había cogido las llaves." },
+        { q:"Мы собирались ужинать, когда в дверь позвонили.", model:"Íbamos a cenar cuando llamaron a la puerta / tocaron el timbre." },
+        { q:"Когда мы приехали на вокзал, поезд уже ушёл.", model:"Cuando llegamos a la estación, el tren ya <b>se había ido</b>." },
+        { q:"Брат позвонил мне как раз, когда я принимал душ.", model:"Mi hermano me llamó justo cuando <b>me estaba duchando</b>." },
+        { q:"Фильм вот-вот должен был начаться, когда отключили свет.", model:"La película estaba a punto de empezar cuando cortaron la luz." },
+        { q:"Я собирался сказать ей правду, но, так как она была очень расстроена, решил сделать это в другой день.", model:"Pensaba decirle la verdad, pero como estaba muy disgustada / de bajón, decidí hacerlo otro día." }
+      ]},
+    { type:"open", title:"Manco Cápac: conecta las frases", instr:"Une cada par de frases con un marcador: <i>en aquellos años, en aquella época, entonces, en aquella ocasión, a partir de ese momento, a esas alturas, aquella jornada</i>. A veces hay varias opciones.",
+      items:[
+        { q:"El barco se empezó a hundir tras el choque. / La gente se puso histérica y empezó a correr.", model:"El barco se empezó a hundir tras el choque. <b>Entonces / A partir de ese momento</b>, la gente se puso histérica y empezó a correr." },
+        { q:"Después de la Guerra Civil, la situación en España no era nada fácil. / Mucha gente se vio obligada a emigrar.", model:"…no era nada fácil. <b>En aquellos años / En aquella época</b>, mucha gente se vio obligada a emigrar." },
+        { q:"Juan y Marta eran superamigos hasta que empezaron a trabajar juntos. / Su relación se fue deteriorando.", model:"…empezaron a trabajar juntos. <b>A partir de ese momento</b>, su relación se fue deteriorando." },
+        { q:"Brasil y Alemania, que hoy se enfrentan en la semifinal, se enfrentaron antes en la final del Mundial de 2002. / Brasil ganó 2-0.", model:"…en la final del Mundial de 2002. <b>En aquella ocasión</b>, Brasil ganó 2-0." },
+        { q:"Fernando llevaba trabajando en la misma empresa más de 20 años. / Sabía que su situación no iba a mejorar y dejó el trabajo.", model:"…más de 20 años. <b>A esas alturas</b>, sabía que su situación no iba a mejorar y dejó el trabajo." }
+      ]},
+    { type:"open", title:"Harlem: explícalo con tus palabras", instr:"¿Qué significan las palabras en negrita? Explícalo en español.",
+      items:[
+        { q:"…tal y como lo <b>bautizaron</b> sus primeros <b>colonos</b> en 1658.", model:"<i>Bautizar</i>: ponerle un nombre. <i>Colonos</i>: las personas que llegaron a vivir a un territorio nuevo." },
+        { q:"Seis años después <b>cayó en manos británicas</b>.", model:"Pasó a estar bajo el control de los británicos." },
+        { q:"La idea <b>no cuajó</b>.", model:"La idea no tuvo éxito, no se llegó a aceptar." },
+        { q:"…para que <b>sonara más anglosajón</b>.", model:"Para que, al oírlo, pareciera un nombre inglés." },
+        { q:"Todavía <b>tierra de granjas</b>…, fue la primera <b>zona residencial</b> a las afueras de Nueva York.", model:"Un lugar de campo con granjas; una zona donde la gente vive (casas, no industria ni comercio)." },
+        { q:"En 1904 <b>se inauguró</b> el metro de Lenox Avenue.", model:"Se abrió por primera vez al público." },
+        { q:"Harlem <b>comenzó a florecer</b> con maestros como Duke Ellington.", model:"Empezó a vivir un periodo de éxito y riqueza cultural." },
+        { q:"La ciudad de Nueva York <b>se anexionó</b> Harlem.", model:"Incorporó Harlem a su territorio." },
+        { q:"El barrio <b>acogió a</b> muchos afroamericanos.", model:"Recibió a muchos afroamericanos, que se instalaron allí." }
+      ]}
+  ],
+  speaking: [
+    "Cuenta un plan que no saliera como pensabas: ¿qué ibas a hacer, qué pasó y qué hiciste al final? (Usa <i>pensaba / iba a…, pero como…, total, que…</i>)",
+    "Describe dos o tres situaciones como las del ejercicio 2B a partir de tu experiencia: <i>justo cuando…, acababa de…, estaba a punto de…</i>",
+    "¿Conoces otra leyenda sobre el origen de una ciudad o de un pueblo? Cuéntala con los marcadores del relato.",
+    "¿Qué barrio de tu ciudad tiene una historia interesante? ¿Cómo ha cambiado?"
+  ]
+}
 ];
 
 /* ===================================================================== */
@@ -264,57 +446,42 @@ function renderHome(){
 }
 
 function renderLesson(l){
-  const secs = [["objetivos","Objetivos"],["lectura","Lectura"],["vocabulario","Vocabulario"],["nuevas","Palabras nuevas"],["gramatica","Gramática"],["variantes","España y Latinoamérica"],["practica","Práctica"],["hablar","Para hablar"],["tarea","Tarea"]];
-  let k = 0; const num = () => String(++k).padStart(2,"0");
-  const ex = l.exercises.map((e,ei) => renderExercise(l,e,ei)).join("");
+  const S = [];  // [id, title, html]
+  const ex = (l.exercises||[]).map((e,ei) => renderExercise(l,e,ei)).join("");
+  if(l.goals && l.goals.length) S.push(["objetivos","Objetivos",`<ul class="goals">${l.goals.map(g=>`<li>${g}</li>`).join("")}</ul>`]);
+  if(l.grammar) S.push(["gramatica","Gramática",`${l.grammar.intro?`<p>${l.grammar.intro}</p>`:""}
+      ${(l.grammar.rules||[]).map(r=>`<div class="rule"><b>${r.h}</b><span>${r.t}</span>${r.ex?`<span class="ex">${r.ex}</span>`:""}</div>`).join("")}
+      ${l.grammar.regionNote?`<div class="note"><b>Variantes:</b><span>${l.grammar.regionNote}</span></div>`:""}`, "gram"]);
+  if(l.cheat) S.push(["chuleta", l.cheat.title, l.cheat.html]);
+  const readings = l.readings || (l.reading ? [l.reading] : []);
+  if(readings.length) S.push(["lectura", readings.length>1?"Lecturas":"Lectura", readings.map(r=>`
+      <div class="reading"><h3>${r.title}</h3>${r.paragraphs.map(p=>`<p>${p}</p>`).join("")}${r.source?`<p class="src">${r.source}</p>`:""}</div>
+      ${r.note?`<div class="note"><b>Nota:</b><span>${r.note}</span></div>`:""}`).join('<div style="height:16px"></div>')]);
+  if(l.vocab && l.vocab.length) S.push(["vocabulario","Vocabulario",`<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>
+      ${l.vocab.map(v=>`<tr draggable="true" class="drag" data-term="${esc(v.term.replace(/<[^>]+>/g,""))}" data-ru="${esc(v.ru)}" title="Arrastra a «Palabras nuevas»"><td class="term">${v.term} ${badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")}
+      </tbody></table></div>`]);
+  S.push(["nuevas","Palabras nuevas",`<p style="color:var(--muted);margin:0 0 12px">Las palabras que salen en clase. Escribe la palabra, la traducción y, si quieres, un ejemplo.</p>
+      <div class="dropzone" id="mw-drop">Arrastra aquí una palabra: seleccionada en el texto, de la tabla de vocabulario o de otra página.</div>
+      <div class="tscroll"><table class="mw"><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th><th><span class="sr">Borrar</span></th></tr></thead>
+      <tbody id="mw-fixed">${(l.myWords||[]).map(w=>`<tr><td class="term">${w.term}</td><td>${w.ru}</td><td class="ex">${w.ex||""}</td><td></td></tr>`).join("")}</tbody>
+      <tbody id="mw-body"></tbody></table></div>
+      <div class="bar"><button class="btn" id="mw-add">Añadir palabra</button><button class="btn ghost" id="mw-copy">Copiar la lista</button><span class="score" id="mw-msg" aria-live="polite"></span></div>`]);
+  if(l.variants && l.variants.length) S.push(["variantes","España y Latinoamérica",`<div class="vs">${l.variants.map(v=>`<div class="row"><span class="topic">${v.topic}</span>
+        <div class="pair"><span>${badge("es")} ${v.es}</span><span>${badge("la")} ${v.la}</span></div>
+        ${v.tip?`<span class="tip">${v.tip}</span>`:""}</div>`).join("")}</div>`]);
+  if(ex) S.push(["practica","Práctica",ex]);
+  if(l.speaking && l.speaking.length) S.push(["hablar","Para hablar en clase",`<ol class="speak">${l.speaking.map(s=>`<li>${s}</li>`).join("")}</ol>`]);
+  if(l.homework) S.push(["tarea","Tarea",`<div class="hw"><p>${l.homework}</p>
+      <textarea id="hw-${l.id}" data-key="${l.id}:hw" placeholder="Puedes escribir aquí tu borrador. Se guarda en este navegador."></textarea></div>`]);
   return `<article class="wrap">
     <header class="lhead">
       <div class="eyebrow">Lección ${l.num} · ${fmtDate(l.date)}</div>
       <h1>${l.title}</h1>
       <p class="lead">${l.subtitle}</p>
-      <div class="meta"><span><b>Temas:</b> ${l.themes.join(", ")}</span></div>
+      ${l.themes && l.themes.length ? `<div class="meta"><span><b>Temas:</b> ${l.themes.join(", ")}</span></div>` : ""}
     </header>
-    <nav class="toc" aria-label="Secciones de la lección">${secs.map(([id,t])=>`<a href="#${l.id}" data-sec="${id}">${t}</a>`).join("")}</nav>
-
-    <section class="blk" id="s-objetivos"><h2><span class="k">${num()}</span>Objetivos</h2>
-      <ul class="goals">${l.goals.map(g=>`<li>${g}</li>`).join("")}</ul></section>
-
-    <section class="blk" id="s-lectura"><h2><span class="k">${num()}</span>Lectura</h2>
-      <div class="reading"><h3>${l.reading.title}</h3>${l.reading.paragraphs.map(p=>`<p>${p}</p>`).join("")}</div>
-      ${l.reading.note?`<div class="note"><b>Variantes:</b><span>${l.reading.note}</span></div>`:""}</section>
-
-    <section class="blk" id="s-vocabulario"><h2><span class="k">${num()}</span>Vocabulario</h2>
-      <div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>
-      ${l.vocab.map(v=>`<tr draggable="true" class="drag" data-term="${esc(v.term.replace(/<[^>]+>/g,""))}" data-ru="${esc(v.ru)}" title="Arrastra a «Palabras nuevas»"><td class="term">${v.term} ${badge(v.r, v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex}</td></tr>`).join("")}
-      </tbody></table></div></section>
-
-    <section class="blk" id="s-nuevas"><h2><span class="k">${num()}</span>Palabras nuevas</h2>
-      <p style="color:var(--muted);margin:0 0 12px">Las palabras que salen en clase. Escribe la palabra, la traducción y, si quieres, un ejemplo.</p>
-      <div class="dropzone" id="mw-drop">Arrastra aquí una palabra: seleccionada en el texto, de la tabla de vocabulario o de otra página.</div>
-      <div class="tscroll"><table class="mw"><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th><th><span class="sr">Borrar</span></th></tr></thead>
-      <tbody id="mw-fixed">${(l.myWords||[]).map(w=>`<tr><td class="term">${w.term}</td><td>${w.ru}</td><td class="ex">${w.ex||""}</td><td></td></tr>`).join("")}</tbody>
-      <tbody id="mw-body"></tbody></table></div>
-      <div class="bar"><button class="btn" id="mw-add">Añadir palabra</button><button class="btn ghost" id="mw-copy">Copiar la lista</button><span class="score" id="mw-msg" aria-live="polite"></span></div>
-    </section>
-
-    <section class="blk gram" id="s-gramatica"><h2><span class="k">${num()}</span>Gramática</h2>
-      <p>${l.grammar.intro}</p>
-      ${l.grammar.rules.map(r=>`<div class="rule"><b>${r.h}</b><span>${r.t}</span><span class="ex">${r.ex}</span></div>`).join("")}
-      ${l.grammar.regionNote?`<div class="note"><b>Variantes:</b><span>${l.grammar.regionNote}</span></div>`:""}</section>
-
-    <section class="blk" id="s-variantes"><h2><span class="k">${num()}</span>España y Latinoamérica</h2>
-      <div class="vs">${l.variants.map(v=>`<div class="row"><span class="topic">${v.topic}</span>
-        <div class="pair"><span>${badge("es")} ${v.es}</span><span>${badge("la")} ${v.la}</span></div>
-        ${v.tip?`<span class="tip">${v.tip}</span>`:""}</div>`).join("")}</div></section>
-
-    <section class="blk" id="s-practica"><h2><span class="k">${num()}</span>Práctica</h2>${ex}</section>
-
-    <section class="blk" id="s-hablar"><h2><span class="k">${num()}</span>Para hablar en clase</h2>
-      <ol class="speak">${l.speaking.map(s=>`<li>${s}</li>`).join("")}</ol></section>
-
-    <section class="blk" id="s-tarea"><h2><span class="k">${num()}</span>Tarea</h2>
-      <div class="hw"><p>${l.homework}</p>
-      <textarea id="hw-${l.id}" data-key="${l.id}:hw" placeholder="Puedes escribir aquí tu borrador. Se guarda en este navegador."></textarea></div></section>
+    <nav class="toc" aria-label="Secciones de la lección">${S.map(([id,t])=>`<a href="#${l.id}" data-sec="${id}">${t}</a>`).join("")}</nav>
+    ${S.map(([id,t,h,cls],i)=>`<section class="blk ${cls||""}" id="s-${id}"><h2><span class="k">${String(i+1).padStart(2,"0")}</span>${t}</h2>${h}</section>`).join("\n")}
   </article>`;
 }
 
@@ -334,7 +501,7 @@ function renderExercise(l,e,ei){
   } else if(e.type==="open"){
     body = `<ol class="items">${e.items.map((it,i)=>`<li><div>${it.q}<textarea id="o-${l.id}-${ei}-${i}" data-key="${key(i)}" aria-label="Tu respuesta ${i+1}">${esc(store.get(key(i))||"")}</textarea><div class="model" hidden><b>Modelo:</b> ${it.model}</div></div></li>`).join("")}</ol><div class="bar"><button class="btn ghost" data-act="model">Ver modelos</button></div>`;
   }
-  return `<div class="ex-block" data-lesson="${l.id}" data-ex="${ei}"><h3>${e.title}</h3><p class="instr">${e.instr}</p>${body}</div>`;
+  return `<div class="ex-block" data-lesson="${l.id}" data-ex="${ei}"><h3>${e.title}</h3><p class="instr">${e.instr}</p>${e.context||""}${body}</div>`;
 }
 
 const norm = s => s.trim().toLowerCase().replace(/\s+/g," ");
@@ -551,7 +718,7 @@ function renderGlossary(){
 function fillGlossary(){
   const rows = [];
   LESSONS.forEach(l=>{
-    l.vocab.forEach(v=>rows.push({...v, lesson:l}));
+    (l.vocab||[]).forEach(v=>rows.push({...v, lesson:l}));
     [...(l.myWords||[]), ...loadMW(l.id)].filter(w=>w.term&&w.term.trim()).forEach(w=>rows.push({term:esc(w.term), ru:esc(w.ru||""), r:"all", mine:true, lesson:l}));
   });
   const q = plain(gQuery);
@@ -562,7 +729,7 @@ function fillGlossary(){
     return true;
   }).sort((a,b)=>plain(a.term.replace(/^(el|la|los|las) /,"")).localeCompare(plain(b.term.replace(/^(el|la|los|las) /,"")),"es"));
   $("#glist").innerHTML = list.length ? `<div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Lección</th></tr></thead><tbody>${
-    list.map(v=>`<tr><td class="term">${v.term} ${v.mine?'<span class="rg mine">nueva</span>':badge(v.r, v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td><a href="#${v.lesson.id}">${v.lesson.num}</a></td></tr>`).join("")
+    list.map(v=>`<tr><td class="term">${v.term} ${v.mine?'<span class="rg mine">nueva</span>':badge(v.r||"all", v.label)}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td><a href="#${v.lesson.id}">${v.lesson.num}</a></td></tr>`).join("")
   }</tbody></table></div>` : `<p class="empty">${rows.length ? "No hay palabras que coincidan." : "Todavía no hay palabras. Aparecerán aquí con cada lección."}</p>`;
   document.querySelectorAll(".fbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===gFilter));
 }
