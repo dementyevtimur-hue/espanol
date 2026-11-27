@@ -1296,7 +1296,19 @@ function route(){
   const hl = nb.querySelector(".nbhl");
   const isDay = l => /^\d{1,2} de [a-záéíóú]+$/.test(l.trim());
   const paint = () => { hl.innerHTML = txt.value.split("\n").map(l=>isDay(l)?`<span class="nbd">${esc(l)}</span>`:esc(l)).join("\n") + "\n"; hl.scrollTop = txt.scrollTop; };
-  txt.value = (store.get("notas") || "").replace(/^— (\d{1,2} de [a-záéíóú]+) —$/gm, "$1");
+  const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const clean = v => {
+    const out = [], seen = new Set();
+    v.replace(/^— (\d{1,2} de [a-záéíóú]+) —$/gm, "$1").split("\n").forEach(l=>{
+      const t = l.trim(), m = t.match(/^(\d{1,2}) de ([a-z]*)$/);
+      if(m && !MESES.includes(m[2]) && MESES.some(x=>x.startsWith(m[2]))) return;   // fecha a medio borrar
+      if(m && MESES.includes(m[2])){ if(seen.has(t)) return; seen.add(t); }
+      out.push(l);
+    });
+    return out.join("\n").replace(/\n{3,}/g,"\n\n").replace(/^\n+/,"");
+  };
+  txt.value = clean(store.get("notas") || "");
+  store.set("notas", txt.value);
   paint();
   txt.addEventListener("input", ()=>{ store.set("notas", txt.value); paint(); });
   txt.addEventListener("scroll", ()=>{ hl.scrollTop = txt.scrollTop; });
@@ -1305,7 +1317,8 @@ function route(){
   nb.querySelector("#nb-close").addEventListener("click", ()=>setOpen(false));
   document.addEventListener("keydown", e=>{ if(e.key==="Escape" && nb.classList.contains("open")) setOpen(false); });
   const today = () => new Date().toLocaleDateString("es-ES",{day:"numeric",month:"long"});
-  txt.addEventListener("beforeinput", ()=>{
+  txt.addEventListener("beforeinput", e=>{
+    if(!/^insert/.test(e.inputType||"insertText")) return;
     const d = today();
     if(txt.value.split("\n").some(l=>l.trim()===d)) return;
     const v = txt.value.replace(/\s+$/,"");
