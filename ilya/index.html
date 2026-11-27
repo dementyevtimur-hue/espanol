@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex">
 <title>Clases de Español de Ilya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Fira+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Fira+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Sans+Condensed:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,900;1,900&family=Alegreya:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 html{-webkit-text-size-adjust:100%}
 body{margin:0}
@@ -299,6 +299,39 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .gday summary em{margin-left:auto;font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
 .gday .tscroll{border:0;border-top:1px solid var(--line);border-radius:0 0 12px 12px}
 .glink{margin:0;padding:10px 14px;font-size:14px}
+/* Clase 27 nov */
+.gcard{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:start;margin-bottom:22px}
+@media (max-width:760px){.gcard{grid-template-columns:minmax(0,1fr)}}
+.shot{margin:0}
+.shot img{display:block;width:100%;max-width:480px;height:auto;border-radius:4px;box-shadow:0 1px 8px rgba(0,0,0,.15)}
+.expl{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 20px;font-size:15px}
+.expl h3{font-size:18px;margin-bottom:8px}
+.expl p{margin:0 0 10px}
+.expl ul{margin:0 0 10px;padding-left:20px}
+.expl li{margin:4px 0}
+.aula-box{background:#DCD3D4;color:#2d2a2a;font-family:"Fira Sans Condensed","Fira Sans",var(--f-body);font-size:15.5px;line-height:1.45;padding:22px 22px 14px;border-radius:2px;color-scheme:light;max-width:480px}
+.aula-box h4{margin:0 0 12px;font-size:21px;font-weight:700;letter-spacing:.01em;color:#3b3838}
+.aula-box p{margin:0 0 10px}
+.aula-box .exs{font-size:15px}
+.adj-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--muted);margin-bottom:14px}
+.aj{font-style:normal;border-radius:3px;padding:0 2px;font-weight:600;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.aj.a{background:#FFD8A8;color:#7a3e00}
+.aj.c{background:#C9E3FF;color:#0b3f78}
+.aj.d{background:#D6F0C8;color:#245c12}
+.aj.s{background:#EBD5FA;color:#5a2380}
+.noticia{max-width:560px;background:#F5F5F3;color:#1d1d1d;box-shadow:0 2px 12px rgba(0,0,0,.18);font-family:"Alegreya",Georgia,serif;color-scheme:light;margin-bottom:14px}
+.nbar{background:#3D86C6;color:#fff;display:flex;align-items:center;gap:12px;padding:8px 14px}
+.nbar b{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:900;font-size:24px}
+.nmenu{width:20px;height:14px;border-top:2px solid #fff;border-bottom:2px solid #fff;position:relative}
+.nmenu::after{content:"";position:absolute;left:0;right:0;top:4px;border-top:2px solid #fff}
+.nbody{padding:14px 16px 10px}
+.nsec{font-size:12px;font-weight:700;margin-bottom:2px}
+.ntit{font-family:"Playfair Display",Georgia,serif;font-weight:900;font-size:clamp(30px,6vw,40px);line-height:1.05;margin:0 0 8px;color:#111}
+.noticia p{text-align:justify;hyphens:auto;font-size:15.5px;line-height:1.5;margin:0 0 10px}
+.ndrop::first-letter{float:left;font-family:"Playfair Display",Georgia,serif;font-size:58px;line-height:.85;padding:4px 6px 0 0}
+.nfoto{margin:6px 0 12px}
+.nfoto img{display:block;width:100%;height:auto}
+.nsrc{text-align:right!important;font-size:12px!important}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 
 @media (max-width:860px){
@@ -339,6 +372,105 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
    en "label" se puede precisar el país: { r:"la", label:"MX" }.
    ===================================================================== */
 const LESSONS = [
+{
+  id: "leccion-2026-11-27",
+  num: 2,
+  date: "2026-11-27",
+  title: "27 de noviembre",
+  topic: "La colocación de los adjetivos y los tiempos de la noticia",
+  subtitle: "Dónde va el adjetivo (antes o después del sustantivo), el imperfecto periodístico y el presente histórico. Texto: «Terrible terremoto en Japón».",
+  sections: [
+    { id:"gramatica", title:"Gramática", html:`
+      <div class="gcard">
+        <figure class="shot"><img src="img/colocacion-adjetivos.png" alt="Colocación de los adjetivos: ficha de gramática" loading="lazy"></figure>
+        <div class="expl">
+          <h3>Кратко по-русски</h3>
+          <p>По умолчанию прилагательное стоит <b>после</b> существительного (<i>posposición</i>).</p>
+          <p><b>Всегда после</b> стоят классифицирующие прилагательные (<i>adjetivos especificativos / clasificadores</i>). Они отделяют предмет от других: происхождение (<i>procedencia</i>), форма, тип, цвет. <i>Un escritor español, una mesa cuadrada, un reactor nuclear.</i></p>
+          <p>Описательные прилагательные (<i>adjetivos explicativos / caracterizadores</i>) могут стоять и <b>перед</b> существительным (<i>anteposición</i>). Тогда фраза звучит книжно, субъективно, эмоционально (<i>registro culto</i>): <i>un extraordinario gol</i>.</p>
+          <p>У некоторых прилагательных место <b>меняет смысл</b>:</p>
+          <ul>
+            <li><i>un gran coche</i> — отличная машина (оценка) · <i>un coche grande</i> — большая машина (размер);</li>
+            <li><i>un pobre hombre</i> — несчастный · <i>un hombre pobre</i> — бедный, без денег;</li>
+            <li><i>una auténtica pesadilla</i> — настоящий кошмар (усиление) · <i>un Picasso auténtico</i> — подлинный.</li>
+          </ul>
+          <p>Порядок и количество (<i>propiedad relativa</i>) обычно ставим <b>перед</b>: <i>la primera vez, el quinto terremoto</i>.</p>
+          <p>Перед существительным в ед. ч. часть прилагательных сокращается (<i>apócope</i>): <i>buen, mal, primer, cualquier</i>; <i>gran</i> — перед любым родом.</p>
+        </div>
+      </div>
+      <div class="gcard">
+        <figure class="shot"><img src="img/imperfecto-periodistico.png" alt="El imperfecto en textos periodísticos y literarios" loading="lazy"></figure>
+        <div class="expl">
+          <h3>Imperfecto periodístico (<i>imperfecto narrativo</i>)</h3>
+          <p>В газетах и литературе <i>imperfecto</i> иногда ставят вместо <i>indefinido</i>, хотя действие однократное и завершённое. Это приём: время как будто «останавливается» (<i>detener el tiempo</i>), и момент выделяется, как в замедленной съёмке.</p>
+          <p><i>Martínez <b>recibía</b> un pase de Roig y <b>marcaba</b> el primer gol</i> = <i>recibió … y marcó</i>: получил пас и забил.</p>
+          <p>Чаще всего встречается в спортивных репортажах, хрониках и новостях с точным указанием времени (<i>en el minuto 5, a las 14:46</i>).</p>
+        </div>
+      </div>
+      <div class="gcard">
+        <div class="aula-box">
+          <h4>PRESENTE HISTÓRICO</h4>
+          <p>En las noticias, las crónicas y las biografías se usa a menudo el presente para contar hechos pasados. Así el relato se vuelve más vivo y el lector «vive» el momento.</p>
+          <p class="exs"><i>14:46 h. <b>Comienza</b> la catástrofe. La gente <b>regresa</b> al trabajo tras la hora del almuerzo. En Tokio las mesas <b>se empiezan</b> a deslizar, los edificios <b>se tambalean</b>…</i></p>
+          <p class="exs"><i>Colón <b>llega</b> a América en 1492.</i></p>
+        </div>
+        <div class="expl">
+          <h3>Presente histórico</h3>
+          <p>Настоящее время (<i>presente</i>) для событий прошлого. Рассказ становится живым и драматичным, читатель как будто сам переносится в момент события. Типично для новостей, хроник (<i>crónica</i>), биографий и исторических текстов.</p>
+          <p>В тексте про Японию видны три времени:</p>
+          <ul>
+            <li><i>Japón <b>ha sufrido</b> este viernes…</i> — <i>pretérito perfecto</i>: свежая новость, «сегодня».</li>
+            <li><i>Las noticias apocalípticas <b>empezaron</b> a llegar…</i> — <i>pretérito indefinido</i>: обычный рассказ о прошлом.</li>
+            <li><i>14:46 h. <b>Comienza</b> la catástrofe…</i> — <i>presente histórico</i>: самый драматичный момент, «здесь и сейчас».</li>
+          </ul>
+        </div>
+      </div>` }
+  ],
+  readings: [
+    { title:"Terrible terremoto en Japón", html:`
+      <div class="adj-legend">
+        <span><i class="aj a">antes</i> antepuesto: valoración, orden (<i>terrible, mayor, quinto</i>)</span>
+        <span><i class="aj c">después</i> clasificador: tipo, origen (<i>nuclear, petroquímica</i>)</span>
+        <span><i class="aj d">después</i> descriptivo (<i>tensa, gigantesca, masiva</i>)</span>
+        <span><i class="aj s">más / mejor</i> comparativo y superlativo</span>
+      </div>
+      <article class="noticia">
+        <div class="nbar"><span class="nmenu" aria-hidden="true"></span><b>Las noticias</b></div>
+        <div class="nbody">
+          <div class="nsec">Internacional</div>
+          <h3 class="ntit"><span class="aj a">Terrible</span> terremoto en Japón</h3>
+          <p class="ndrop">De repente, tras la calma <span class="aj d">tensa</span> <span class="aj d">posterior</span> a la conmoción, las noticias <span class="aj d">apocalípticas</span> empezaron a llegar, una tras otra, <span class="aj s">a cada cual más grave</span>. Un tren de pasajeros totalmente <span class="aj d">desaparecido</span> después de ser arrollado por una ola <span class="aj d">gigantesca</span> junto a la costa; conductores <span class="aj d">desesperados</span> huyendo de una lengua de agua de 10 metros de altura, algunos de ellos sin éxito; entre 200 y 300 cuerpos sin vida <span class="aj d">desperdigados</span> por la playa de Sendai, la ciudad <span class="aj s">más afectada</span> por el tsunami; una planta <span class="aj c">petroquímica</span> ardiendo; un reactor <span class="aj c">nuclear</span> cuyo fallo en el sistema de refrigeración obligaba a declarar el estado de emergencia <span class="aj c">nuclear</span> y a evacuar a 3000 personas en un radio de dos kilómetros. Y así, hasta el infinito.</p>
+          <figure class="nfoto"><img src="img/fukushima.jpg" alt="Incendio en la central nuclear de Fukushima" loading="lazy"></figure>
+          <p>Japón ha sufrido este viernes su <span class="aj a">mayor</span> terremoto en 140 años, el <span class="aj a">quinto</span> <span class="aj s">más fuerte</span> del mundo. Unos 500 desaparecidos y 350 muertos <span class="aj d">confirmados</span> por la Policía a <span class="aj a">última</span> hora de este viernes. Más de 1000 fallecidos, según la agencia de noticias Kyodo. 14:46 h. Comienza la catástrofe. La gente regresa al trabajo tras la hora del almuerzo. En Tokio las mesas se empiezan a deslizar, los edificios se tambalean como flanes, la gente se marea y pierde el equilibrio. Pronto el pánico se apodera de la capital de Japón, una megaurbe de 36 millones de personas. Pero Tokio es la ciudad <span class="aj s">mejor preparada</span> del mundo contra los terremotos y apenas se desploman un puñado de edificios.</p>
+          <p>A 400 kilómetros al noreste de la capital, en las prefecturas de Miyagi y Fukushima, la situación es mucho <span class="aj s">más dramática</span>. El terremoto, de 8,9 grados de magnitud, ha tenido el epicentro a 130 kilómetros de sus costas, en el océano <span class="aj c">Pacífico</span>, a una profundidad de 26 kilómetros. El <span class="aj a">terrible</span> temblor pronto origina un tsunami que se retroalimenta cuanto más se acerca a la costa y es este último, más que el terremoto, la causa de la destrucción <span class="aj d">masiva</span>.</p>
+          <p class="nsrc">(<i>Fuente:</i> Público)</p>
+        </div>
+      </article>
+      <div class="note"><b>Fíjate:</b><span>casi todos los adjetivos van después del sustantivo. Los que van antes son de valoración (<i>terrible</i>) o de orden y cantidad (<i>mayor, quinto, última</i>). Los clasificadores (<i>nuclear, petroquímica, Pacífico</i>) nunca pueden ir delante.</span></div>` }
+  ],
+  vocab: [
+    { term:"el terremoto / el temblor / el seísmo", ru:"землетрясение", ex:"El terrible temblor pronto origina un tsunami." },
+    { term:"la conmoción", ru:"потрясение, шок", ex:"La calma tensa posterior a la conmoción." },
+    { term:"a cada cual más (grave)", ru:"одно хуже (серьёзнее) другого", ex:"Las noticias llegaban, a cada cual más grave." },
+    { term:"arrollar", ru:"сбить, снести (о потоке, машине)", ex:"Un tren arrollado por una ola gigantesca." },
+    { term:"una lengua de agua", ru:"язык (вал) воды", ex:"Huyendo de una lengua de agua de 10 metros." },
+    { term:"desperdigado", ru:"разбросанный", ex:"Cuerpos desperdigados por la playa." },
+    { term:"arder", ru:"гореть", ex:"Una planta petroquímica ardiendo." },
+    { term:"el fallo", ru:"сбой, неисправность", ex:"Un fallo en el sistema de refrigeración." },
+    { term:"evacuar", ru:"эвакуировать", ex:"Evacuar a 3000 personas." },
+    { term:"el / la fallecido/a", ru:"погибший, умерший", ex:"Más de 1000 fallecidos." },
+    { term:"deslizarse", ru:"скользить, съезжать", ex:"Las mesas se empiezan a deslizar." },
+    { term:"tambalearse", ru:"шататься", ex:"Los edificios se tambalean como flanes." },
+    { term:"marearse", ru:"почувствовать головокружение", ex:"La gente se marea y pierde el equilibrio." },
+    { term:"apoderarse de", ru:"овладеть, охватить", ex:"El pánico se apodera de la capital." },
+    { term:"la megaurbe", ru:"мегаполис", ex:"Una megaurbe de 36 millones de personas." },
+    { term:"desplomarse", ru:"рухнуть, обрушиться", ex:"Apenas se desploman un puñado de edificios." },
+    { term:"un puñado de", ru:"горстка, несколько", ex:"Un puñado de edificios." },
+    { term:"retroalimentarse", ru:"самоусиливаться", ex:"Un tsunami que se retroalimenta." },
+    { term:"un pobre hombre / un hombre pobre", ru:"несчастный человек / бедный человек", ex:"Gramática: el sentido cambia con la posición." },
+    { term:"un gran coche / un coche grande", ru:"отличная машина / большая машина", ex:"Gramática: el sentido cambia con la posición." }
+  ]
+},
 {
   id: "leccion-1",
   num: 1,
@@ -549,10 +681,11 @@ function renderLesson(l){
   if(l.grammar) S.push(["gramatica","Gramática",`${l.grammar.intro?`<p>${l.grammar.intro}</p>`:""}
       ${(l.grammar.rules||[]).map(r=>`<div class="rule"><b>${r.h}</b><span>${r.t}</span>${r.ex?`<span class="ex">${r.ex}</span>`:""}</div>`).join("")}
       ${l.grammar.regionNote?`<div class="note"><b>Variantes:</b><span>${l.grammar.regionNote}</span></div>`:""}`, "gram"]);
+  (l.sections||[]).forEach(x=>S.push([x.id, x.title, x.html]));
   if(l.cheat) S.push(["chuleta", l.cheat.title, l.cheat.html]);
   const readings = l.readings || (l.reading ? [l.reading] : []);
   if(readings.length) S.push(["lectura", readings.length>1?"Lecturas":"Lectura", readings.map(r=>`
-      ${r.image ? `<figure class="orig"><img src="${r.image}" alt="${esc(r.title)}" loading="lazy"></figure>
+      ${r.html ? r.html : r.image ? `<figure class="orig"><img src="${r.image}" alt="${esc(r.title)}" loading="lazy"></figure>
         <details class="txt"><summary>Texto para copiar o arrastrar palabras</summary><div class="reading">${r.paragraphs.map(p=>`<p>${p}</p>`).join("")}${r.source?`<p class="src">${r.source}</p>`:""}</div></details>`
       : `<div class="reading"><h3>${r.title}</h3>${r.paragraphs.map(p=>`<p>${p}</p>`).join("")}${r.source?`<p class="src">${r.source}</p>`:""}</div>`}
       ${r.note?`<div class="note"><b>Nota:</b><span>${r.note}</span></div>`:""}
