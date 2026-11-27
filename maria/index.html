@@ -342,6 +342,23 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .nfoto{margin:6px 0 12px}
 .nfoto img{display:block;width:100%;height:auto}
 .nsrc{text-align:right!important;font-size:12px!important}
+
+/* Bloc de notas */
+#nb-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;writing-mode:vertical-rl;background:var(--accent);color:var(--surface);border:0;border-radius:10px 0 0 10px;padding:16px 9px;font:inherit;font-size:14px;font-weight:600;letter-spacing:.06em;cursor:pointer;box-shadow:-2px 2px 10px rgba(0,0,0,.18);display:flex;align-items:center;gap:8px}
+#nb-tab svg{transform:rotate(90deg)}
+#nb{position:fixed;top:0;right:0;bottom:0;z-index:70;width:min(400px,92vw);background:#FFFBEA;color:#2b2b2b;color-scheme:light;box-shadow:-6px 0 24px rgba(0,0,0,.22);display:flex;flex-direction:column;transform:translateX(105%);transition:transform .25s ease;visibility:hidden}
+#nb.open{transform:none;visibility:visible}
+#nb header{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid #eadfb0;background:#FCEFB4}
+#nb header b{font-family:var(--f-display);font-size:20px;margin-right:auto}
+#nb header button{font:inherit;font-size:13px;border:1px solid #d9c770;background:#fff8d6;color:#5a4a00;border-radius:6px;padding:5px 9px;cursor:pointer}
+#nb header .x{font-size:20px;line-height:1;padding:2px 9px}
+.nbw{position:relative;flex:1;min-height:0}
+#nb textarea,.nbhl{position:absolute;inset:0;margin:0;border:0;border-radius:0;font-family:var(--f-body);font-size:16px;line-height:30px;padding:2px 18px 20px;white-space:pre-wrap;overflow-wrap:break-word;word-break:normal;letter-spacing:normal;scrollbar-gutter:stable;box-sizing:border-box}
+#nb textarea{resize:none;width:100%;height:100%;overflow-y:auto;background:repeating-linear-gradient(#FFFBEA 0 29px,#eadfb0 29px 30px);background-attachment:local;color:transparent;caret-color:#2b2b2b;min-height:0}
+#nb textarea::placeholder{color:#9a8f6a}
+.nbhl{overflow:hidden;pointer-events:none;color:#2b2b2b}
+.nbhl .nbd{color:var(--accent);font-weight:700}
+#nb textarea:focus{outline:none}
 /* crónica deportiva (La Vanguardia) */
 .cronica{max-width:560px;background:#fff;color:#222;font-family:"Fira Sans Condensed","Fira Sans",var(--f-body);color-scheme:light;padding:14px 16px 30px;box-shadow:0 2px 10px rgba(0,0,0,.16);margin-bottom:18px;clip-path:polygon(0 0,100% 0,100% 100%,94% calc(100% - 9px),84% calc(100% - 2px),70% calc(100% - 10px),57% calc(100% - 3px),44% calc(100% - 11px),30% calc(100% - 2px),17% calc(100% - 9px),6% calc(100% - 3px),0 calc(100% - 8px))}
 .cronica figure{margin:0 0 12px}
@@ -356,10 +373,11 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .mas h3{font-family:"Nunito",var(--f-body);font-weight:600;font-size:18px;line-height:1.35;color:#222;margin:0 0 12px}
 .mas .bn{color:var(--m-red);font-weight:800}
 .mas .instr:empty{display:none}
-.mas .mimg{margin:0;max-width:400px}
+.mas .mimg{position:relative;margin:0 0 0 6px;max-width:360px;box-shadow:0 1px 6px rgba(0,0,0,.25);border:5px solid #fff}
+.mas .mtag{position:absolute;left:8px;bottom:-16px;background:var(--m-br);color:#fff;font-weight:800;font-size:18px;letter-spacing:.02em;padding:3px 10px}
 .mas .mimg img{display:block;width:100%;height:auto}
 .mas .mbox{background:var(--m-box);padding:16px 18px 14px}
-.mas .mimg+.mbox{margin-top:-4px}
+.mas .mimg+.mbox{margin-top:-10px;padding-top:34px}
 .mas .items>li::before{font-family:"Nunito",var(--f-body);font-weight:800;color:var(--m-red);font-size:15px}
 .mas .items{gap:12px}
 .mas .items>li:only-child{grid-template-columns:minmax(0,1fr)}.mas .items>li:only-child::before{display:none}
@@ -549,7 +567,7 @@ function renderExercise(l,e,ei){
       : `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div><div class="bar"><button class="btn ghost" data-act="model">Ver modelos</button></div>`;
   }
   if(th==="mas"){
-    const head = `${e.band?`<div class="mband">${e.band}</div>`:""}${e.title?`<h3>${e.title}</h3>`:""}${e.image?`<figure class="mimg"><img src="${e.image}" alt="${esc(e.alt||"")}" loading="lazy"></figure>`:""}`;
+    const head = `${e.band?`<div class="mband">${e.band}</div>`:""}${e.title?`<h3>${e.title}</h3>`:""}${e.image?`<figure class="mimg"><img src="${e.image}" alt="${esc(e.alt||"")}" loading="lazy">${e.tag?`<span class="mtag">${e.tag}</span>`:""}</figure>`:""}`;
     return `<div class="ex-block mas" data-lesson="${l.id}" data-ex="${ei}">${head}${e.box?`<div class="mbox">${e.context||""}${body}</div>`:`${e.context||""}${body}`}</div>`;
   }
   const head = th==="aula"
@@ -870,6 +888,51 @@ function route(){
   else { v.innerHTML = renderHome(); renderNav("inicio"); }
   window.scrollTo(0,0);
 }
+
+/* Bloc de notas: pestaña fija a la derecha, se despliega como un menú */
+(function(){
+  const tab = document.createElement("button");
+  tab.id = "nb-tab"; tab.type = "button"; tab.setAttribute("aria-expanded","false"); tab.setAttribute("aria-controls","nb");
+  tab.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>Notas`;
+  const nb = document.createElement("aside");
+  nb.id = "nb"; nb.setAttribute("aria-label","Notas");
+  nb.innerHTML = `<header><b>Notas</b><button type="button" class="x" id="nb-close" aria-label="Cerrar">×</button></header>
+    <div class="nbw"><textarea id="nb-txt" aria-label="Notas" placeholder="Apunta aquí lo que surja en clase…"></textarea><div class="nbhl" aria-hidden="true"></div></div>`;
+  document.body.append(tab, nb);
+  const txt = nb.querySelector("#nb-txt");
+  const hl = nb.querySelector(".nbhl");
+  const isDay = l => /^\d{1,2} de [a-záéíóú]+$/.test(l.trim());
+  const paint = () => { hl.innerHTML = txt.value.split("\n").map(l=>isDay(l)?`<span class="nbd">${esc(l)}</span>`:esc(l)).join("\n") + "\n"; hl.scrollTop = txt.scrollTop; };
+  const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const clean = v => {
+    const out = [], seen = new Set();
+    v.replace(/^— (\d{1,2} de [a-záéíóú]+) —$/gm, "$1").split("\n").forEach(l=>{
+      const t = l.trim(), m = t.match(/^(\d{1,2}) de ([a-z]*)$/);
+      if(m && !MESES.includes(m[2]) && MESES.some(x=>x.startsWith(m[2]))) return;   // fecha a medio borrar
+      if(m && MESES.includes(m[2])){ if(seen.has(t)) return; seen.add(t); }
+      out.push(l);
+    });
+    return out.join("\n").replace(/\n{3,}/g,"\n\n").replace(/^\n+/,"");
+  };
+  txt.value = clean(store.get("notas") || "");
+  store.set("notas", txt.value);
+  paint();
+  txt.addEventListener("input", ()=>{ store.set("notas", txt.value); paint(); });
+  txt.addEventListener("scroll", ()=>{ hl.scrollTop = txt.scrollTop; });
+  const setOpen = o => { nb.classList.toggle("open", o); tab.setAttribute("aria-expanded", String(o)); if(o) setTimeout(()=>txt.focus(), 200); else tab.focus(); };
+  tab.addEventListener("click", ()=>setOpen(!nb.classList.contains("open")));
+  nb.querySelector("#nb-close").addEventListener("click", ()=>setOpen(false));
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && nb.classList.contains("open")) setOpen(false); });
+  const today = () => new Date().toLocaleDateString("es-ES",{day:"numeric",month:"long"});
+  txt.addEventListener("beforeinput", e=>{
+    if(!/^insert/.test(e.inputType||"insertText")) return;
+    const d = today();
+    if(txt.value.split("\n").some(l=>l.trim()===d)) return;
+    const v = txt.value.replace(/\s+$/,"");
+    txt.value = (v ? v+"\n\n" : "") + `${d}\n`;
+    txt.selectionStart = txt.selectionEnd = txt.value.length;
+  });
+})();
 window.addEventListener("hashchange", route);
 route();
 </script>
