@@ -342,6 +342,18 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .nfoto{margin:6px 0 12px}
 .nfoto img{display:block;width:100%;height:auto}
 .nsrc{text-align:right!important;font-size:12px!important}
+
+/* Bloc de notas */
+#nb-tab{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:60;writing-mode:vertical-rl;background:var(--accent);color:var(--surface);border:0;border-radius:10px 0 0 10px;padding:16px 9px;font:inherit;font-size:14px;font-weight:600;letter-spacing:.06em;cursor:pointer;box-shadow:-2px 2px 10px rgba(0,0,0,.18);display:flex;align-items:center;gap:8px}
+#nb-tab svg{transform:rotate(90deg)}
+#nb{position:fixed;top:0;right:0;bottom:0;z-index:70;width:min(400px,92vw);background:#FFFBEA;color:#2b2b2b;color-scheme:light;box-shadow:-6px 0 24px rgba(0,0,0,.22);display:flex;flex-direction:column;transform:translateX(105%);transition:transform .25s ease;visibility:hidden}
+#nb.open{transform:none;visibility:visible}
+#nb header{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid #eadfb0;background:#FCEFB4}
+#nb header b{font-family:var(--f-display);font-size:20px;margin-right:auto}
+#nb header button{font:inherit;font-size:13px;border:1px solid #d9c770;background:#fff8d6;color:#5a4a00;border-radius:6px;padding:5px 9px;cursor:pointer}
+#nb header .x{font-size:20px;line-height:1;padding:2px 9px}
+#nb textarea{flex:1;margin:0;border:0;border-radius:0;resize:none;background:repeating-linear-gradient(#FFFBEA 0 29px,#eadfb0 29px 30px);background-attachment:local;line-height:30px;padding:2px 18px 20px;font-size:16px;color:#2b2b2b;min-height:0}
+#nb textarea:focus{outline:none}
 /* crónica deportiva (La Vanguardia) */
 .cronica{max-width:560px;background:#fff;color:#222;font-family:"Fira Sans Condensed","Fira Sans",var(--f-body);color-scheme:light;padding:14px 16px 30px;box-shadow:0 2px 10px rgba(0,0,0,.16);margin-bottom:18px;clip-path:polygon(0 0,100% 0,100% 100%,94% calc(100% - 9px),84% calc(100% - 2px),70% calc(100% - 10px),57% calc(100% - 3px),44% calc(100% - 11px),30% calc(100% - 2px),17% calc(100% - 9px),6% calc(100% - 3px),0 calc(100% - 8px))}
 .cronica figure{margin:0 0 12px}
@@ -356,10 +368,11 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .mas h3{font-family:"Nunito",var(--f-body);font-weight:600;font-size:18px;line-height:1.35;color:#222;margin:0 0 12px}
 .mas .bn{color:var(--m-red);font-weight:800}
 .mas .instr:empty{display:none}
-.mas .mimg{margin:0;max-width:400px}
+.mas .mimg{position:relative;margin:0 0 0 6px;max-width:360px;box-shadow:0 1px 6px rgba(0,0,0,.25);border:5px solid #fff}
+.mas .mtag{position:absolute;left:8px;bottom:-16px;background:var(--m-br);color:#fff;font-weight:800;font-size:18px;letter-spacing:.02em;padding:3px 10px}
 .mas .mimg img{display:block;width:100%;height:auto}
 .mas .mbox{background:var(--m-box);padding:16px 18px 14px}
-.mas .mimg+.mbox{margin-top:-4px}
+.mas .mimg+.mbox{margin-top:-10px;padding-top:34px}
 .mas .items>li::before{font-family:"Nunito",var(--f-body);font-weight:800;color:var(--m-red);font-size:15px}
 .mas .items{gap:12px}
 .mas .items>li:only-child{grid-template-columns:minmax(0,1fr)}.mas .items>li:only-child::before{display:none}
@@ -799,7 +812,7 @@ function renderExercise(l,e,ei){
       : `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div><div class="bar"><button class="btn ghost" data-act="model">Ver modelos</button></div>`;
   }
   if(th==="mas"){
-    const head = `${e.band?`<div class="mband">${e.band}</div>`:""}${e.title?`<h3>${e.title}</h3>`:""}${e.image?`<figure class="mimg"><img src="${e.image}" alt="${esc(e.alt||"")}" loading="lazy"></figure>`:""}`;
+    const head = `${e.band?`<div class="mband">${e.band}</div>`:""}${e.title?`<h3>${e.title}</h3>`:""}${e.image?`<figure class="mimg"><img src="${e.image}" alt="${esc(e.alt||"")}" loading="lazy">${e.tag?`<span class="mtag">${e.tag}</span>`:""}</figure>`:""}`;
     return `<div class="ex-block mas" data-lesson="${l.id}" data-ex="${ei}">${head}${e.box?`<div class="mbox">${e.context||""}${body}</div>`:`${e.context||""}${body}`}</div>`;
   }
   const head = th==="aula"
@@ -1009,14 +1022,14 @@ const DEBERES = [
   ],
   exercises: [
     { type:"open", theme:"mas", band:"Más ejercicios", box:true, title:'<span class="bn">3.</span> Contesta las siguientes preguntas sobre las crónicas. Puedes trabajar con diccionarios o con buscadores de internet.',
-      image:"img/mas-texto1.jpg", alt:"Texto 1: David Luiz en el suelo tras la derrota",
+      image:"img/mas-texto1.jpg", tag:"TEXTO 1", alt:"Texto 1: David Luiz en el suelo tras la derrota",
       items:[
         { q:"¿Qué palabra se usa en el primer párrafo para hacer referencia al partido? ¿Qué otras se podrían usar?" },
         { q:"Lee de nuevo el segundo párrafo. ¿Entiendes qué es un <b>tanto</b>? ¿De qué palabra, también usada en el segundo párrafo, es sinónima?" },
         { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>poco tardó Alemania en <b>lanzar un par de contragolpes</b></li><li><b>marcar a placer</b></li><li>Alemania <b>bajó el listón</b></li><li><b>la presión de verse por debajo</b> en el marcador</li><li>los <b>desnortó</b> definitivamente</li><li><b>carecía por completo de sentido de juego</b></li><li>Alemania <b>bailó sobre el cadáver</b> de un Brasil descompuesto</li><li>Kross <b>fulminó</b> las esperanzas de su rival</li><li>antes de <b>noquear a su rival</b></li><li>lo que les hará regresar al éxito <b>más tarde o más temprano</b></li></ul>" },
         { q:"En el segundo párrafo aparece el verbo <b>destronar</b>. ¿Entiendes qué significa? ¿Con qué sustantivos podría combinarse el verbo <b>destronar</b> en este u otros contextos?" }
       ]},
-    { type:"open", theme:"mas", box:true, title:"", image:"img/mas-texto2.jpg", alt:"Texto 2: incendio en una planta de Japón",
+    { type:"open", theme:"mas", box:true, title:"", image:"img/mas-texto2.jpg", tag:"TEXTO 2", alt:"Texto 2: incendio en una planta de Japón",
       items:[
         { q:"¿Qué palabras se usan para referirse a las personas muertas?" },
         { q:"¿Cómo dirías de otra manera las siguientes expresiones?<ul class='sq'><li>las noticias empezaron a llegar, <b>a cada cual más grave</b></li><li>conductores desesperados huyendo de una <b>lengua de agua</b> de 10 metros de altura</li><li>y así, <b>hasta el infinito</b></li><li>los edificios <b>se tambalean como flanes</b></li><li>pronto <b>el pánico se apodera de</b> la capital de Japón</li><li>apenas se desploman <b>un puñado de</b> edificios</li></ul>" },
@@ -1263,6 +1276,30 @@ function route(){
   else { v.innerHTML = renderHome(); renderNav("inicio"); }
   window.scrollTo(0,0);
 }
+
+/* Bloc de notas: pestaña fija a la derecha, se despliega como un menú */
+(function(){
+  const tab = document.createElement("button");
+  tab.id = "nb-tab"; tab.type = "button"; tab.setAttribute("aria-expanded","false"); tab.setAttribute("aria-controls","nb");
+  tab.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>Notas`;
+  const nb = document.createElement("aside");
+  nb.id = "nb"; nb.setAttribute("aria-label","Bloc de notas");
+  nb.innerHTML = `<header><b>Bloc de notas</b><button type="button" id="nb-date">+ Fecha</button><button type="button" class="x" id="nb-close" aria-label="Cerrar">×</button></header>
+    <textarea id="nb-txt" aria-label="Notas" placeholder="Apunta aquí lo que surja en clase…"></textarea>`;
+  document.body.append(tab, nb);
+  const txt = nb.querySelector("#nb-txt");
+  txt.value = store.get("notas") || "";
+  txt.addEventListener("input", ()=>store.set("notas", txt.value));
+  const setOpen = o => { nb.classList.toggle("open", o); tab.setAttribute("aria-expanded", String(o)); if(o) setTimeout(()=>txt.focus(), 200); else tab.focus(); };
+  tab.addEventListener("click", ()=>setOpen(!nb.classList.contains("open")));
+  nb.querySelector("#nb-close").addEventListener("click", ()=>setOpen(false));
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape" && nb.classList.contains("open")) setOpen(false); });
+  nb.querySelector("#nb-date").addEventListener("click", ()=>{
+    const d = new Date().toLocaleDateString("es-ES",{day:"numeric",month:"long"});
+    const pre = txt.value && !txt.value.endsWith("\n") ? "\n\n" : (txt.value ? "\n" : "");
+    txt.value += `${pre}— ${d} —\n`; store.set("notas", txt.value); txt.focus(); txt.selectionStart = txt.selectionEnd = txt.value.length;
+  });
+})();
 window.addEventListener("hashchange", route);
 route();
 </script>
