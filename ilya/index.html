@@ -434,6 +434,7 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
   <main id="view" tabindex="-1"></main>
 </div>
 
+<script src="../common/sync.js"></script>
 <script>
 /* =====================================================================
    LECCIONES
@@ -696,10 +697,7 @@ const LESSONS = [
 
 /* ===================================================================== */
 const REG = { all:{cls:"all", label:"General"}, es:{cls:"es", label:"España"}, la:{cls:"la", label:"Latinoamérica"} };
-const store = {
-  get(k){ try{ return localStorage.getItem("ilya:"+k); }catch(e){ return null; } },
-  set(k,v){ try{ localStorage.setItem("ilya:"+k, v); }catch(e){} }
-};
+const store = makeStore("ilya");   /* common/sync.js: se guarda en el servidor y en el navegador */
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtDate = d => new Date(d+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
@@ -854,6 +852,7 @@ function bindMyWords(l){
       <td><button class="del" data-i="${i}" aria-label="Borrar fila ${i+1}" title="Borrar">×</button></td></tr>`).join("");
   };
   draw();
+  window.__mwReload = k => { if(k!==key || body.contains(document.activeElement)) return; rows = loadMW(l.id); if(!rows.length) rows = [{term:"",ru:"",ex:""}]; draw(); };
   const addWord = (term, ru="") => {
     term = term.replace(/\s+/g," ").trim().replace(/^[«"¿¡(\-—]+|[»".,;:!?)\-—]+$/g,"");
     if(!term || term.length > 80) return;
@@ -1310,6 +1309,12 @@ function route(){
   txt.value = clean(store.get("notas") || "");
   store.set("notas", txt.value);
   paint();
+  window.__nbReload = () => {
+    const a = txt.selectionStart, b = txt.selectionEnd, top = txt.scrollTop;
+    txt.value = clean(store.get("notas") || "");
+    if(document.activeElement===txt) txt.setSelectionRange(Math.min(a, txt.value.length), Math.min(b, txt.value.length));
+    txt.scrollTop = top; paint();
+  };
   txt.addEventListener("input", ()=>{ store.set("notas", txt.value); paint(); });
   txt.addEventListener("scroll", ()=>{ hl.scrollTop = txt.scrollTop; });
   const setOpen = o => { nb.classList.toggle("open", o); tab.setAttribute("aria-expanded", String(o)); if(o) setTimeout(()=>txt.focus(), 200); else tab.focus(); };
@@ -1326,6 +1331,25 @@ function route(){
     txt.selectionStart = txt.selectionEnd = txt.value.length;
   });
 })();
+/* Cambios que llegan del servidor (otro dispositivo): actualizar lo que se ve */
+store.onRemote(keys => {
+  const act = document.activeElement;
+  keys.forEach(k => {
+    if(k==="notas"){ if(window.__nbReload) window.__nbReload(); return; }
+    if(k==="glosario:words"){
+      if(!$("#glist") || $("#glist").contains(act)) return;
+      const open = [...document.querySelectorAll("#glist details[open] .glink a")].map(a=>a.getAttribute("href").slice(1));
+      fillGlossary();
+      document.querySelectorAll("#glist details").forEach(d=>{ const a = d.querySelector(".glink a"); if(a && open.includes(a.getAttribute("href").slice(1))) d.open = true; });
+      return;
+    }
+    if(/:words$/.test(k)){ if(window.__mwReload) window.__mwReload(k); return; }
+    document.querySelectorAll("[data-key]").forEach(el => {
+      if(el.dataset.key!==k || el===act) return;
+      el.value = store.get(k) || ""; el.classList.remove("ok","bad");
+    });
+  });
+});
 window.addEventListener("hashchange", route);
 route();
 </script>
