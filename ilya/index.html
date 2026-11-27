@@ -716,11 +716,6 @@ function renderHome(){
     </div>
     ${DEBERES.length ? `<h2 style="font-size:24px;margin-top:40px">Deberes</h2><div class="cards" style="margin-top:14px">${debSorted().map(d=>`
       <a class="card" href="#${d.id}"><span class="eyebrow">${d.topic}</span><h3>${dayLabel(d.date)}</h3><p>${d.instr.split(". ")[0]}.</p></a>`).join("")}</div>` : ""}
-    <div class="legend"><span>Marcas de variante:</span>
-      <span>${badge("es")} se usa sobre todo en España</span>
-      <span>${badge("la")} se usa sobre todo en Latinoamérica</span>
-      <span>${badge("all")} se usa en todas partes</span>
-    </div>
   </div>`;
 }
 
