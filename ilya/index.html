@@ -687,7 +687,7 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const fmtDate = d => new Date(d+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
 const badge = (r, label) => `<span class="rg ${REG[r].cls}">${label || (r==="all" ? "ES · LATAM" : r==="es" ? "ES" : "LATAM")}</span>`;
 const dayLabel = d => new Date(d+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"long"});
-const debSorted = () => [...DEBERES].sort((a,b)=>b.date.localeCompare(a.date));
+const debSorted = () => DEBERES.filter(d=>!d.partOf).sort((a,b)=>b.date.localeCompare(a.date));
 const sorted = () => [...LESSONS].sort((a,b)=>b.date.localeCompare(a.date));
 
 function renderNav(active){
@@ -735,6 +735,8 @@ function renderLesson(l){
       ${l.grammar.regionNote?`<div class="note"><b>Variantes:</b><span>${l.grammar.regionNote}</span></div>`:""}`, "gram"]);
   (l.sections||[]).forEach(x=>S.push([x.id, x.title, x.html]));
   if(l.cheat) S.push(["chuleta", l.cheat.title, l.cheat.html]);
+  if(l.story){ const d = DEBERES.find(x=>x.id===l.story), r = renderDeber(d); l._gaps = r.gaps;
+    S.push(["leyenda", "Leyenda", r.html.replace(/^[\s\S]*?(?=<div class="ex-block story sheet">)/,"").replace(/\s*<\/article>\s*$/,"")]); }
   const readings = l.readings || (l.reading ? [l.reading] : []);
   if(readings.length) S.push(["lectura", readings.length>1?"Lecturas":"Lectura", readings.map(r=>`
       ${r.html ? r.html : r.image ? `<figure class="orig"><img src="${r.image}" alt="${esc(r.title)}" loading="lazy"></figure>
@@ -875,6 +877,7 @@ function bindMyWords(l){
 
 function bindLesson(l){
   document.querySelectorAll(".ex-block").forEach(block=>{
+    if(block.dataset.ex===undefined) return;
     const ei = +block.dataset.ex, ex = l.exercises[ei], score = block.querySelector(".score");
     if(ex.type==="gap"){
       block.addEventListener("input", e=>{ if(e.target.dataset.key) store.set(e.target.dataset.key, e.target.value); });
@@ -956,6 +959,7 @@ function bindLesson(l){
     }
   });
   bindMyWords(l);
+  if(l.story) bindDeber(DEBERES.find(x=>x.id===l.story), l._gaps);
   const hw = document.getElementById("hw-"+l.id);
   if(hw){ hw.value = store.get(hw.dataset.key) || ""; hw.addEventListener("input", ()=>store.set(hw.dataset.key, hw.value)); }
   document.querySelectorAll(".toc a").forEach(a=>a.addEventListener("click", e=>{
@@ -977,9 +981,10 @@ const DEBERES = [
   tag: "Crón.",
   date: "2026-11-27",
   title: "27 de noviembre",
-  topic: "Dos crónicas: el Mineirazo y el terremoto de Japón",
-  instr: "Lee las dos crónicas y haz los ejercicios 3, 4, 14 y 15.",
-  subtitle: "Lee la crónica del partido Brasil–Alemania y la noticia del terremoto de Japón. Después, haz los ejercicios.",
+  story: "deber-urashima",
+  topic: "La leyenda de Urashima Tarō y dos crónicas",
+  instr: "Completa la leyenda con el pretérito indefinido, lee las dos crónicas y haz los ejercicios.",
+  subtitle: "Completa la leyenda de Urashima Tarō con el pretérito indefinido. Después, lee la crónica del partido Brasil–Alemania y la noticia del terremoto de Japón y haz los ejercicios.",
   readings: [
     { title:"El desplome de la Canarinha", html:`
       <article class="cronica">
@@ -1092,6 +1097,7 @@ const DEBERES = [
 },
 {
   id: "deber-urashima",
+  partOf: "deber-cronicas",
   tag: "Ind.",
   date: "2026-11-27",
   title: "La leyenda de Urashima Tarō",
@@ -1249,6 +1255,7 @@ function route(){
   if(l){ v.innerHTML = renderLesson(l); bindLesson(l); renderNav(l.id); }
   else if(DEBERES.find(x=>x.id===h)){
     const d = DEBERES.find(x=>x.id===h);
+    if(d.partOf){ location.replace("#"+d.partOf); return; }
     if(d.kind==="pack"){ v.innerHTML = renderLesson(d); bindLesson(d); renderNav(d.id); }
     else { const r = renderDeber(d); v.innerHTML = r.html; bindDeber(d, r.gaps); renderNav(d.id); }
   }
