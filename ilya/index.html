@@ -299,6 +299,16 @@ table.fverbs{font-size:14px;border-collapse:collapse;width:100%}
 .gday summary em{margin-left:auto;font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
 .gday .tscroll{border:0;border-top:1px solid var(--line);border-radius:0 0 12px 12px}
 .glink{margin:0;padding:10px 14px;font-size:14px}
+.addw{margin:22px 0 6px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.addw h2{font-size:18px;margin:0 0 10px}
+.addw .row{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.4fr);gap:8px}
+.addw select,.addw input{font:inherit;font-size:15px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);min-width:0;width:100%;box-sizing:border-box}
+.addw .bar{margin-top:10px}
+.addw .note{margin:8px 0 0;font-size:13px;color:var(--muted)}
+.mine{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;font-size:11px;font-family:var(--f-mono);background:var(--accent-soft);color:var(--accent);vertical-align:middle}
+.gdel{float:right;border:0;background:none;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:2px 6px}
+.gdel:hover{color:var(--accent)}
+@media (max-width:640px){.addw .row{grid-template-columns:1fr}}
 /* Clase 27 nov */
 .gcard{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:20px;align-items:start;margin-bottom:22px}
 @media (max-width:760px){.gcard{grid-template-columns:minmax(0,1fr)}}
@@ -1030,12 +1040,61 @@ function bindDeber(d, gaps){
   });
 }
 
-let gFilter = "todo", gQuery = "";
+let gFilter = "todo", gQuery = "", gOpen = null;
+const loadGW = () => { try{ return JSON.parse(store.get("glosario:words")||"[]"); }catch(e){ return []; } };
+const saveGW = a => store.set("glosario:words", JSON.stringify(a));
+function bindGlossaryAdd(){
+  const msg = $("#aw-msg");
+  $("#addw").addEventListener("submit", e=>{
+    e.preventDefault();
+    const term = $("#aw-t").value.replace(/\s+/g," ").trim(), ru = $("#aw-r").value.trim(), ex = $("#aw-e").value.trim(), lid = $("#aw-l").value;
+    if(!term){ $("#aw-t").focus(); return; }
+    const all = loadGW();
+    const l = LESSONS.find(x=>x.id===lid);
+    const dup = [...(l.vocab||[]), ...(l.myWords||[]), ...all.filter(w=>w.l===lid)].some(w=>plain(String(w.term).replace(/<[^>]+>/g,""))===plain(term));
+    if(dup){ msg.textContent = `«${term}» ya está en la clase del ${l.title}.`; return; }
+    all.push({id: Date.now().toString(36), l: lid, term, ru, ex});
+    saveGW(all);
+    $("#aw-t").value = $("#aw-r").value = $("#aw-e").value = "";
+    $("#aw-t").focus();
+    gOpen = lid; fillGlossary();
+    msg.textContent = `Añadida: ${term} (${l.title})`;
+  });
+  $("#glist").addEventListener("click", e=>{
+    const b = e.target.closest(".gdel"); if(!b) return;
+    const all = loadGW(), w = all.find(x=>x.id===b.dataset.id);
+    if(!w) return;
+    saveGW(all.filter(x=>x.id!==w.id)); gOpen = w.l; fillGlossary();
+    msg.textContent = `Borrada: ${w.term}`;
+  });
+  $("#aw-copy").addEventListener("click", async ()=>{
+    const all = loadGW();
+    if(!all.length){ msg.textContent = "Todavía no has añadido palabras."; return; }
+    const text = sorted().filter(l=>all.some(w=>w.l===l.id)).map(l=>`${l.title}\n`+all.filter(w=>w.l===l.id).map(w=>`${w.term}${w.ru?` — ${w.ru}`:""}${w.ex?` (${w.ex})`:""}`).join("\n")).join("\n\n");
+    try{ await navigator.clipboard.writeText(text); msg.textContent = "Copiado. Puedes pegarlo en un mensaje."; }
+    catch(err){
+      const ta = document.createElement("textarea"); ta.value = text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
+      let ok = false; try{ ok = document.execCommand("copy"); }catch(e2){}
+      ta.remove(); msg.textContent = ok ? "Copiado. Puedes pegarlo en un mensaje." : "No se pudo copiar.";
+    }
+  });
+}
 function renderGlossary(){
   return `<div class="wrap">
     <div class="eyebrow">Herramienta</div>
     <h1 style="font-size:clamp(30px,5vw,44px);margin:10px 0">Glosario</h1>
     <p class="lead">El vocabulario de cada clase, ordenado por fechas.</p>
+    <form class="addw" id="addw" autocomplete="off">
+      <h2>Añadir una palabra</h2>
+      <div class="row">
+        <select id="aw-l" aria-label="Clase">${sorted().map(l=>`<option value="${l.id}">${l.title}</option>`).join("")}</select>
+        <input id="aw-t" placeholder="Palabra en español" aria-label="Palabra en español" required>
+        <input id="aw-r" placeholder="Перевод" aria-label="Перевод">
+        <input id="aw-e" placeholder="Ejemplo (opcional)" aria-label="Ejemplo">
+      </div>
+      <div class="bar"><button class="btn" type="submit">Añadir</button><button class="btn ghost" type="button" id="aw-copy">Copiar mis palabras</button><span class="score" id="aw-msg" aria-live="polite"></span></div>
+      <p class="note">Tus palabras se guardan en este navegador y aparecen con la etiqueta «mía» en la clase elegida.</p>
+    </form>
     <div class="filters">
       <input id="gq" type="search" placeholder="Buscar en español o en ruso" aria-label="Buscar">
       <button class="fbtn" data-f="todo">Todo</button>
@@ -1052,12 +1111,15 @@ function fillGlossary(){
     if(q && !plain(v.term+" "+v.ru+" "+(v.alt||"")+" "+(v.ex||"")).replace(/<[^>]+>/g,"").includes(q)) return false;
     return true;
   };
-  const groups = sorted().map(l=>({ l, words: [...(l.vocab||[]), ...(l.myWords||[])].filter(keep) })).filter(g=>g.words.length);
-  const total = LESSONS.reduce((n,l)=>n+(l.vocab||[]).length,0);
+  const mine = loadGW();
+  const groups = sorted().map(l=>({ l, words: [...(l.vocab||[]), ...(l.myWords||[]), ...mine.filter(w=>w.l===l.id).map(w=>({...w, mine:true}))].filter(keep) })).filter(g=>g.words.length);
+  const total = LESSONS.reduce((n,l)=>n+(l.vocab||[]).length,0) + mine.length;
   $("#glist").innerHTML = groups.length ? groups.map(({l,words})=>`
-    <details class="gday" ${q?"open":""}><summary><b>${l.title}</b>${l.topic?`<span>${l.topic}</span>`:""}<em>${words.length} palabras</em></summary>
+    <details class="gday" ${q||gOpen===l.id?"open":""}><summary><b>${l.title}</b>${l.topic?`<span>${l.topic}</span>`:""}<em>${words.length} palabras</em></summary>
     <div class="tscroll"><table><thead><tr><th>Español</th><th>Русский</th><th>Ejemplo</th></tr></thead><tbody>${
-      words.map(v=>`<tr><td class="term">${v.term} ${v.r && v.r!=="all" ? badge(v.r, v.label) : ""}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")
+      words.map(v=>v.mine
+        ? `<tr><td class="term">${esc(v.term)}<span class="mine">mía</span></td><td>${esc(v.ru||"")}</td><td class="ex">${esc(v.ex||"")}<button class="gdel" data-id="${v.id}" aria-label="Borrar ${esc(v.term)}" title="Borrar">×</button></td></tr>`
+        : `<tr><td class="term">${v.term} ${v.r && v.r!=="all" ? badge(v.r, v.label) : ""}${v.alt?`<span class="alt">${v.alt}</span>`:""}</td><td>${v.ru}</td><td class="ex">${v.ex||""}</td></tr>`).join("")
     }</tbody></table><p class="glink"><a href="#${l.id}">Ir a la clase del ${l.title}</a></p></div></details>`).join("")
     : `<p class="empty">${total ? "No hay palabras que coincidan." : "Todavía no hay palabras. Aparecerán aquí con cada clase."}</p>`;
   document.querySelectorAll(".fbtn").forEach(b=>b.setAttribute("aria-pressed", b.dataset.f===gFilter));
@@ -1074,7 +1136,7 @@ function route(){
     else { const r = renderDeber(d); v.innerHTML = r.html; bindDeber(d, r.gaps); renderNav(d.id); }
   }
   else if(h==="glosario"){
-    v.innerHTML = renderGlossary(); renderNav("glosario"); fillGlossary();
+    gOpen = null; v.innerHTML = renderGlossary(); renderNav("glosario"); fillGlossary(); bindGlossaryAdd();
     $("#gq").addEventListener("input", e=>{ gQuery = e.target.value; fillGlossary(); });
     document.querySelectorAll(".fbtn").forEach(b=>b.addEventListener("click", ()=>{ gFilter = b.dataset.f; fillGlossary(); }));
   }
