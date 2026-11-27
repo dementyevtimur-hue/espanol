@@ -1067,17 +1067,6 @@ function bindGlossaryAdd(){
     saveGW(all.filter(x=>x.id!==w.id)); gOpen = w.l; fillGlossary();
     msg.textContent = `Borrada: ${w.term}`;
   });
-  $("#aw-copy").addEventListener("click", async ()=>{
-    const all = loadGW();
-    if(!all.length){ msg.textContent = "Todavía no has añadido palabras."; return; }
-    const text = sorted().filter(l=>all.some(w=>w.l===l.id)).map(l=>`${l.title}\n`+all.filter(w=>w.l===l.id).map(w=>`${w.term}${w.ru?` — ${w.ru}`:""}${w.ex?` (${w.ex})`:""}`).join("\n")).join("\n\n");
-    try{ await navigator.clipboard.writeText(text); msg.textContent = "Copiado. Puedes pegarlo en un mensaje."; }
-    catch(err){
-      const ta = document.createElement("textarea"); ta.value = text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
-      let ok = false; try{ ok = document.execCommand("copy"); }catch(e2){}
-      ta.remove(); msg.textContent = ok ? "Copiado. Puedes pegarlo en un mensaje." : "No se pudo copiar.";
-    }
-  });
 }
 function renderGlossary(){
   return `<div class="wrap">
@@ -1092,7 +1081,7 @@ function renderGlossary(){
         <input id="aw-r" placeholder="Перевод" aria-label="Перевод">
         <input id="aw-e" placeholder="Ejemplo (opcional)" aria-label="Ejemplo">
       </div>
-      <div class="bar"><button class="btn" type="submit">Añadir</button><button class="btn ghost" type="button" id="aw-copy">Copiar mis palabras</button><span class="score" id="aw-msg" aria-live="polite"></span></div>
+      <div class="bar"><button class="btn" type="submit">Añadir</button><span class="score" id="aw-msg" aria-live="polite"></span></div>
     </form>
     <div class="filters">
       <input id="gq" type="search" placeholder="Buscar en español o en ruso" aria-label="Buscar">
