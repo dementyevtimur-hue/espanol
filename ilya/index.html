@@ -502,7 +502,9 @@ const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtDate = d => new Date(d+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"long",year:"numeric"});
 const badge = (r, label) => `<span class="rg ${REG[r].cls}">${label || (r==="all" ? "ES · LATAM" : r==="es" ? "ES" : "LATAM")}</span>`;
-const sorted = () => [...LESSONS].sort((a,b)=>b.num-a.num);
+const dayLabel = d => new Date(d+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"long"});
+const debSorted = () => [...DEBERES].sort((a,b)=>b.date.localeCompare(a.date));
+const sorted = () => [...LESSONS].sort((a,b)=>b.date.localeCompare(a.date));
 
 function renderNav(active){
   $("#nav-lessons").innerHTML = LESSONS.length ? "" : `<li class="navempty">Aún no hay lecciones</li>`;
@@ -510,8 +512,8 @@ function renderNav(active){
     `<li><a href="#${l.id}" ${active===l.id?'aria-current="page"':''}><span class="n">${l.date.slice(8,10)}</span><span>${l.title}${l.topic?`<small class="nt">${l.topic}</small>`:""}</span></a></li>`).join("");
   document.querySelectorAll('[data-route]').forEach(a => a.toggleAttribute("aria-current", a.dataset.route===active));
   if(active==="glosario") $('[data-route="glosario"]').setAttribute("aria-current","page");
-  $("#nav-deberes").innerHTML = DEBERES.length ? [...DEBERES].reverse().map(d =>
-    `<li><a href="#${d.id}" ${active===d.id?'aria-current="page"':''}><span class="n">${d.tag}</span><span>${d.title}</span></a></li>`).join("") : `<li class="navempty">Aún no hay deberes</li>`;
+  $("#nav-deberes").innerHTML = DEBERES.length ? debSorted().map(d =>
+    `<li><a href="#${d.id}" ${active===d.id?'aria-current="page"':''}><span class="n">${d.date.slice(8,10)}</span><span>${dayLabel(d.date)}<small class="nt">${d.topic}</small></span></a></li>`).join("") : `<li class="navempty">Aún no hay deberes</li>`;
 }
 
 function renderHome(){
@@ -528,8 +530,8 @@ function renderHome(){
         <div class="chips">${(l.themes||[]).map(t=>`<span class="chip">${t}</span>`).join("")}</div>
       </a>`).join("")}
     </div>
-    ${DEBERES.length ? `<h2 style="font-size:24px;margin-top:40px">Deberes</h2><div class="cards" style="margin-top:14px">${[...DEBERES].reverse().map(d=>`
-      <a class="card" href="#${d.id}"><span class="eyebrow">${d.topic} · ${fmtDate(d.date)}</span><h3>${d.title}</h3><p>${d.instr.split(". ")[0]}.</p></a>`).join("")}</div>` : ""}
+    ${DEBERES.length ? `<h2 style="font-size:24px;margin-top:40px">Deberes</h2><div class="cards" style="margin-top:14px">${debSorted().map(d=>`
+      <a class="card" href="#${d.id}"><span class="eyebrow">${d.topic}</span><h3>${dayLabel(d.date)}</h3><p>${d.instr.split(". ")[0]}.</p></a>`).join("")}</div>` : ""}
     <div class="legend"><span>Marcas de variante:</span>
       <span>${badge("es")} se usa sobre todo en España</span>
       <span>${badge("la")} se usa sobre todo en Latinoamérica</span>
@@ -774,8 +776,8 @@ const DEBERES = [
   kind: "pack",
   tag: "Marc.",
   date: "2026-11-27",
-  title: "Marcadores temporales y el barrio de Harlem",
-  topic: "Marcadores temporales",
+  title: "27 de noviembre",
+  topic: "Marcadores temporales y el barrio de Harlem",
   instr: "Une las frases con marcadores temporales, lee el texto sobre Harlem y explica las expresiones.",
   subtitle: "Une las frases con marcadores temporales, lee el texto sobre Harlem y explica las expresiones en negrita.",
   readings: [
